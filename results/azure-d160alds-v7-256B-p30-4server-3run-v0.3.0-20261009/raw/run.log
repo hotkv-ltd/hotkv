@@ -1,0 +1,562 @@
+Detected versions:
+  HotKV      0.3.0      (no git tree)
+  Redis      8.10.2     (release tarball)
+  Valkey     9.1.2      (release tarball)
+  Dragonfly  v2.0.2     8ce4bbb106586057fbd85f71ed353c60d0d5bf87
+  memtier    memtier_benchmark v=255.255.255 sha=272eeb64:0 bits=64 libevent=2.1.12-stable openssl=OpenSSL 3.0.13 30 Jan 2024 prometheus=yes
+  Platform: Azure D160alds_v7 (AMD EPYC 9V45, Turin) (vm, 160 cores)
+
+Load generators (memtier runs remotely, server box is dedicated):
+  10.0.0.5           64 cores  <-- WARNING: smaller than the server, will bottleneck the run
+  10.0.0.6           64 cores  <-- WARNING: smaller than the server, will bottleneck the run
+  10.0.0.7           64 cores  <-- WARNING: smaller than the server, will bottleneck the run
+  Server dialled at: 10.0.0.4:6399
+NOTE: SWEEP=0 - every server runs 160 threads (clamped to each server's maximum).
+      Redis and Valkey execute commands on one thread; their threads here are I/O threads,
+      and they may do better with fewer of them (SWEEP=1 finds each server's best).
+
+============================================================
+  Full Isolated Benchmark: 3 runs per server
+  Memtier: Threads=156  Clients=50  Pipeline=30  TestTime=10s
+  Data size: 256 bytes
+  Platform: Azure D160alds_v7 (AMD EPYC 9V45, Turin) (vm)  CPU cores=160
+  Load: 3 remote client machine(s) -> 10.0.0.4
+  Server threads: hotkv=160 redis=128 valkey=160 dragonfly=160
+============================================================
+
+=== hotkv ===
+  --- Run 1/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        50866655 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        36661164 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       4610757 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      54849995 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     25050648 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       92040553 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      31617779 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      43776706 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       50863288 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       28997514 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       11237948 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       125232520 ops/sec
+ 115296full_bench.sh: line 543: 115296 Killed                  nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 2/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        50176484 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        36638078 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       4619077 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      55351610 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     25000860 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       90783545 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      31519473 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      44000399 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       50488677 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       29018864 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       11387076 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       126711855 ops/sec
+ 118817full_bench.sh: line 543: 118817 Killed                  nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 3/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        50480621 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        36643656 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       4617382 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      55333360 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     25088655 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       86654370 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      31969914 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      43381526 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       50626647 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       28979487 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       11275369 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       116992929 ops/sec
+ 121246full_bench.sh: line 543: 121246 Killed                  nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no --loglevel warning > /tmp/${srv}_bench.log 2>&1
+
+=== redis ===
+  --- Run 1/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        4001058 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        1934619 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       232199 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      1430404 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     1530680 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       1596865 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      567431 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      621464 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       2053737 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       463150 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       345729 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       8623938 ops/sec
+ 123672full_bench.sh: line 543: 123672 Killed                  nohup $REDIS_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no --protected-mode no $(redis_family_flags redis "$nthreads") --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 2/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        3409794 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        1132934 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       774865 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      1397967 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     1555238 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       6281446 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      1247914 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      628324 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       2755992 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       3328753 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       576087 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       3104776 ops/sec
+ 126894full_bench.sh: line 543: 126894 Killed                  nohup $REDIS_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no --protected-mode no $(redis_family_flags redis "$nthreads") --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 3/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        1925372 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        1116062 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       277956 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      1388454 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     832040 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       2104069 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      1805635 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      1283306 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       1106785 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       536527 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       378641 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       3235600 ops/sec
+ 130151full_bench.sh: line 543: 130151 Killed                  nohup $REDIS_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no --protected-mode no $(redis_family_flags redis "$nthreads") --loglevel warning > /tmp/${srv}_bench.log 2>&1
+
+=== valkey ===
+  --- Run 1/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        2882486 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        1833278 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       567854 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      1822423 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     1702685 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       1915118 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      842106 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      927089 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       941861 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       1444020 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       443639 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       3228519 ops/sec
+ 133257full_bench.sh: line 543: 133257 Killed                  nohup $VALKEY_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no --protected-mode no $(redis_family_flags valkey "$nthreads") --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 2/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        2826644 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        1597893 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       536872 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      1963296 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     953887 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       1918073 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      828204 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      878476 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       894438 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       751444 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       464801 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       3480446 ops/sec
+ 135469full_bench.sh: line 543: 135469 Killed                  nohup $VALKEY_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no --protected-mode no $(redis_family_flags valkey "$nthreads") --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 3/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        2986363 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        1631573 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       515323 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      1860919 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     1290421 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       1985163 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      871696 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      781654 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       865286 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       781768 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       467744 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       3983029 ops/sec
+ 137350full_bench.sh: line 543: 137350 Killed                  nohup $VALKEY_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no --protected-mode no $(redis_family_flags valkey "$nthreads") --loglevel warning > /tmp/${srv}_bench.log 2>&1
+
+=== dragonfly ===
+  --- Run 1/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        15056715 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        13122835 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       2372189 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      14284161 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     8858165 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       21115725 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      10579641 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      11014977 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       12008771 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       9811920 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       2945561 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       126524658 ops/sec
+ 139275full_bench.sh: line 543: 139275 Killed                  nohup $DRAGONFLY_BIN --port $PORT --bind $BIND_ADDR --proactor_threads=$nthreads --dbfilename= --noversion_check --logtostderr ${DRAGONFLY_EXTRA_FLAGS:-} > /tmp/${srv}_bench.log 2>&1
+  --- Run 2/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        15042258 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        13446228 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       2348137 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      14442422 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     9271428 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       20533044 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      10621610 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      10853946 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       12044417 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       9624474 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       2941342 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       123212009 ops/sec
+ 141127full_bench.sh: line 543: 141127 Killed                  nohup $DRAGONFLY_BIN --port $PORT --bind $BIND_ADDR --proactor_threads=$nthreads --dbfilename= --noversion_check --logtostderr ${DRAGONFLY_EXTRA_FLAGS:-} > /tmp/${srv}_bench.log 2>&1
+  --- Run 3/3 ---
+  Pre-populating 5000000 keys for SET...
+    SET        14781415 ops/sec
+  Pre-populating 5000000 keys for GET...
+    GET        13619600 ops/sec
+  Pre-populating 5000000 keys for MGET...
+    MGET       2340658 ops/sec
+  Pre-populating 5000000 keys for SETNX...
+    SETNX      14730122 ops/sec
+  Pre-populating 5000000 keys for APPEND...
+    APPEND     8776564 ops/sec
+  Pre-populating 5000000 keys for INCR...
+    INCR       20603259 ops/sec
+  Pre-populating 5000000 keys for LPUSH...
+    LPUSH      10555575 ops/sec
+  Pre-populating 5000000 keys for RPUSH...
+    RPUSH      11212800 ops/sec
+  Pre-populating 5000000 keys for SADD...
+    SADD       12292403 ops/sec
+  Pre-populating 5000000 keys for HSET...
+    HSET       9797534 ops/sec
+  Pre-populating 5000000 keys for MSET...
+    MSET       2928820 ops/sec
+  Pre-populating 5000000 keys for PING...
+    PING       126033542 ops/sec
+ 142837full_bench.sh: line 543: 142837 Killed                  nohup $DRAGONFLY_BIN --port $PORT --bind $BIND_ADDR --proactor_threads=$nthreads --dbfilename= --noversion_check --logtostderr ${DRAGONFLY_EXTRA_FLAGS:-} > /tmp/${srv}_bench.log 2>&1
+
+Assembling results...
+
+============================================================
+  HotKV Exclusive Features Benchmark
+============================================================
+
+=== HotKV (no compression, 4KB values) ===
+  --- Run 1/3 ---
+  Pre-populating 5000000 keys for SET...
+    TAG.SET        447888 ops/sec
+  Pre-populating 5000000 keys for SET...
+    TAG.GET        7517570 ops/sec
+  Pre-populating 5000000 keys for SET...
+    TAG.COUNT      7811168 ops/sec
+  Pre-populating 5000000 keys for SET...
+    NEXPIRE        87408538 ops/sec
+  Pre-populating 5000000 keys for SET...
+    NTTL           90255674 ops/sec
+    SET (4KB)      3976534 ops/sec
+    GET (4KB)      2385546 ops/sec
+ 144547full_bench.sh: line 543: 144547 Killed                  nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 2/3 ---
+  Pre-populating 5000000 keys for SET...
+    TAG.SET        451466 ops/sec
+  Pre-populating 5000000 keys for SET...
+    TAG.GET        7305480 ops/sec
+  Pre-populating 5000000 keys for SET...
+    TAG.COUNT      7394601 ops/sec
+  Pre-populating 5000000 keys for SET...
+    NEXPIRE        88154239 ops/sec
+  Pre-populating 5000000 keys for SET...
+    NTTL           92113528 ops/sec
+    SET (4KB)      3984842 ops/sec
+    GET (4KB)      2384305 ops/sec
+ 145657full_bench.sh: line 543: 145657 Killed                  nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no --loglevel warning > /tmp/${srv}_bench.log 2>&1
+  --- Run 3/3 ---
+  Pre-populating 5000000 keys for SET...
+    TAG.SET        466557 ops/sec
+  Pre-populating 5000000 keys for SET...
+    TAG.GET        6845636 ops/sec
+  Pre-populating 5000000 keys for SET...
+    TAG.COUNT      7420667 ops/sec
+  Pre-populating 5000000 keys for SET...
+    NEXPIRE        88105329 ops/sec
+  Pre-populating 5000000 keys for SET...
+    NTTL           89120430 ops/sec
+    SET (4KB)      3985607 ops/sec
+    GET (4KB)      2385083 ops/sec
+ 146765full_bench.sh: line 543: 146765 Killed                  nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no --loglevel warning > /tmp/${srv}_bench.log 2>&1
+
+=== HotKV (compression ON, 4KB values, threshold 512) ===
+  --- Run 1/3 ---
+    SET (4KB+comp) 0 ops/sec
+    GET (4KB+comp) 0 ops/sec
+ 147875full_bench.sh: line 543: 147875 Killed                  nohup $HOTKV_BIN --config "$COMP_CONF" --no-snapshot > /tmp/hotkv_comp_bench.log 2>&1
+  --- Run 2/3 ---
+    SET (4KB+comp) 0 ops/sec
+    GET (4KB+comp) 0 ops/sec
+ 148334full_bench.sh: line 543: 148334 Killed                  nohup $HOTKV_BIN --config "$COMP_CONF" --no-snapshot > /tmp/hotkv_comp_bench.log 2>&1
+  --- Run 3/3 ---
+    SET (4KB+comp) 0 ops/sec
+    GET (4KB+comp) 0 ops/sec
+ 148798full_bench.sh: line 543: 148798 Killed                  nohup $HOTKV_BIN --config "$COMP_CONF" --no-snapshot > /tmp/hotkv_comp_bench.log 2>&1
+
+Results saved to: /tmp/full_bench_p30/comparison.json
+
+========================================================================================================================
+  RESULTS (median of 3 runs)  -  ops/sec | p50 ms | p99 ms | server CPU %
+  remote load, tuned per server: HotKV=160t, Redis=128t, Valkey=160t, Dragonfly=160t
+========================================================================================================================
+ Command                       HotKV                       Redis                      Valkey                   Dragonfly
+------------------------------------------------------------------------------------------------------------------------
+     SET  50,480,621*  3.73 40.45  9696  3,409,794  58.78 581.63  6223  2,882,486  27.61 354.30  1313  15,042,258  18.08 59.39  9906
+     GET  36,643,656*  6.39 24.06  6216  1,132,934  226.30 692.22  6467  1,631,573  186.36 364.54  1655  13,446,228  19.50 54.78  9799
+    MGET  4,617,382* 56.83 152.57  8596    277,956  770.05 3080.19  9083    536,872  626.56 1097.73  1759  2,348,137  115.20 207.87 11105
+   SETNX  55,333,360*  3.43 39.42  7873  1,397,967  186.37 366.59  2191  1,860,919  177.15 257.02  1371  14,442,422  18.13 52.48  9327
+  APPEND  25,050,648*  7.11 66.05  6226  1,530,680  137.79 667.65  3677  1,290,421  215.58 475.13  1368  8,858,165  28.29 129.53 10387
+    INCR  90,783,545*  1.99 13.95  8668  2,104,069  87.67 260.10   337  1,918,073  162.80 211.97   964  20,603,259  12.48 37.63 10968
+   LPUSH  31,617,779*  7.55 31.49 11305  1,247,914  162.66 671.74  4605    842,106  357.04 401.41   762  10,579,641  24.64 86.53 10245
+   RPUSH  43,776,706*  5.02 37.38 10687    628,324  362.50 1056.77  5735    878,476  331.08 372.74   868  11,014,977  23.81 79.87 10085
+    LPOP          0   0.00  0.00     0          0   0.00  0.00     0          0   0.00  0.00     0          0   0.00  0.00     0
+    RPOP          0   0.00  0.00     0          0   0.00  0.00     0          0   0.00  0.00     0          0   0.00  0.00     0
+    SADD  50,626,647*  4.27 39.94 10325  2,053,737  75.41 1155.07  5423    894,438  342.01 368.64   610  12,044,417  21.76 69.12  9637
+    HSET  28,997,514*  7.29 56.83  8459    536,527  477.18 1425.41  8788    781,768  369.32 460.80   771  9,797,534  23.64 119.30  9764
+    MSET  11,275,369* 22.53 58.11  8758    378,641  745.47 1499.13  9934    464,801  644.30 1302.53   819  2,941,342  94.55 177.15 10549
+    PING  125,232,520   1.49 16.64  6064  3,235,600  90.11 101.38   416  3,480,446  87.04 121.86  1056  126,033,542*  1.62  6.82 10570
+========================================================================================================================
+
+============================================================================================================
+  RESOURCE USAGE (median of runs)
+============================================================================================================
+ Command      Server      ops/sec   cores   ops/CPU-s    RSS MB   peak MB    Gbps   link%    Mpps
+------------------------------------------------------------------------------------------------------------
+     SET       HotKV   50,480,621    97.0      37,767     2,826     2,863   89.42     115    3.92
+     SET       Redis    3,409,794    62.2       1,689     2,004     2,106    2.63       3    0.12
+     SET      Valkey    2,882,486    13.1       6,813     2,650     2,650    2.23       3    0.11
+     SET   Dragonfly   15,042,258    99.1      10,509     1,990     3,221   26.00      33    1.07
+------------------------------------------------------------------------------------------------------------
+     GET       HotKV   36,643,656    62.2      45,058     2,809     2,863   68.88      88    3.86
+     GET       Redis    1,132,934    64.7       1,325     2,178     2,179    2.13       3    0.20
+     GET      Valkey    1,631,573    16.6       7,400     1,939     2,663    3.11       4    0.27
+     GET   Dragonfly   13,446,228    98.0      10,518     2,140     3,221   25.30      32    1.39
+------------------------------------------------------------------------------------------------------------
+    MGET       HotKV    4,617,382    86.0       3,866     3,377     3,409   64.57      83    2.48
+    MGET       Redis      277,956    90.8         223     2,288     2,288    4.35       6    0.14
+    MGET      Valkey      536,872    17.6       2,335     2,041     2,663    8.30      11    0.25
+    MGET   Dragonfly    2,348,137   111.1       1,621     2,994     3,908   34.12      44    0.96
+------------------------------------------------------------------------------------------------------------
+   SETNX       HotKV   55,333,360    78.7      53,703     2,906     3,409  105.69     136    4.57
+   SETNX       Redis    1,397,967    21.9       4,870     2,221     2,254    2.60       3    0.13
+   SETNX      Valkey    1,860,919    13.7      10,969     2,011     2,663    3.59       5    0.19
+   SETNX   Dragonfly   14,442,422    93.3      11,838     2,470     3,908   27.54      35    1.12
+------------------------------------------------------------------------------------------------------------
+  APPEND       HotKV   25,050,648    62.3      30,303   104,185   104,822   48.53      62    1.99
+  APPEND       Redis    1,530,680    36.8       1,736    10,674    10,674    1.64       2    0.09
+  APPEND      Valkey    1,290,421    13.7       5,020     8,840     8,855    1.75       2    0.10
+  APPEND   Dragonfly    8,858,165   103.9       6,344    30,299    31,356   16.60      21    0.67
+------------------------------------------------------------------------------------------------------------
+    INCR       HotKV   90,783,545    86.7      77,928     2,235   104,822   24.40      31    4.51
+    INCR       Redis    2,104,069     3.4      36,425       576    10,652    0.46       1    0.11
+    INCR      Valkey    1,918,073     9.6      15,240       576     8,855    0.55       1    0.15
+    INCR   Dragonfly   20,603,259   109.7      14,346     1,476    31,356    5.63       7    1.06
+------------------------------------------------------------------------------------------------------------
+   LPUSH       HotKV   31,617,779   113.0      21,370   113,998   113,998   60.30      77    2.43
+   LPUSH       Redis    1,247,914    46.1       1,099     8,025    10,652    1.42       2    0.08
+   LPUSH      Valkey      842,106     7.6       8,351     5,327     8,855    1.64       2    0.11
+   LPUSH   Dragonfly   10,579,641   102.4       7,854    40,578    41,611   20.20      26    0.82
+------------------------------------------------------------------------------------------------------------
+   RPUSH       HotKV   43,776,706   106.9      30,620   152,065   152,065   81.73     105    3.37
+   RPUSH       Redis      628,324    57.4         831     4,776    10,652    1.25       2    0.08
+   RPUSH      Valkey      878,476     8.7       6,897     5,415     8,855    1.62       2    0.11
+   RPUSH   Dragonfly   11,014,977   100.9       8,367    41,987    43,016   21.06      27    0.86
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+    SADD       HotKV   50,626,647   103.2      36,456     9,509   151,958   93.22     120    3.85
+    SADD       Redis    2,053,737    54.2         851     2,533    10,652    1.22       2    0.07
+    SADD      Valkey      894,438     6.1      10,442     2,795     8,855    1.63       2    0.11
+    SADD   Dragonfly   12,044,417    96.4       9,380     3,459    43,016   22.44      29    0.91
+------------------------------------------------------------------------------------------------------------
+    HSET       HotKV   28,997,514    84.6      25,851    17,901   151,958  101.92     131    3.75
+    HSET       Redis      536,527    87.9         436     3,929    10,652    1.86       2    0.09
+    HSET      Valkey      781,768     7.7       7,779     4,225     8,855    2.72       3    0.14
+    HSET   Dragonfly    9,797,534    97.6       7,533     6,676    43,016   33.94      44    1.06
+------------------------------------------------------------------------------------------------------------
+    MSET       HotKV   11,275,369    87.6       9,280     4,422   151,958   76.05      98    1.89
+    MSET       Redis      378,641    99.3         288     3,213    10,652    2.90       4    0.14
+    MSET      Valkey      464,801     8.2       4,362     2,736     8,855    3.47       4    0.19
+    MSET   Dragonfly    2,941,342   105.5       2,130     2,849    43,016   21.15      27    0.47
+------------------------------------------------------------------------------------------------------------
+    PING       HotKV  125,232,520    60.6     158,866     4,076   151,958   19.16      25    6.41
+    PING       Redis    3,235,600     4.2      59,675     2,378    10,652    0.54       1    0.24
+    PING      Valkey    3,480,446    10.6      23,393     2,020     8,855    0.58       1    0.27
+    PING   Dragonfly  126,033,542   105.7      91,474     2,639    43,016   19.31      25    6.47
+------------------------------------------------------------------------------------------------------------
+
+  !! WIRE-BOUND: 7 server/command pairs used >=85% of the
+     advertised link. Those results measure the NIC, not the server, and any
+     ratio between two wire-bound servers is meaningless:
+            SET  HotKV       115% of link
+            GET  HotKV       88% of link
+          SETNX  HotKV       136% of link
+          RPUSH  HotKV       105% of link
+           SADD  HotKV       120% of link
+           HSET  HotKV       131% of link
+           MSET  HotKV       98% of link
+
+  !! CLIENT-BOUND: 1 server/command pairs ran with the load
+     generator above 85% CPU. Those numbers are memtier's ceiling,
+     not the server's. Add client machines and re-run before publishing:
+           PING  HotKV       client at 86% CPU
+
+============================================================================================================
+  BENCHMARK CONFIGURATION
+============================================================================================================
+  memtier: -t 156 -c 50 --pipeline 30 -d 256 --test-time=10  (7,800 connections per client box, 3 runs, median reported)
+  host:    THP=always madvise [never]  overcommit=1  somaxconn=65535  nofile=1048576  iface=eth0 @ 78 Gbps
+
+  --- HotKV ---
+    launch: /opt/hotkv/build/release/src/hotkv --port 6399 --bind 0.0.0.0 --threads 160 --no-snapshot --protected-mode no --loglevel warning
+    effective: maxmemory=0  maxmemory-policy=noeviction  io-threads=1  appendonly=no  protected-mode=no  tcp-backlog=511  timeout=0  hz=10  databases=16
+    memory cap: none (maxmemory=0) - no eviction during the run
+  --- Redis ---
+    launch: /opt/redis-8.10.2/src/redis-server --port 6399 --bind 0.0.0.0 --save  --appendonly no --protected-mode no --io-threads 128 --io-threads-do-reads yes --loglevel warning
+    effective: maxmemory=0  maxmemory-policy=noeviction  io-threads=128  appendonly=no  protected-mode=no  tcp-backlog=511  timeout=0  hz=10  databases=16
+    memory cap: none (maxmemory=0) - no eviction during the run
+  --- Valkey ---
+    launch: /opt/valkey-9.1.2/src/valkey-server --port 6399 --bind 0.0.0.0 --save  --appendonly no --protected-mode no --io-threads 160 --loglevel warning
+    effective: maxmemory=0  maxmemory-policy=noeviction  io-threads=160  appendonly=no  protected-mode=no  tcp-backlog=511  timeout=0  hz=10  databases=16
+    memory cap: none (maxmemory=0) - no eviction during the run
+  --- Dragonfly ---
+    launch: /opt/dragonfly/build-opt/dragonfly --port 6399 --bind 0.0.0.0 --proactor_threads=160 --dbfilename= --noversion_check --logtostderr 
+    effective: maxmemory=265588057702  timeout=0  databases=16
+============================================================================================================
+
+  Commands where another server measured higher than HotKV:
+        PING  Dragonfly: 126,033,542 vs our 125,232,520  (0.6% faster)
+
+============================================================
+  HotKV EXCLUSIVE FEATURES (median of 3 runs)
+============================================================
+           Command         ops/sec
+------------------------------------
+           TAG.SET         451,466
+           TAG.GET       7,305,480
+         TAG.COUNT       7,420,667
+           NEXPIRE      88,105,329
+              NTTL      90,255,674
+         SET (4KB)       3,984,842
+         GET (4KB)       2,385,083
+============================================================
+
+
+JSON output: /tmp/full_bench_p30/comparison.json
+Done!
+BENCH_DONE

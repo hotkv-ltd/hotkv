@@ -1,0 +1,7 @@
+[04:52:07] engines ['redis'], sizes [20000], clients [1], ef_qps [80]
+[04:52:07] started redis pid 448494: taskset -c 140-143 /opt/redis-8.10.2/src/redis-server --port 6441 --bind 127.0.0.1 --save  --appendonly no --protected-mode no --loglevel warning
+[04:52:15]   ingest redis bench1: 20000 vectors, 16 conn, 8.8s = 2279/s, server used 2.54 cores, rss 0.16 GB
+[04:52:16]   recall redis build 1 ef 20: 0.8870
+[04:52:16]   recall redis build 1 ef 80: 0.9787
+[04:52:19]   qps size 20000 ef 80 clients  1 trial 1 redis:      1773 q/s p50 0.55 ms p99 0.94 ms server 1.0 cores client-busy-max 0.05
+[04:52:20] RUN DONE

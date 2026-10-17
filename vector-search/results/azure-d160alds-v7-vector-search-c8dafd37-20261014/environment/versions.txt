@@ -1,0 +1,7 @@
+c8dafd375b83907320473937f66d55b03c934668
+HotKV v0.3.0
+Redis server v=8.10.2 sha=00000000:1 malloc=jemalloc-5.3.0 bits=64 build=3a58a5d8666dcb3
+numpy==2.5.4
+pyarrow==26.0.0
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+cmake version 3.28.3

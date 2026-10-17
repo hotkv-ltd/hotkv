@@ -1,0 +1,2 @@
+# Keep every byte as is, so the SHA256SUMS files stay valid on any checkout.
+* -text

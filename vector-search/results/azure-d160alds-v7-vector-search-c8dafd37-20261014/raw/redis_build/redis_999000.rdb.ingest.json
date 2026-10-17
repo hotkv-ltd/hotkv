@@ -1,0 +1,21 @@
+[
+ {
+  "engine": "redis",
+  "index": "bench1",
+  "vectors": 999000,
+  "connections": 32,
+  "pipeline_depth": 8,
+  "cas": true,
+  "seconds": 934.68,
+  "vectors_per_sec": 1068.8,
+  "sent": 999000,
+  "count_in_server": 999000,
+  "nonstandard_replies": 0,
+  "server_cpu_seconds": 2854.9,
+  "server_cores_used": 3.05,
+  "server_rss_bytes": 7011741696,
+  "size": 999000,
+  "build": 1,
+  "used_memory_bytes": 6895721400
+ }
+]

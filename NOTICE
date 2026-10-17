@@ -1,0 +1,20 @@
+HotKV benchmarks
+Copyright 2026 HotKV Ltd
+
+The scripts in this repository (harness/ and vector-search/scripts/) are licensed
+under the Apache License, Version 2.0 (see LICENSE).
+
+The results, raw data, reports and documentation (results/, vector-search/results/
+and the Markdown files) are licensed under the Creative Commons Attribution 4.0
+International License (see LICENSE-DATA). When you reuse or quote them, credit
+HotKV Ltd, link to this repository, and say whether you changed anything.
+
+HotKV is a trademark of HotKV Ltd. Neither licence grants any right to use the
+HotKV name or logo; the Apache License, Version 2.0, says so in section 6.
+
+Redis is a registered trademark of Redis Ltd. Valkey is a trademark of LF Projects,
+LLC. Dragonfly is a trademark of DragonflyDB Ltd. They are named only to identify the
+software that was measured; this implies no sponsorship, endorsement or affiliation.
+The software and data of third parties referred to here (Redis, Valkey, Dragonfly,
+memtier_benchmark, the dbpedia-entities-openai-1M dataset) stay under their own
+licences.

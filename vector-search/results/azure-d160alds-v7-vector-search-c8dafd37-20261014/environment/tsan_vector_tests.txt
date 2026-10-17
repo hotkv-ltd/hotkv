@@ -1,0 +1,14 @@
+ThreadSanitizer run of the vector unit tests (filter VectorStore*:VectorIndex*:*Vsim*:*VSIM*:*Vector*)
+Build: source of commit c8dafd37 with the one-constant change of commit d08edbf7 (32 lock stripes); Debug, -fsanitize=thread; run with 'setarch x86_64 -R' (this kernel's address randomization is incompatible with TSan).
+With 64 stripes (the measured commit c8dafd37) the same tests abort at the first test that grows an index: ThreadSanitizer CHECK failed, sanitizer_deadlock_detector.h:67 (a thread holds 64 locks).
+
+ser bench 382294856 Oct 14 06:17 build/tsan/tests/hotkv_tests
+run exit 0
+[==========] Running 61 tests from 5 test suites.
+[==========] 61 tests from 5 test suites ran. (798887 ms total)
+[  PASSED  ] 61 tests.
+ThreadSanitizer reports: 0   CHECK failures: 0
+FINAL TSAN3 DONE
+[==========] Running 61 tests from 5 test suites.
+[==========] 61 tests from 5 test suites ran. (798887 ms total)
+[  PASSED  ] 61 tests.

@@ -1,0 +1,244 @@
+[05:36:57] engines ['hotkv', 'redis'], sizes [100000], clients [1, 2, 4, 8, 16, 32, 50, 100], ef_qps [80, 40, 150, 300]
+[05:36:57] started hotkv pid 133045: taskset -c 0-127 /opt/hotkv_final/build/release/src/hotkv --port 6440 --bind 127.0.0.1 --threads 128 --no-snapshot --protected-mode no --loglevel warning
+[05:37:03] started redis pid 133177: taskset -c 0-127 /opt/redis-8.10.2/src/redis-server --port 6441 --bind 127.0.0.1 --save  --appendonly no --protected-mode no --loglevel warning --dir /home/bench/vsb/rdb --dbfilename redis_100000.rdb
+[05:37:18]   ingest hotkv bench1: 100000 vectors, 32 conn, 15.2s = 6590/s, server used 12.97 cores, rss 0.75 GB
+[05:37:19]   recall hotkv build 1 ef 10: 0.7563
+[05:37:19]   recall hotkv build 1 ef 20: 0.8686
+[05:37:19]   recall hotkv build 1 ef 40: 0.9421
+[05:37:20]   recall hotkv build 1 ef 80: 0.9750
+[05:37:21]   recall hotkv build 1 ef 150: 0.9905
+[05:37:22]   recall hotkv build 1 ef 300: 0.9960
+[05:37:24]   recall hotkv build 1 ef 500: 0.9977
+[05:37:24]   redis bench1: 100000 vectors loaded from redis_100000.rdb (built earlier at 1755/s)
+[05:37:25]   recall redis build 1 ef 10: 0.7124
+[05:37:25]   recall redis build 1 ef 20: 0.8284
+[05:37:26]   recall redis build 1 ef 40: 0.9109
+[05:37:27]   recall redis build 1 ef 80: 0.9618
+[05:37:28]   recall redis build 1 ef 150: 0.9832
+[05:37:30]   recall redis build 1 ef 300: 0.9926
+[05:37:32]   recall redis build 1 ef 500: 0.9972
+[05:37:47]   ingest hotkv bench2: 100000 vectors, 32 conn, 15.2s = 6584/s, server used 13.34 cores, rss 1.45 GB
+[05:37:48]   recall hotkv build 2 ef 10: 0.7608
+[05:37:48]   recall hotkv build 2 ef 20: 0.8672
+[05:37:48]   recall hotkv build 2 ef 40: 0.9350
+[05:37:49]   recall hotkv build 2 ef 80: 0.9744
+[05:37:50]   recall hotkv build 2 ef 150: 0.9893
+[05:37:51]   recall hotkv build 2 ef 300: 0.9960
+[05:37:53]   recall hotkv build 2 ef 500: 0.9979
+[05:37:53]   redis bench2: 100000 vectors loaded from redis_100000.rdb (built earlier at 1688/s)
+[05:37:54]   recall redis build 2 ef 10: 0.7181
+[05:37:54]   recall redis build 2 ef 20: 0.8366
+[05:37:55]   recall redis build 2 ef 40: 0.9237
+[05:37:56]   recall redis build 2 ef 80: 0.9644
+[05:37:57]   recall redis build 2 ef 150: 0.9853
+[05:37:59]   recall redis build 2 ef 300: 0.9940
+[05:38:01]   recall redis build 2 ef 500: 0.9967
+[05:38:17]   ingest hotkv bench3: 100000 vectors, 32 conn, 16.1s = 6214/s, server used 14.19 cores, rss 2.16 GB
+[05:38:18]   recall hotkv build 3 ef 10: 0.7521
+[05:38:18]   recall hotkv build 3 ef 20: 0.8687
+[05:38:18]   recall hotkv build 3 ef 40: 0.9386
+[05:38:19]   recall hotkv build 3 ef 80: 0.9748
+[05:38:20]   recall hotkv build 3 ef 150: 0.9907
+[05:38:21]   recall hotkv build 3 ef 300: 0.9960
+[05:38:23]   recall hotkv build 3 ef 500: 0.9982
+[05:38:23]   redis bench3: 100000 vectors loaded from redis_100000.rdb (built earlier at 1638/s)
+[05:38:24]   recall redis build 3 ef 10: 0.7127
+[05:38:24]   recall redis build 3 ef 20: 0.8364
+[05:38:25]   recall redis build 3 ef 40: 0.9206
+[05:38:26]   recall redis build 3 ef 80: 0.9682
+[05:38:27]   recall redis build 3 ef 150: 0.9851
+[05:38:29]   recall redis build 3 ef 300: 0.9950
+[05:38:31]   recall redis build 3 ef 500: 0.9976
+[05:38:37]   qps size 100000 ef 80 clients  1 trial 1 hotkv:      1790 q/s p50 0.56 ms p99 0.84 ms server 1.0 cores client-busy-max 0.05
+[05:38:43]   qps size 100000 ef 80 clients  1 trial 1 redis:      1201 q/s p50 0.82 ms p99 1.28 ms server 1.0 cores client-busy-max 0.04
+[05:38:49]   qps size 100000 ef 80 clients  1 trial 2 redis:      1214 q/s p50 0.82 ms p99 1.19 ms server 1.0 cores client-busy-max 0.04
+[05:38:55]   qps size 100000 ef 80 clients  1 trial 2 hotkv:      1816 q/s p50 0.55 ms p99 0.78 ms server 1.0 cores client-busy-max 0.05
+[05:39:00]   qps size 100000 ef 80 clients  1 trial 3 hotkv:      1820 q/s p50 0.55 ms p99 0.78 ms server 1.0 cores client-busy-max 0.05
+[05:39:06]   qps size 100000 ef 80 clients  1 trial 3 redis:      1214 q/s p50 0.82 ms p99 1.20 ms server 1.0 cores client-busy-max 0.04
+[05:39:12]   qps size 100000 ef 80 clients  2 trial 1 hotkv:      3547 q/s p50 0.56 ms p99 0.81 ms server 1.9 cores client-busy-max 0.05
+[05:39:18]   qps size 100000 ef 80 clients  2 trial 1 redis:      2327 q/s p50 0.86 ms p99 1.26 ms server 2.0 cores client-busy-max 0.03
+[05:39:24]   qps size 100000 ef 80 clients  2 trial 2 redis:      2339 q/s p50 0.85 ms p99 1.25 ms server 2.0 cores client-busy-max 0.03
+[05:39:29]   qps size 100000 ef 80 clients  2 trial 2 hotkv:      3550 q/s p50 0.56 ms p99 0.79 ms server 1.9 cores client-busy-max 0.05
+[05:39:35]   qps size 100000 ef 80 clients  2 trial 3 hotkv:      3582 q/s p50 0.56 ms p99 0.79 ms server 1.9 cores client-busy-max 0.05
+[05:39:41]   qps size 100000 ef 80 clients  2 trial 3 redis:      2338 q/s p50 0.85 ms p99 1.24 ms server 2.0 cores client-busy-max 0.03
+[05:39:47]   qps size 100000 ef 80 clients  4 trial 1 hotkv:      7078 q/s p50 0.57 ms p99 0.80 ms server 3.8 cores client-busy-max 0.05
+[05:39:53]   qps size 100000 ef 80 clients  4 trial 1 redis:      4132 q/s p50 0.95 ms p99 1.51 ms server 3.8 cores client-busy-max 0.03
+[05:39:59]   qps size 100000 ef 80 clients  4 trial 2 redis:      4136 q/s p50 0.95 ms p99 1.47 ms server 3.8 cores client-busy-max 0.03
+[05:40:05]   qps size 100000 ef 80 clients  4 trial 2 hotkv:      7048 q/s p50 0.57 ms p99 0.80 ms server 3.8 cores client-busy-max 0.05
+[05:40:10]   qps size 100000 ef 80 clients  4 trial 3 hotkv:      7094 q/s p50 0.56 ms p99 0.80 ms server 3.8 cores client-busy-max 0.05
+[05:40:16]   qps size 100000 ef 80 clients  4 trial 3 redis:      4191 q/s p50 0.95 ms p99 1.42 ms server 3.8 cores client-busy-max 0.03
+[05:40:22]   qps size 100000 ef 80 clients  8 trial 1 hotkv:     13691 q/s p50 0.58 ms p99 0.83 ms server 7.6 cores client-busy-max 0.05
+[05:40:28]   qps size 100000 ef 80 clients  8 trial 1 redis:      6652 q/s p50 1.19 ms p99 1.76 ms server 6.8 cores client-busy-max 0.02
+[05:40:34]   qps size 100000 ef 80 clients  8 trial 2 redis:      6645 q/s p50 1.19 ms p99 1.77 ms server 6.8 cores client-busy-max 0.02
+[05:40:40]   qps size 100000 ef 80 clients  8 trial 2 hotkv:     13673 q/s p50 0.59 ms p99 0.83 ms server 7.6 cores client-busy-max 0.05
+[05:40:46]   qps size 100000 ef 80 clients  8 trial 3 hotkv:     13714 q/s p50 0.58 ms p99 0.83 ms server 7.6 cores client-busy-max 0.05
+[05:40:52]   qps size 100000 ef 80 clients  8 trial 3 redis:      6590 q/s p50 1.19 ms p99 1.87 ms server 6.7 cores client-busy-max 0.02
+[05:40:58]   qps size 100000 ef 80 clients 16 trial 1 hotkv:     24702 q/s p50 0.64 ms p99 1.02 ms server 15.1 cores client-busy-max 0.05
+[05:41:04]   qps size 100000 ef 80 clients 16 trial 1 redis:      8480 q/s p50 1.86 ms p99 2.62 ms server 9.3 cores client-busy-max 0.02
+[05:41:09]   qps size 100000 ef 80 clients 16 trial 2 redis:      8422 q/s p50 1.88 ms p99 2.64 ms server 9.2 cores client-busy-max 0.02
+[05:41:15]   qps size 100000 ef 80 clients 16 trial 2 hotkv:     23718 q/s p50 0.66 ms p99 1.15 ms server 15.0 cores client-busy-max 0.05
+[05:41:21]   qps size 100000 ef 80 clients 16 trial 3 hotkv:     25003 q/s p50 0.64 ms p99 0.95 ms server 15.2 cores client-busy-max 0.05
+[05:41:27]   qps size 100000 ef 80 clients 16 trial 3 redis:      8475 q/s p50 1.87 ms p99 2.57 ms server 9.3 cores client-busy-max 0.02
+[05:41:34]   qps size 100000 ef 80 clients 32 trial 1 hotkv:     36608 q/s p50 0.80 ms p99 1.87 ms server 30.0 cores client-busy-max 0.05
+[05:41:40]   qps size 100000 ef 80 clients 32 trial 1 redis:      8343 q/s p50 3.56 ms p99 4.97 ms server 9.4 cores client-busy-max 0.01
+[05:41:46]   qps size 100000 ef 80 clients 32 trial 2 redis:      8150 q/s p50 3.66 ms p99 5.67 ms server 9.1 cores client-busy-max 0.01
+[05:41:52]   qps size 100000 ef 80 clients 32 trial 2 hotkv:     39279 q/s p50 0.81 ms p99 1.28 ms server 29.9 cores client-busy-max 0.04
+[05:41:58]   qps size 100000 ef 80 clients 32 trial 3 hotkv:     39372 q/s p50 0.80 ms p99 1.32 ms server 29.8 cores client-busy-max 0.04
+[05:42:04]   qps size 100000 ef 80 clients 32 trial 3 redis:      8320 q/s p50 3.57 ms p99 5.27 ms server 9.6 cores client-busy-max 0.01
+[05:42:11]   qps size 100000 ef 80 clients 50 trial 1 hotkv:     48367 q/s p50 1.02 ms p99 1.67 ms server 46.9 cores client-busy-max 0.04
+[05:42:17]   qps size 100000 ef 80 clients 50 trial 1 redis:      7656 q/s p50 6.66 ms p99 10.65 ms server 9.1 cores client-busy-max 0.01
+[05:42:23]   qps size 100000 ef 80 clients 50 trial 2 redis:      7672 q/s p50 6.68 ms p99 10.63 ms server 8.9 cores client-busy-max 0.01
+[05:42:30]   qps size 100000 ef 80 clients 50 trial 2 hotkv:     48250 q/s p50 1.03 ms p99 1.57 ms server 47.1 cores client-busy-max 0.04
+[05:42:36]   qps size 100000 ef 80 clients 50 trial 3 hotkv:     47251 q/s p50 1.03 ms p99 1.81 ms server 47.1 cores client-busy-max 0.04
+[05:42:42]   qps size 100000 ef 80 clients 50 trial 3 redis:      7544 q/s p50 6.84 ms p99 10.66 ms server 8.8 cores client-busy-max 0.01
+[05:42:49]   qps size 100000 ef 80 clients 100 trial 1 hotkv:     63247 q/s p50 1.53 ms p99 2.80 ms server 93.9 cores client-busy-max 0.03
+[05:42:56]   qps size 100000 ef 80 clients 100 trial 1 redis:      7196 q/s p50 12.40 ms p99 24.77 ms server 8.8 cores client-busy-max 0.00
+[05:43:03]   qps size 100000 ef 80 clients 100 trial 2 redis:      7119 q/s p50 12.43 ms p99 24.93 ms server 8.7 cores client-busy-max 0.00
+[05:43:10]   qps size 100000 ef 80 clients 100 trial 2 hotkv:     60249 q/s p50 1.61 ms p99 2.93 ms server 94.9 cores client-busy-max 0.03
+[05:43:16]   qps size 100000 ef 80 clients 100 trial 3 hotkv:     68443 q/s p50 1.40 ms p99 2.66 ms server 93.4 cores client-busy-max 0.04
+[05:43:23]   qps size 100000 ef 80 clients 100 trial 3 redis:      7103 q/s p50 12.55 ms p99 25.15 ms server 8.7 cores client-busy-max 0.00
+[05:43:29]   qps size 100000 ef 40 clients  1 trial 1 hotkv:      2737 q/s p50 0.36 ms p99 0.54 ms server 0.9 cores client-busy-max 0.08
+[05:43:35]   qps size 100000 ef 40 clients  1 trial 1 redis:      1485 q/s p50 0.65 ms p99 1.14 ms server 1.0 cores client-busy-max 0.04
+[05:43:41]   qps size 100000 ef 40 clients  1 trial 2 redis:      1554 q/s p50 0.64 ms p99 0.93 ms server 1.0 cores client-busy-max 0.05
+[05:43:47]   qps size 100000 ef 40 clients  1 trial 2 hotkv:      2754 q/s p50 0.36 ms p99 0.53 ms server 0.9 cores client-busy-max 0.08
+[05:43:52]   qps size 100000 ef 40 clients  1 trial 3 hotkv:      2779 q/s p50 0.36 ms p99 0.52 ms server 0.9 cores client-busy-max 0.08
+[05:43:58]   qps size 100000 ef 40 clients  1 trial 3 redis:      1506 q/s p50 0.65 ms p99 1.06 ms server 1.0 cores client-busy-max 0.04
+[05:44:04]   qps size 100000 ef 40 clients  2 trial 1 hotkv:      5379 q/s p50 0.37 ms p99 0.54 ms server 1.8 cores client-busy-max 0.08
+[05:44:10]   qps size 100000 ef 40 clients  2 trial 1 redis:      3040 q/s p50 0.65 ms p99 0.95 ms server 1.9 cores client-busy-max 0.04
+[05:44:16]   qps size 100000 ef 40 clients  2 trial 2 redis:      2984 q/s p50 0.65 ms p99 1.05 ms server 1.9 cores client-busy-max 0.04
+[05:44:22]   qps size 100000 ef 40 clients  2 trial 2 hotkv:      5330 q/s p50 0.37 ms p99 0.55 ms server 1.8 cores client-busy-max 0.08
+[05:44:27]   qps size 100000 ef 40 clients  2 trial 3 hotkv:      5400 q/s p50 0.37 ms p99 0.55 ms server 1.8 cores client-busy-max 0.08
+[05:44:33]   qps size 100000 ef 40 clients  2 trial 3 redis:      3027 q/s p50 0.65 ms p99 0.97 ms server 1.9 cores client-busy-max 0.04
+[05:44:39]   qps size 100000 ef 40 clients  4 trial 1 hotkv:     10573 q/s p50 0.38 ms p99 0.55 ms server 3.7 cores client-busy-max 0.08
+[05:44:45]   qps size 100000 ef 40 clients  4 trial 1 redis:      5260 q/s p50 0.74 ms p99 1.21 ms server 3.6 cores client-busy-max 0.04
+[05:44:51]   qps size 100000 ef 40 clients  4 trial 2 redis:      5314 q/s p50 0.73 ms p99 1.17 ms server 3.6 cores client-busy-max 0.04
+[05:44:57]   qps size 100000 ef 40 clients  4 trial 2 hotkv:     10592 q/s p50 0.38 ms p99 0.55 ms server 3.7 cores client-busy-max 0.08
+[05:45:02]   qps size 100000 ef 40 clients  4 trial 3 hotkv:     10664 q/s p50 0.37 ms p99 0.55 ms server 3.7 cores client-busy-max 0.08
+[05:45:08]   qps size 100000 ef 40 clients  4 trial 3 redis:      5327 q/s p50 0.73 ms p99 1.15 ms server 3.6 cores client-busy-max 0.04
+[05:45:14]   qps size 100000 ef 40 clients  8 trial 1 hotkv:     20844 q/s p50 0.38 ms p99 0.57 ms server 7.4 cores client-busy-max 0.08
+[05:45:20]   qps size 100000 ef 40 clients  8 trial 1 redis:      8330 q/s p50 0.93 ms p99 1.49 ms server 6.0 cores client-busy-max 0.03
+[05:45:26]   qps size 100000 ef 40 clients  8 trial 2 redis:      8375 q/s p50 0.93 ms p99 1.44 ms server 6.1 cores client-busy-max 0.03
+[05:45:32]   qps size 100000 ef 40 clients  8 trial 2 hotkv:     20878 q/s p50 0.38 ms p99 0.56 ms server 7.4 cores client-busy-max 0.08
+[05:45:38]   qps size 100000 ef 40 clients  8 trial 3 hotkv:     20714 q/s p50 0.38 ms p99 0.57 ms server 7.4 cores client-busy-max 0.08
+[05:45:44]   qps size 100000 ef 40 clients  8 trial 3 redis:      8400 q/s p50 0.92 ms p99 1.47 ms server 6.0 cores client-busy-max 0.03
+[05:45:50]   qps size 100000 ef 40 clients 16 trial 1 hotkv:     38021 q/s p50 0.42 ms p99 0.64 ms server 14.5 cores client-busy-max 0.08
+[05:45:56]   qps size 100000 ef 40 clients 16 trial 1 redis:      8637 q/s p50 1.82 ms p99 2.43 ms server 6.0 cores client-busy-max 0.02
+[05:46:02]   qps size 100000 ef 40 clients 16 trial 2 redis:      8521 q/s p50 1.81 ms p99 2.68 ms server 6.0 cores client-busy-max 0.02
+[05:46:08]   qps size 100000 ef 40 clients 16 trial 2 hotkv:     38077 q/s p50 0.42 ms p99 0.64 ms server 14.8 cores client-busy-max 0.07
+[05:46:14]   qps size 100000 ef 40 clients 16 trial 3 hotkv:     36000 q/s p50 0.43 ms p99 0.73 ms server 14.5 cores client-busy-max 0.08
+[05:46:20]   qps size 100000 ef 40 clients 16 trial 3 redis:      8666 q/s p50 1.78 ms p99 2.46 ms server 6.2 cores client-busy-max 0.02
+[05:46:26]   qps size 100000 ef 40 clients 32 trial 1 hotkv:     62755 q/s p50 0.50 ms p99 0.86 ms server 29.1 cores client-busy-max 0.07
+[05:46:32]   qps size 100000 ef 40 clients 32 trial 1 redis:      8448 q/s p50 3.75 ms p99 5.64 ms server 6.2 cores client-busy-max 0.01
+[05:46:38]   qps size 100000 ef 40 clients 32 trial 2 redis:      8160 q/s p50 3.84 ms p99 7.01 ms server 6.1 cores client-busy-max 0.01
+[05:46:44]   qps size 100000 ef 40 clients 32 trial 2 hotkv:     62253 q/s p50 0.50 ms p99 0.86 ms server 29.6 cores client-busy-max 0.07
+[05:46:50]   qps size 100000 ef 40 clients 32 trial 3 hotkv:     61722 q/s p50 0.51 ms p99 0.83 ms server 28.8 cores client-busy-max 0.08
+[05:46:56]   qps size 100000 ef 40 clients 32 trial 3 redis:      8240 q/s p50 3.83 ms p99 6.30 ms server 6.1 cores client-busy-max 0.01
+[05:47:03]   qps size 100000 ef 40 clients 50 trial 1 hotkv:     81603 q/s p50 0.60 ms p99 1.00 ms server 45.4 cores client-busy-max 0.06
+[05:47:09]   qps size 100000 ef 40 clients 50 trial 1 redis:      8173 q/s p50 4.91 ms p99 10.15 ms server 6.2 cores client-busy-max 0.01
+[05:47:15]   qps size 100000 ef 40 clients 50 trial 2 redis:      8225 q/s p50 4.94 ms p99 10.10 ms server 6.1 cores client-busy-max 0.01
+[05:47:22]   qps size 100000 ef 40 clients 50 trial 2 hotkv:     83290 q/s p50 0.59 ms p99 1.04 ms server 45.1 cores client-busy-max 0.07
+[05:47:28]   qps size 100000 ef 40 clients 50 trial 3 hotkv:     83108 q/s p50 0.58 ms p99 1.03 ms server 45.1 cores client-busy-max 0.07
+[05:47:34]   qps size 100000 ef 40 clients 50 trial 3 redis:      8361 q/s p50 4.75 ms p99 9.95 ms server 6.4 cores client-busy-max 0.01
+[05:47:41]   qps size 100000 ef 40 clients 100 trial 1 hotkv:    115672 q/s p50 0.84 ms p99 1.55 ms server 91.5 cores client-busy-max 0.06
+[05:47:48]   qps size 100000 ef 40 clients 100 trial 1 redis:      7866 q/s p50 11.35 ms p99 23.15 ms server 6.0 cores client-busy-max 0.00
+[05:47:55]   qps size 100000 ef 40 clients 100 trial 2 redis:      7894 q/s p50 11.43 ms p99 23.07 ms server 6.0 cores client-busy-max 0.00
+[05:48:02]   qps size 100000 ef 40 clients 100 trial 2 hotkv:    116344 q/s p50 0.82 ms p99 1.56 ms server 91.5 cores client-busy-max 0.06
+[05:48:09]   qps size 100000 ef 40 clients 100 trial 3 hotkv:    115262 q/s p50 0.83 ms p99 1.61 ms server 91.7 cores client-busy-max 0.06
+[05:48:15]   qps size 100000 ef 40 clients 100 trial 3 redis:      7994 q/s p50 11.33 ms p99 22.89 ms server 6.1 cores client-busy-max 0.00
+[05:48:21]   qps size 100000 ef 150 clients  1 trial 1 hotkv:      1186 q/s p50 0.85 ms p99 1.18 ms server 1.0 cores client-busy-max 0.03
+[05:48:27]   qps size 100000 ef 150 clients  1 trial 1 redis:       847 q/s p50 1.18 ms p99 1.67 ms server 1.0 cores client-busy-max 0.03
+[05:48:33]   qps size 100000 ef 150 clients  1 trial 2 redis:       845 q/s p50 1.18 ms p99 1.68 ms server 1.0 cores client-busy-max 0.03
+[05:48:39]   qps size 100000 ef 150 clients  1 trial 2 hotkv:      1186 q/s p50 0.85 ms p99 1.18 ms server 1.0 cores client-busy-max 0.03
+[05:48:45]   qps size 100000 ef 150 clients  1 trial 3 hotkv:      1202 q/s p50 0.84 ms p99 1.16 ms server 1.0 cores client-busy-max 0.03
+[05:48:50]   qps size 100000 ef 150 clients  1 trial 3 redis:       836 q/s p50 1.18 ms p99 1.83 ms server 1.0 cores client-busy-max 0.02
+[05:48:56]   qps size 100000 ef 150 clients  2 trial 1 hotkv:      2323 q/s p50 0.86 ms p99 1.21 ms server 1.9 cores client-busy-max 0.03
+[05:49:02]   qps size 100000 ef 150 clients  2 trial 1 redis:      1643 q/s p50 1.21 ms p99 1.84 ms server 2.0 cores client-busy-max 0.02
+[05:49:08]   qps size 100000 ef 150 clients  2 trial 2 redis:      1646 q/s p50 1.21 ms p99 1.79 ms server 2.0 cores client-busy-max 0.02
+[05:49:14]   qps size 100000 ef 150 clients  2 trial 2 hotkv:      2310 q/s p50 0.87 ms p99 1.24 ms server 1.9 cores client-busy-max 0.03
+[05:49:20]   qps size 100000 ef 150 clients  2 trial 3 hotkv:      2303 q/s p50 0.87 ms p99 1.22 ms server 1.9 cores client-busy-max 0.03
+[05:49:25]   qps size 100000 ef 150 clients  2 trial 3 redis:      1665 q/s p50 1.19 ms p99 1.73 ms server 2.0 cores client-busy-max 0.02
+[05:49:31]   qps size 100000 ef 150 clients  4 trial 1 hotkv:      4555 q/s p50 0.88 ms p99 1.24 ms server 3.9 cores client-busy-max 0.03
+[05:49:37]   qps size 100000 ef 150 clients  4 trial 1 redis:      3081 q/s p50 1.29 ms p99 1.91 ms server 3.9 cores client-busy-max 0.02
+[05:49:43]   qps size 100000 ef 150 clients  4 trial 2 redis:      3050 q/s p50 1.29 ms p99 2.00 ms server 3.9 cores client-busy-max 0.02
+[05:49:49]   qps size 100000 ef 150 clients  4 trial 2 hotkv:      4553 q/s p50 0.88 ms p99 1.23 ms server 3.9 cores client-busy-max 0.03
+[05:49:55]   qps size 100000 ef 150 clients  4 trial 3 hotkv:      4578 q/s p50 0.88 ms p99 1.23 ms server 3.9 cores client-busy-max 0.03
+[05:50:01]   qps size 100000 ef 150 clients  4 trial 3 redis:      3028 q/s p50 1.30 ms p99 2.09 ms server 3.8 cores client-busy-max 0.02
+[05:50:06]   qps size 100000 ef 150 clients  8 trial 1 hotkv:      9014 q/s p50 0.89 ms p99 1.24 ms server 7.7 cores client-busy-max 0.03
+[05:50:12]   qps size 100000 ef 150 clients  8 trial 1 redis:      4914 q/s p50 1.61 ms p99 2.40 ms server 7.3 cores client-busy-max 0.03
+[05:50:18]   qps size 100000 ef 150 clients  8 trial 2 redis:      4858 q/s p50 1.62 ms p99 2.51 ms server 7.3 cores client-busy-max 0.03
+[05:50:24]   qps size 100000 ef 150 clients  8 trial 2 hotkv:      8832 q/s p50 0.91 ms p99 1.28 ms server 7.7 cores client-busy-max 0.03
+[05:50:30]   qps size 100000 ef 150 clients  8 trial 3 hotkv:      8830 q/s p50 0.91 ms p99 1.28 ms server 7.7 cores client-busy-max 0.03
+[05:50:36]   qps size 100000 ef 150 clients  8 trial 3 redis:      4890 q/s p50 1.61 ms p99 2.46 ms server 7.3 cores client-busy-max 0.03
+[05:50:42]   qps size 100000 ef 150 clients 16 trial 1 hotkv:     15824 q/s p50 1.01 ms p99 1.49 ms server 15.5 cores client-busy-max 0.03
+[05:50:48]   qps size 100000 ef 150 clients 16 trial 1 redis:      5855 q/s p50 2.67 ms p99 4.30 ms server 11.1 cores client-busy-max 0.02
+[05:50:54]   qps size 100000 ef 150 clients 16 trial 2 redis:      5832 q/s p50 2.67 ms p99 4.40 ms server 11.0 cores client-busy-max 0.02
+[05:51:00]   qps size 100000 ef 150 clients 16 trial 2 hotkv:     15832 q/s p50 1.01 ms p99 1.50 ms server 15.4 cores client-busy-max 0.03
+[05:51:06]   qps size 100000 ef 150 clients 16 trial 3 hotkv:     16096 q/s p50 0.99 ms p99 1.47 ms server 15.5 cores client-busy-max 0.03
+[05:51:12]   qps size 100000 ef 150 clients 16 trial 3 redis:      5773 q/s p50 2.70 ms p99 4.34 ms server 11.0 cores client-busy-max 0.02
+[05:51:18]   qps size 100000 ef 150 clients 32 trial 1 hotkv:     23736 q/s p50 1.26 ms p99 2.76 ms server 30.5 cores client-busy-max 0.03
+[05:51:24]   qps size 100000 ef 150 clients 32 trial 1 redis:      6271 q/s p50 5.12 ms p99 7.63 ms server 12.5 cores client-busy-max 0.01
+[05:51:30]   qps size 100000 ef 150 clients 32 trial 2 redis:      6123 q/s p50 5.25 ms p99 7.80 ms server 12.3 cores client-busy-max 0.01
+[05:51:36]   qps size 100000 ef 150 clients 32 trial 2 hotkv:     24627 q/s p50 1.29 ms p99 1.95 ms server 31.0 cores client-busy-max 0.03
+[05:51:42]   qps size 100000 ef 150 clients 32 trial 3 hotkv:     24616 q/s p50 1.29 ms p99 2.03 ms server 30.4 cores client-busy-max 0.03
+[05:51:49]   qps size 100000 ef 150 clients 32 trial 3 redis:      6239 q/s p50 5.17 ms p99 7.78 ms server 12.3 cores client-busy-max 0.01
+[05:51:55]   qps size 100000 ef 150 clients 50 trial 1 hotkv:     28496 q/s p50 1.74 ms p99 2.70 ms server 48.4 cores client-busy-max 0.02
+[05:52:01]   qps size 100000 ef 150 clients 50 trial 1 redis:      5823 q/s p50 8.49 ms p99 13.07 ms server 12.2 cores client-busy-max 0.01
+[05:52:08]   qps size 100000 ef 150 clients 50 trial 2 redis:      5915 q/s p50 8.40 ms p99 12.23 ms server 12.4 cores client-busy-max 0.01
+[05:52:14]   qps size 100000 ef 150 clients 50 trial 2 hotkv:     28164 q/s p50 1.77 ms p99 2.63 ms server 48.5 cores client-busy-max 0.02
+[05:52:20]   qps size 100000 ef 150 clients 50 trial 3 hotkv:     27946 q/s p50 1.74 ms p99 3.09 ms server 48.5 cores client-busy-max 0.02
+[05:52:27]   qps size 100000 ef 150 clients 50 trial 3 redis:      5858 q/s p50 8.49 ms p99 12.56 ms server 12.2 cores client-busy-max 0.01
+[05:52:33]   qps size 100000 ef 150 clients 100 trial 1 hotkv:     33200 q/s p50 2.97 ms p99 4.89 ms server 96.5 cores client-busy-max 0.02
+[05:52:40]   qps size 100000 ef 150 clients 100 trial 1 redis:      5515 q/s p50 15.67 ms p99 30.91 ms server 11.7 cores client-busy-max 0.00
+[05:52:47]   qps size 100000 ef 150 clients 100 trial 2 redis:      5518 q/s p50 15.74 ms p99 30.95 ms server 11.7 cores client-busy-max 0.00
+[05:52:54]   qps size 100000 ef 150 clients 100 trial 2 hotkv:     34652 q/s p50 2.84 ms p99 4.84 ms server 95.9 cores client-busy-max 0.02
+[05:53:01]   qps size 100000 ef 150 clients 100 trial 3 hotkv:     32984 q/s p50 2.96 ms p99 5.12 ms server 96.7 cores client-busy-max 0.02
+[05:53:08]   qps size 100000 ef 150 clients 100 trial 3 redis:      5528 q/s p50 15.63 ms p99 30.70 ms server 11.8 cores client-busy-max 0.00
+[05:53:13]   qps size 100000 ef 300 clients  1 trial 1 hotkv:       712 q/s p50 1.41 ms p99 1.99 ms server 1.0 cores client-busy-max 0.02
+[05:53:19]   qps size 100000 ef 300 clients  1 trial 1 redis:       545 q/s p50 1.82 ms p99 2.74 ms server 1.0 cores client-busy-max 0.03
+[05:53:25]   qps size 100000 ef 300 clients  1 trial 2 redis:       545 q/s p50 1.81 ms p99 2.71 ms server 1.0 cores client-busy-max 0.03
+[05:53:31]   qps size 100000 ef 300 clients  1 trial 2 hotkv:       703 q/s p50 1.42 ms p99 2.01 ms server 1.0 cores client-busy-max 0.02
+[05:53:37]   qps size 100000 ef 300 clients  1 trial 3 hotkv:       703 q/s p50 1.42 ms p99 2.02 ms server 1.0 cores client-busy-max 0.02
+[05:53:43]   qps size 100000 ef 300 clients  1 trial 3 redis:       548 q/s p50 1.81 ms p99 2.74 ms server 1.0 cores client-busy-max 0.02
+[05:53:48]   qps size 100000 ef 300 clients  2 trial 1 hotkv:      1371 q/s p50 1.46 ms p99 2.08 ms server 2.0 cores client-busy-max 0.02
+[05:53:54]   qps size 100000 ef 300 clients  2 trial 1 redis:      1083 q/s p50 1.82 ms p99 2.81 ms server 2.0 cores client-busy-max 0.02
+[05:54:00]   qps size 100000 ef 300 clients  2 trial 2 redis:      1072 q/s p50 1.83 ms p99 2.82 ms server 2.0 cores client-busy-max 0.03
+[05:54:06]   qps size 100000 ef 300 clients  2 trial 2 hotkv:      1386 q/s p50 1.45 ms p99 2.06 ms server 2.0 cores client-busy-max 0.02
+[05:54:12]   qps size 100000 ef 300 clients  2 trial 3 hotkv:      1372 q/s p50 1.46 ms p99 2.11 ms server 2.0 cores client-busy-max 0.02
+[05:54:18]   qps size 100000 ef 300 clients  2 trial 3 redis:      1070 q/s p50 1.84 ms p99 2.85 ms server 2.0 cores client-busy-max 0.03
+[05:54:23]   qps size 100000 ef 300 clients  4 trial 1 hotkv:      2703 q/s p50 1.48 ms p99 2.09 ms server 3.9 cores client-busy-max 0.02
+[05:54:29]   qps size 100000 ef 300 clients  4 trial 1 redis:      2002 q/s p50 1.96 ms p99 3.08 ms server 3.9 cores client-busy-max 0.02
+[05:54:35]   qps size 100000 ef 300 clients  4 trial 2 redis:      2012 q/s p50 1.95 ms p99 3.06 ms server 3.9 cores client-busy-max 0.02
+[05:54:41]   qps size 100000 ef 300 clients  4 trial 2 hotkv:      2720 q/s p50 1.48 ms p99 2.08 ms server 3.9 cores client-busy-max 0.02
+[05:54:47]   qps size 100000 ef 300 clients  4 trial 3 hotkv:      2722 q/s p50 1.48 ms p99 2.08 ms server 3.9 cores client-busy-max 0.02
+[05:54:53]   qps size 100000 ef 300 clients  4 trial 3 redis:      2001 q/s p50 1.95 ms p99 3.14 ms server 3.9 cores client-busy-max 0.02
+[05:54:59]   qps size 100000 ef 300 clients  8 trial 1 hotkv:      5342 q/s p50 1.50 ms p99 2.11 ms server 7.8 cores client-busy-max 0.02
+[05:55:04]   qps size 100000 ef 300 clients  8 trial 1 redis:      3227 q/s p50 2.45 ms p99 3.68 ms server 7.7 cores client-busy-max 0.02
+[05:55:10]   qps size 100000 ef 300 clients  8 trial 2 redis:      3199 q/s p50 2.45 ms p99 3.83 ms server 7.7 cores client-busy-max 0.02
+[05:55:16]   qps size 100000 ef 300 clients  8 trial 2 hotkv:      5328 q/s p50 1.50 ms p99 2.13 ms server 7.8 cores client-busy-max 0.02
+[05:55:22]   qps size 100000 ef 300 clients  8 trial 3 hotkv:      5325 q/s p50 1.51 ms p99 2.12 ms server 7.8 cores client-busy-max 0.02
+[05:55:28]   qps size 100000 ef 300 clients  8 trial 3 redis:      3247 q/s p50 2.43 ms p99 3.66 ms server 7.7 cores client-busy-max 0.02
+[05:55:34]   qps size 100000 ef 300 clients 16 trial 1 hotkv:      9616 q/s p50 1.66 ms p99 2.31 ms server 15.5 cores client-busy-max 0.03
+[05:55:40]   qps size 100000 ef 300 clients 16 trial 1 redis:      3859 q/s p50 4.09 ms p99 6.33 ms server 13.2 cores client-busy-max 0.01
+[05:55:46]   qps size 100000 ef 300 clients 16 trial 2 redis:      3864 q/s p50 4.10 ms p99 6.27 ms server 13.2 cores client-busy-max 0.01
+[05:55:52]   qps size 100000 ef 300 clients 16 trial 2 hotkv:      9619 q/s p50 1.66 ms p99 2.31 ms server 15.5 cores client-busy-max 0.03
+[05:55:58]   qps size 100000 ef 300 clients 16 trial 3 hotkv:      9591 q/s p50 1.67 ms p99 2.35 ms server 15.6 cores client-busy-max 0.03
+[05:56:04]   qps size 100000 ef 300 clients 16 trial 3 redis:      3850 q/s p50 4.10 ms p99 6.33 ms server 13.2 cores client-busy-max 0.01
+[05:56:10]   qps size 100000 ef 300 clients 32 trial 1 hotkv:     12680 q/s p50 2.18 ms p99 6.74 ms server 31.3 cores client-busy-max 0.02
+[05:56:16]   qps size 100000 ef 300 clients 32 trial 1 redis:      4096 q/s p50 7.77 ms p99 11.16 ms server 17.6 cores client-busy-max 0.01
+[05:56:22]   qps size 100000 ef 300 clients 32 trial 2 redis:      4085 q/s p50 7.76 ms p99 11.42 ms server 17.5 cores client-busy-max 0.01
+[05:56:28]   qps size 100000 ef 300 clients 32 trial 2 hotkv:     14098 q/s p50 2.23 ms p99 3.65 ms server 31.4 cores client-busy-max 0.02
+[05:56:35]   qps size 100000 ef 300 clients 32 trial 3 hotkv:     14314 q/s p50 2.22 ms p99 3.27 ms server 31.3 cores client-busy-max 0.02
+[05:56:41]   qps size 100000 ef 300 clients 32 trial 3 redis:      4254 q/s p50 7.62 ms p99 10.72 ms server 17.5 cores client-busy-max 0.01
+[05:56:47]   qps size 100000 ef 300 clients 50 trial 1 hotkv:     16096 q/s p50 3.06 ms p99 4.86 ms server 48.8 cores client-busy-max 0.01
+[05:56:53]   qps size 100000 ef 300 clients 50 trial 1 redis:      4669 q/s p50 11.24 ms p99 17.79 ms server 17.9 cores client-busy-max 0.01
+[05:57:00]   qps size 100000 ef 300 clients 50 trial 2 redis:      4034 q/s p50 11.81 ms p99 16.98 ms server 17.2 cores client-busy-max 0.00
+[05:57:06]   qps size 100000 ef 300 clients 50 trial 2 hotkv:     15909 q/s p50 3.10 ms p99 4.80 ms server 49.2 cores client-busy-max 0.01
+[05:57:12]   qps size 100000 ef 300 clients 50 trial 3 hotkv:     15845 q/s p50 3.11 ms p99 4.83 ms server 49.3 cores client-busy-max 0.01
+[05:57:19]   qps size 100000 ef 300 clients 50 trial 3 redis:      5249 q/s p50 9.88 ms p99 17.29 ms server 18.0 cores client-busy-max 0.01
+[05:57:26]   qps size 100000 ef 300 clients 100 trial 1 hotkv:     18672 q/s p50 5.21 ms p99 9.05 ms server 97.3 cores client-busy-max 0.01
+[05:57:32]   qps size 100000 ef 300 clients 100 trial 1 redis:      3938 q/s p50 27.35 ms p99 36.34 ms server 20.0 cores client-busy-max 0.00
+[05:57:39]   qps size 100000 ef 300 clients 100 trial 2 redis:      3969 q/s p50 27.27 ms p99 36.67 ms server 20.3 cores client-busy-max 0.00
+[05:57:46]   qps size 100000 ef 300 clients 100 trial 2 hotkv:     18474 q/s p50 5.29 ms p99 9.04 ms server 97.5 cores client-busy-max 0.01
+[05:57:53]   qps size 100000 ef 300 clients 100 trial 3 hotkv:     18070 q/s p50 5.46 ms p99 8.84 ms server 97.6 cores client-busy-max 0.01
+[05:58:00]   qps size 100000 ef 300 clients 100 trial 3 redis:      3968 q/s p50 27.32 ms p99 36.82 ms server 20.1 cores client-busy-max 0.00
+[05:58:00] RUN DONE
