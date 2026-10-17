@@ -1,0 +1,62 @@
+name: Report a finding
+description: A setting that is unfair to a server, a mistake in how we measured or described something, or a better configuration
+title: "[Finding]: "
+labels: ["finding"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We did this on a best effort basis and no benchmark is perfect. If you think something we published is unfair, wrong or misleading, for any server, please tell us. When a published result is wrong, we re-measure it, correct it and say what changed.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: What is affected?
+      options:
+        - A published result or figure
+        - How a server was configured
+        - How the benchmark measures something
+        - How a result is described in the text
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: The file, table or figure, for example a path under results/ or vector-search/results/.
+    validations:
+      required: true
+
+  - type: textarea
+    id: finding
+    attributes:
+      label: What did you find?
+      description: What is wrong, unfair or missing, and which server or servers does it affect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Documentation, a different configuration you tried, your own numbers, or a link to a run. Commands and raw output help us reproduce it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix
+      description: What setting or wording would you use instead?
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and found no duplicate.
+          required: true
+        - label: I removed passwords, tokens and other secrets from everything I pasted.
+          required: true

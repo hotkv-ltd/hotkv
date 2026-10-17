@@ -1,0 +1,77 @@
+name: Share benchmark results
+description: Share your own benchmark run, on any hardware, cloud, versions or workload
+title: "[Results]: "
+labels: ["benchmark-result"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for running the benchmark and sharing what you found. Results that differ from ours are as welcome as results that agree. The more of the setup you describe, the easier it is for others to check and compare.
+
+  - type: dropdown
+    id: benchmark
+    attributes:
+      label: Which benchmark did you run?
+      options:
+        - Throughput benchmark (harness/)
+        - Vector search benchmark (vector-search/)
+        - My own variation of one of them
+    validations:
+      required: true
+
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware and network
+      description: Cloud and instance types or CPU model, vCPUs, RAM, network speed, and how many load generator machines you used.
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and kernel
+      placeholder: "Ubuntu 24.04, kernel 6.8"
+    validations:
+      required: true
+
+  - type: textarea
+    id: versions
+    attributes:
+      label: Server versions
+      description: The version of every server you measured (HotKV, Redis, Valkey, Dragonfly) and of memtier_benchmark, and how each was built or installed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands and settings
+      description: The exact commands and environment variables you used, and the server launch lines or configuration. Say what differs from the published run.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: results
+    attributes:
+      label: Results
+      description: Paste the numbers, or link to your report. A link to the raw output (the harness log and memtier or vector search JSON) is best.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else worth knowing
+      description: Results that surprised you, flagged figures, limits of your setup, or settings you think favour or hurt a server.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed passwords, tokens, private addresses and other secrets from everything I pasted.
+          required: true
+        - label: I understand that results from other setups can differ from the published ones, and that is fine.
+          required: true

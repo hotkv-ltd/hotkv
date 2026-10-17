@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/hotkv-ltd/hotkv/discussions
+    about: Ask a question, share an idea or talk about your results. Use issues only for benchmark results, findings, bugs and suggestions.
+  - name: Documentation
+    url: https://docs.hotkv.com
+    about: Guides and reference for HotKV.
+  - name: Security vulnerability
+    url: https://github.com/hotkv-ltd/hotkv/security/policy
+    about: Do not open a public issue. Report vulnerabilities privately as described in SECURITY.md.
+  - name: Commercial support and sales
+    url: https://hotkv.com
+    about: Questions about the HotKV server, plans and commercial support.

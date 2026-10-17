@@ -1,0 +1,26 @@
+name: Suggestion
+description: Suggest a new workload, a server to include, or an improvement to the harness or the reports
+title: "[Suggestion]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is missing?
+      description: What do you want to measure or do, and what is in the way?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What would you like the harness or the reports to do? A sketch of the commands or the output helps.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches or workarounds you tried.

@@ -1,0 +1,73 @@
+name: Bug report
+description: Report a bug in the scripts, the report generators or the documentation
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug. For security vulnerabilities do not use this form, see SECURITY.md. If you think a published result is wrong or unfair, please use the "Report a finding" form instead.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which part?
+      options:
+        - harness/full_bench.sh
+        - harness/setup_server.sh or tune_server.sh
+        - harness/render_report.py or render_html.py
+        - vector-search/ scripts
+        - Documentation or README
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: The commit of this repository you used.
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The exact commands and environment variables you used.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and error output
+      description: Paste relevant output. Remove passwords, tokens, private addresses and any other secrets first.
+      render: text
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and found no duplicate.
+          required: true
+        - label: I removed passwords, tokens and other secrets from everything I pasted.
+          required: true
