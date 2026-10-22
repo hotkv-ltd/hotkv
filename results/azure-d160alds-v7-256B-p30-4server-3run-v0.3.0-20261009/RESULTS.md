@@ -251,6 +251,12 @@ These used at or above 85% of the network link, so the link set the
 number, not the server. Treat them as lower bounds, and see the caveat above
 if this instance meters send and receive bandwidth differently.
 
+> Correction, 22 October 2026: the `link used` column below adds inbound and
+> outbound bytes and divides by the harness wall clock (about 13 s, including
+> server launch), not the 10-second test. Per-direction figures over the test
+> window are in NOTES.md under "Reading the flagged figures": GET and MGET sat
+> on the outbound ceiling, and SETNX, HSET, SET and SADD on the inbound one.
+
 | command | server | link used |
 |---|---|---|
 | SET | HotKV | 115% |

@@ -80,18 +80,27 @@ them, so the server's inbound ceiling is at least 131.7 Gbps. `RESULTS.md` was r
 the load generators' CPU reaches 85%. A flagged figure may be below what the server
 could do, and ratios built on one are given as bounds.
 
-- **Reads send the values out**, so the outbound cap applies. HotKV's GET used 88% of
-  it and MGET 83%: those two HotKV figures are close to what this network can carry,
-  and HotKV's true read throughput on this CPU is likely higher.
-- **Writes receive the values.** The link-used figure adds inbound and outbound bytes
-  and compares them with the outbound cap, so a write above 100% (HotKV SET, SETNX,
-  RPUSH, SADD, HSET) is not a full link. Against the inbound ceiling of at least
-  131.7 Gbps, the heaviest write, SETNX at 105.7 Gbps, used about 80%.
+- **Reads send the values out**, so the outbound cap applies. Over the 10-second test
+  window the server's NIC counters show HotKV's GET at 78.8 Gbps and MGET at 82.0 Gbps
+  outbound (medians of three runs), which is the measured outbound ceiling. Both are
+  floors set by the instance; HotKV's true read throughput on this CPU is higher.
+- **Writes receive the values.** Inbound, HotKV's SETNX moved 134.5 Gbps, HSET 132.0,
+  SADD 122.3 and SET 122.0 against an inbound ceiling of at least 131.7 Gbps, so those
+  four are floors set by the network as well. RPUSH (106.1) and MSET (105.6) used about
+  80%, LPUSH 58%, APPEND 46%.
+- **Correction, 22 October 2026.** The `link used` column in `RESULTS.md` and the
+  figures first quoted here (GET 88%, SETNX 105.7 Gbps) came from the harness adding
+  inbound and outbound bytes and dividing by its wall clock, which includes server
+  launch and teardown (about 13 s), not the 10-second test. The figures above divide
+  the per-direction NIC byte counts in `raw/p30_4srv_raw.tgz` (`server_resources.rx_bytes`
+  and `tx_bytes`) by the 10-second test duration. The understatement was in HotKV's
+  disfavour: more of its figures were network-bound than the table marks.
 - **PING and INCR move little data** and are limited by the load generators. On PING
   the load generators' CPU reached 86% with HotKV and 82% with Dragonfly; the 0.6%
   difference between them is within that limit, so PING is a tie between the two.
 - **Redis and Valkey** reached neither limit on any command (at most 11% of the link
-  and 2% load-generator CPU); Dragonfly reached at most 44% of the link and 13%
+  and 2% load-generator CPU); Dragonfly reached at most 52% of the outbound ceiling
+  (MGET, 40.6 Gbps) and 34% of the inbound one (HSET, 44.5 Gbps), and 13%
   load-generator CPU, apart from PING.
 - **CPU figures.** I/O threads (Redis, Valkey) and proactor threads (Dragonfly) can keep
   cores busy without executing commands, so the CPU and ops-per-CPU-second columns are
