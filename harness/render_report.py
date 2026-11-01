@@ -107,6 +107,7 @@ def config_section(d):
         ("data_size_bytes", "Value size"),
         ("pipeline", "Pipeline depth"),
         ("threads_per_client_machine", "memtier threads per client box"),
+        ("memtier_processes_per_client_box", "memtier processes per client box"),
         ("connections_per_thread", "Connections per thread"),
         ("total_connections_per_client_machine", "Total connections per client box"),
         ("test_time_sec", "Test duration per command"),

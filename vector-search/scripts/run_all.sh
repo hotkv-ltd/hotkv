@@ -35,6 +35,12 @@ PY="${PY:-/opt/vsb-venv/bin/python}"
 SERVER_CPUS="${SERVER_CPUS:-0-127}"
 CLIENT_CPUS="${CLIENT_CPUS:-128-159}"
 HOTKV_THREADS="${HOTKV_THREADS:-128}"
+# Where the Redis indexes are built (step 3): the server on REDIS_BUILD_SERVER_CPUS, the loaders on
+# REDIS_BUILD_CLIENT_CPUS. The defaults are the 160-vCPU machine's; change them for another machine.
+REDIS_BUILD_SERVER_CPUS="${REDIS_BUILD_SERVER_CPUS:-140-143}"
+REDIS_BUILD_CLIENT_CPUS="${REDIS_BUILD_CLIENT_CPUS:-144-159}"
+# Title of the report.
+TITLE="${TITLE:-Vector search: HotKV and Redis 8.10.2 on 160 vCPUs}"
 export HOTKV_BIN="${HOTKV_BIN:-/opt/hotkv/build/release/src/hotkv}"
 mkdir -p "$WORK/rdb" "$WORK/out"
 
@@ -45,9 +51,9 @@ if [ -z "${SKIP_PREP:-}" ]; then   # SKIP_PREP=1 runs only steps 5 and 6 (machin
   # 3. Redis indexes: built with 32 connections and VADD ... CAS (the faster of Redis's two loading modes
   #    in the tuning checks), saved with SAVE. Cores 140-143 hold the Redis server, 144-159 the loaders,
   #    so this can run while other work uses the rest of the machine.
-  taskset -c 144-159 "$PY" "$HERE/vsbench.py" --data-dir "$WORK/data" --out "$WORK/out/redis_build" \
+  taskset -c "$REDIS_BUILD_CLIENT_CPUS" "$PY" "$HERE/vsbench.py" --data-dir "$WORK/data" --out "$WORK/out/redis_build" \
       --engines redis --sizes 100000 999000 --builds 3 1 --build-only --redis-cas --ingest-conns 32 \
-      --redis-rdb "$WORK/rdb/redis_{size}.rdb" --server-cpus 140-143 --port-offset 100
+      --redis-rdb "$WORK/rdb/redis_{size}.rdb" --server-cpus "$REDIS_BUILD_SERVER_CPUS" --port-offset 100
 
   bash "$HERE/tune.sh" "$WORK/data" "$WORK/out"
 fi
@@ -66,5 +72,5 @@ done
 # measured as well (HotKV is rebuilt for it; Redis is loaded from the same saved file).
 taskset -c "$CLIENT_CPUS" "$PY" "$HERE/vsbench.py" --data-dir "$WORK/data" --out "$WORK/out/run_999000_ef500"     --sizes 999000 --builds 1     --redis-rdb "$WORK/rdb/redis_{size}.rdb" --redis-cas --ingest-conns 32     --ef-recall 500 --ef-qps 500     --clients 1 2 4 8 16 32 50 100 --trials 3 --warm 1.0 --dur 4     --server-cpus "$SERVER_CPUS" --hotkv-threads "$HOTKV_THREADS" --redis-io-threads 1
 
-"$PY" "$HERE/render_report.py" --title "Vector search: HotKV and Redis 8.10.2 on 160 vCPUs"     --out "$WORK/out/RESULTS.md"     "$WORK/out/run_999000/results.json,$WORK/out/run_999000_ef500/results.json" "$WORK/out/run_100000/results.json"
+"$PY" "$HERE/render_report.py" --title "$TITLE"     --out "$WORK/out/RESULTS.md"     "$WORK/out/run_999000/results.json,$WORK/out/run_999000_ef500/results.json" "$WORK/out/run_100000/results.json"
 echo "DONE: $WORK/out/RESULTS.md"

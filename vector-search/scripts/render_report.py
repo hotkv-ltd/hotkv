@@ -118,6 +118,12 @@ def main():
     ap.add_argument("results", nargs="+", help="results.json of one run; join several for the same size with commas")
     ap.add_argument("--title", required=True)
     ap.add_argument("--out", required=True)
+    # Optional: what the report says about the machine and the builds. The defaults are the published
+    # Azure D160 run's, so rendering that run again gives the same report.
+    ap.add_argument("--machine", default="Azure Standard_D160alds_v7")
+    ap.add_argument("--redis-version", default="8.10.2")
+    ap.add_argument("--hotkv-commit", default=None, help="overrides the commit recorded in the results")
+    ap.add_argument("--limit-note", action="append", default=[], help="an extra line for the limits section (repeatable)")
     args = ap.parse_args()
     runs = [Run(p.split(",")) for p in args.results]
     m0 = runs[0].meta
@@ -139,10 +145,10 @@ def main():
         n_server += (int(hi) - int(lo) + 1) if hi else 1
     L += ["## Setup", ""]
     L += [table([
-        ["Machine", f"Azure Standard_D160alds_v7: {lscpu.get('Model name', '?')}, {n_server + m0['client_cpus']} vCPUs, one VM"],
+        ["Machine", f"{args.machine}: {lscpu.get('Model name', '?')}, {n_server + m0['client_cpus']} vCPUs, one VM"],
         ["Kernel / OS", m0["platform"]],
-        ["HotKV", f"commit `{m0.get('hotkv_commit')}`, binary SHA-256 `{m0['binaries']['hotkv']['sha256'][:16]}...`, release build, portable flags (no -march=native)"],
-        ["Redis", f"8.10.2 from the GitHub release tag, stock `make`, binary SHA-256 `{m0['binaries']['redis']['sha256'][:16]}...`"],
+        ["HotKV", f"commit `{args.hotkv_commit or m0.get('hotkv_commit')}`, binary SHA-256 `{m0['binaries']['hotkv']['sha256'][:16]}...`, release build, portable flags (no -march=native)"],
+        ["Redis", f"{args.redis_version} from the GitHub release tag, stock `make`, binary SHA-256 `{m0['binaries']['redis']['sha256'][:16]}...`"],
         ["CPU placement", f"servers pinned to vCPUs {a0['server_cpus']}; load generators on {m0['client_cpus']} other vCPUs; same CPU set for both servers; loopback"],
         ["HotKV launch", f"`hotkv --threads {a0['hotkv_threads']} --no-snapshot --protected-mode no`"],
         ["Redis launch", f"`redis-server --save \"\" --appendonly no --protected-mode no`" + (f" `--io-threads {a0['redis_io_threads']}`" if a0["redis_io_threads"] > 1 else " (default I/O threads)")],
@@ -239,7 +245,7 @@ def main():
           "- vCPUs are hyperthreads: a pinned set of N vCPUs is N/2 physical cores.",
           "- Redis is a stock build. Its vector sets run at most 32 searches at once (a compile-time limit, `HNSW_MAX_THREADS`) and add vectors on the main thread, so it uses a small part of this machine; that is how it behaves, not something this benchmark configured.",
           "- Recall is measured once per index build and `ef`. Independent builds of the same engine differ in recall; the range is shown where several builds were made.",
-          "- The HotKV build is an unreleased commit (see Setup). Redis was loaded with `VADD ... CAS` and run with its default I/O threads; the tuning runs that led to those choices are in `raw/tuning/`.", ""]
+          "- The HotKV build is an unreleased commit (see Setup). Redis was loaded with `VADD ... CAS` and run with its default I/O threads; the tuning runs that led to those choices are in `raw/tuning/`."] + ["- " + n for n in args.limit_note] + [""]
     with open(args.out, "w") as fh:
         fh.write("\n".join(L))
     print("wrote", args.out)

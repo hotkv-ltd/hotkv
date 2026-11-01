@@ -1,0 +1,155 @@
+{
+ "meta": {
+  "started_utc": "2026-10-31T16:09:43Z",
+  "args": {
+   "data_dir": "/home/ubuntu/vsb/data",
+   "out": "/home/ubuntu/vsb/out/tuning/redis_io8",
+   "engines": [
+    "redis"
+   ],
+   "sizes": [
+    100000
+   ],
+   "builds": [
+    1
+   ],
+   "ef_recall": [
+    80
+   ],
+   "ef_qps": [
+    80
+   ],
+   "clients": [
+    1,
+    16,
+    50
+   ],
+   "trials": 1,
+   "warm": 1.5,
+   "dur": 5.0,
+   "m": 16,
+   "ef_construction": 200,
+   "ingest_conns": 32,
+   "hotkv_ingest_conns": null,
+   "ingest_depth": 8,
+   "redis_cas": false,
+   "hotkv_threads": 96,
+   "redis_io_threads": 8,
+   "server_cpus": "0-63,96-159",
+   "redis_rdb": "/home/ubuntu/vsb/rdb/redis_{size}.rdb",
+   "build_only": false,
+   "port_offset": 0,
+   "note": ""
+  },
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy": "2.5.4",
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+  "lscpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  192\nOn-line CPU(s) list:                     0-191\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) 6975P-C\nCPU family:                              6\nModel:                                   173\nThread(s) per core:                      2\nCore(s) per socket:                      96\nSocket(s):                               1\nStepping:                                1\nBogoMIPS:                                5400.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq monitor ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 wbnoinvd ida arat avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq rdpid bus_lock_detect cldemote movdiri movdir64b md_clear serialize amx_bf16 avx512_fp16 amx_tile amx_int8 flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               4.5 MiB (96 instances)\nL1i cache:                               6 MiB (96 instances)\nL2 cache:                                192 MiB (96 instances)\nL3 cache:                                480 MiB (1 instance)\nNUMA node(s):                            3\nNUMA node0 CPU(s):                       0-31,96-127\nNUMA node1 CPU(s):                       32-63,128-159\nNUMA node2 CPU(s):                       64-95,160-191\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+  "client_cpus": 64,
+  "binaries": {
+   "hotkv": {
+    "path": "/opt/hotkv_vs/build/release/src/hotkv",
+    "sha256": "499a3a848a9aaa6e95d3231613c1eb3fcca36142ff31731dce548681110189b1"
+   },
+   "redis": {
+    "path": "/opt/redis-8.10.3/src/redis-server",
+    "sha256": "8accf550b207092429366e915e3e4e0a51a351ddc218195233eb44b7b87f04ca"
+   }
+  },
+  "hotkv_commit": null,
+  "finished_utc": "2026-10-31T16:10:20Z"
+ },
+ "ingest": [
+  {
+   "engine": "redis",
+   "index": "bench1",
+   "vectors": 100000,
+   "connections": 32,
+   "pipeline_depth": 8,
+   "cas": true,
+   "seconds": 62.61,
+   "vectors_per_sec": 1597.1,
+   "sent": 100000,
+   "count_in_server": 100000,
+   "nonstandard_replies": 0,
+   "server_cpu_seconds": 173.8,
+   "server_cores_used": 2.78,
+   "server_rss_bytes": 719269888,
+   "size": 100000,
+   "build": 1,
+   "used_memory_bytes": 691956336,
+   "loaded_from_rdb": "redis_100000.rdb"
+  }
+ ],
+ "recall": [
+  {
+   "recall_at_10": 0.9666000000000001,
+   "stdev_per_query": 0.08743248824092793,
+   "queries": 1000,
+   "replies_with_fewer_than_10": 0,
+   "engine": "redis",
+   "size": 100000,
+   "build": 1,
+   "ef": 80
+  }
+ ],
+ "qps": [
+  {
+   "clients": 1,
+   "queries": 4060,
+   "qps": 812.0,
+   "p50_ms": 1.1936174996662885,
+   "p99_ms": 2.001300822048506,
+   "mean_ms": 1.2305027815412095,
+   "max_ms": 2.476654000929557,
+   "server_cores_used": 0.9060202816267484,
+   "client_busy_max": 0.04180504525507314,
+   "client_busy_mean": 0.04180504525507314,
+   "short_replies": 0,
+   "late_starts": 0,
+   "engine": "redis",
+   "size": 100000,
+   "ef": 80,
+   "trial": 1
+  },
+  {
+   "clients": 16,
+   "queries": 27704,
+   "qps": 5540.8,
+   "p50_ms": 2.680580499145435,
+   "p99_ms": 5.7132966412609685,
+   "mean_ms": 2.8848416157169456,
+   "max_ms": 11.317372001940385,
+   "server_cores_used": 7.152159573263779,
+   "client_busy_max": 0.03467472171310613,
+   "client_busy_mean": 0.03383012987371204,
+   "short_replies": 0,
+   "late_starts": 0,
+   "engine": "redis",
+   "size": 100000,
+   "ef": 80,
+   "trial": 1
+  },
+  {
+   "clients": 50,
+   "queries": 30313,
+   "qps": 6062.6,
+   "p50_ms": 8.02454099903116,
+   "p99_ms": 14.156903600087416,
+   "mean_ms": 8.250439234912985,
+   "max_ms": 18.463016000168864,
+   "server_cores_used": 7.6133695627544355,
+   "client_busy_max": 0.014029950364337521,
+   "client_busy_mean": 0.013299507868074477,
+   "short_replies": 0,
+   "late_starts": 0,
+   "engine": "redis",
+   "size": 100000,
+   "ef": 80,
+   "trial": 1
+  }
+ ],
+ "server_info": {
+  "redis_100000": "# Server\r\nredis_version:8.10.3\r\nredis_git_sha1:00000000\r\nredis_git_dirty:1\r\nredis_build_id:7c8531f272bcca73\r\nredis_mode:standalone\r\nos:Linux 7.0.0-1014-aws x86_64\r\narch_bits:64\r\nmonotonic_clock:POSIX clock_gettime\r\nmultiplexing_api:epoll\r\natomicvar_api:c11-builtin\r\ngcc_version:13.3.0\r\nprocess_id:1591213\r\nprocess_supervised:no\r\nrun_id:4fd53ac7c556648f62e18982a446363aed1975aa\r\ntcp_port:6441\r\nserver_time_usec:1793463020757071\r\nuptime_in_seconds:37\r\nuptime_in_days:0\r\nhz:10\r\nconfigured_hz:10\r\nlru_clock:15078124\r\nexecutable:/opt/redis-8.10.3/src/redis-server\r\nconfig_file:\r\nio_threads_active:1\r\nlistener0:name=tcp,bind=127.0.0.1,port=6441\r\n\r\n# Clients\r\nconnected_clients:1\r\ncluster_connections:0\r\nmaxclients:10000\r\nclient_recent_max_input_buffer:54708\r\nclient_recent_max_output_buffer:0\r\nblocked_clients:0\r\ntracking_clients:0\r\npubsub_clients:0\r\nwatching_clients:0\r\nclients_in_timeout_table:0\r\nactive_clients:51\r\ntotal_watched_keys:0\r\ntotal_blocking_keys:0\r\ntotal_blocking_keys_on_nokey:0\r\n\r\n# Memory\r\nused_memory:2074163168\r\nused_memory_human:1.93G\r\nused_memory_rss:2160177152\r\nused_memory_rss_human:2.01G\r\nused_memory_peak:2079914464\r\nused_memory_peak_human:1.94G\r\nused_memory_peak_time:1793463015\r\nused_memory_peak_perc:99.72%\r\nused_memory_overhead:2009708\r\nused_memory_startup:1923432\r\nused_memory_dataset:2072153460\r\nused_memory_dataset_perc:100.00%\r\nallocator_allocated:2088320984\r\nallocator_active:2089201664\r\nallocator_resident:2157989888\r\nallocator_muzzy:0\r\ntotal_system_memory:399234650112\r\ntotal_system_memory_human:371.82G\r\nused_memory_lua:32768\r\nused_memory_vm_eval:32768\r\nused_memory_lua_human:32.00K\r\nused_memory_scripts_eval:0\r\nnumber_of_cached_scripts:0\r\nnumber_of_functions:0\r\nnumber_of_libraries:0\r\nused_memory_vm_functions:34816\r\nused_memory_vm_total:67584\r\nused_memory_vm_total_human:66.00K\r\nused_memory_functions:192\r\nused_memory_hash_templates:72\r\nused_memory_scripts:192\r\nused_memory_scripts_human:192B\r\nmaxmemory:0\r\nmaxmemory_human:0B\r\nmaxmemory_policy:noeviction\r\nallocator_frag_ratio:1.00\r\nallocator_frag_bytes:864744\r\nallocator_rss_ratio:1.03\r\nallocator_rss_bytes:68788224\r\nrss_overhead_ratio:1.00\r\nrss_overhead_bytes:2187264\r\nmem_fragmentation_ratio:1.04\r\nmem_fragmentation_bytes:82021304\r\nmem_not_counted_for_evict:0\r\nmem_replication_backlog:0\r\nmem_total_replication_buffers:0\r\nmem_replica_full_sync_buffer:0\r\nmem_clients_slaves:0\r\nmem_clients_normal:17676\r\nmem_clients_normal_shared:0\r\nmem_clients_normal_unshared:0\r\nmem_cluster_slot_migration_output_buffer:0\r\nmem_cluster_slot_migration_input_buffer:0\r\nmem_cluster_slot_migration_input_buffer_peak:0\r\nmem_cluster_links:0\r\nmem_aof_buffer:0\r\nmem_allocator:jemalloc-5.3.0\r\nmem_overhead_db_hashtable_rehashing:0\r\nactive_defrag_running:0\r\nlazyfree_pending_objects:0\r\nlazyfreed_objects:0\r\n\r\n# Persistence\r\nloading:0\r\nasync_loading:0\r\ncurrent_cow_peak:0\r\ncurrent_cow_size:0\r\ncurrent_cow_size_age:0\r\ncurrent_fork_perc:0.00\r\ncurrent_save_keys_processed:0\r\ncurrent_save_keys_total:0\r\nrdb_changes_since_last_save:0\r\nrdb_bgsave_in_progress:0\r\nrdb_last_save_time:1793462983\r\nrdb_last_bgsave_status:ok\r\nrdb_last_bgsave_time_sec:-1\r\nrdb_current_bgsave_time_sec:-1\r\nrdb_saves:0\r\nrdb_saves_consecutive_failures:0\r\nrdb_last_cow_size:0\r\nrdb_last_load_keys_expired:0\r\nrdb_last_load_keys_loaded:3\r\naof_enabled:0\r\naof_rewrite_in_progress:0\r\naof_rewrite_scheduled:0\r\naof_last_rewrite_time_sec:-1\r\naof_current_rewrite_time_sec:-1\r\naof_last_bgrewrite_status:ok\r\naof_rewrites:0\r\naof_rewrites_consecutive_failures:0\r\naof_last_write_status:ok\r\naof_last_cow_size:0\r\nbackup_in_progress:0\r\nmodule_fork_in_progress:0\r\nmodule_fork_last_cow_size:0\r\n\r\n# Threads\r\nio_thread_0:clients=0,reads=0,writes=0\r\nio_thread_1:clients=1,reads=36136,writes=18061\r\nio_thread_2:clients=0,reads=23181,writes=11585\r\nio_thread_3:clients=0,reads=24384,writes=12188\r\nio_thread_4:clients=0,reads=23060,writes=11525\r\nio_thread_5:clients=0,reads=21141,writes=10566\r\nio_thread_6:clients=0,reads=18906,writes=9448\r\nio_thread_7:clients=0,reads=17611,writes=8802\r\n\r\n# Stats\r\ntotal_connections_received:189\r\ntotal_commands_processed:82057\r\ninstantaneous_ops_per_sec:6043\r\ntotal_net_input_bytes:2510570144\r\ntotal_net_output_bytes:30556091\r\ntotal_net_repl_input_bytes:0\r\ntotal_net_repl_output_bytes:0\r\ninstantaneous_input_kbps:180807.91\r\ninstantaneous_output_kbps:2200.20\r\ninstantaneous_input_repl_kbps:0.00\r\ninstantaneous_output_repl_kbps:0.00\r\nrejected_connections:0\r\nsync_full:0\r\nsync_partial_ok:0\r\nsync_partial_err:0\r\nexpired_subkeys:0\r\nexpired_subkeys_active:0\r\nexpired_keys:0\r\nexpired_keys_active:0\r\nexpired_stale_perc:0.00\r\nexpired_time_cap_reached_count:0\r\nexpire_cycle_cpu_milliseconds:0\r\nevicted_keys:0\r\nevicted_clients:0\r\nevicted_scripts:0\r\ntotal_eviction_exceeded_time:0\r\ncurrent_eviction_exceeded_time:0\r\nkeyspace_hits:82056\r\nkeyspace_misses:0\r\npubsub_channels:0\r\npubsub_patterns:0\r\npubsubshard_channels:0\r\nlatest_fork_usec:0\r\ntotal_forks:0\r\nmigrate_cached_sockets:0\r\nslave_expires_tracked_keys:0\r\nactive_defrag_hits:0\r\nactive_defrag_misses:0\r\nactive_defrag_key_hits:0\r\nactive_defrag_key_misses:0\r\ntotal_active_defrag_time:0\r\ncurrent_active_defrag_time:0\r\ntracking_total_keys:0\r\ntracking_total_items:0\r\ntracking_total_prefixes:0\r\nunexpected_error_replies:0\r\ntotal_error_replies:118\r\ndump_payload_sanitizations:0\r\ntotal_reads_processed:164419\r\ntotal_writes_processed:82175\r\nio_threaded_reads_processed:164419\r\nio_threaded_writes_processed:82175\r\nio_threaded_total_prefetch_batches:17647\r\nio_threaded_total_prefetch_entries:54246\r\nclient_query_buffer_limit_disconnections:0\r\nclient_output_buffer_limit_disconnections:0\r\nreply_buffer_shrinks:186\r\nreply_buffer_expands:0\r\neventloop_cycles:27834\r\neventloop_duration_sum:13615937\r\neventloop_duration_cmd_sum:6310554\r\ninstantaneous_eventloop_cycles_per_sec:370\r\ninstantaneous_eventloop_duration_usec:2713\r\neventloop_cycles_with_clients_processing:15801\r\ntotal_client_processing_events:246286\r\navg_pipeline_length_sum:82176\r\navg_pipeline_length_cnt:82176\r\navg_pipeline_length:1.00\r\nslowlog_commands_count:1\r\nslowlog_commands_time_ms_max:10.24\r\nslowlog_commands_time_ms_sum:10.24\r\nhash_templates:0\r\nhash_template_keys:0\r\nacl_access_denied_auth:0\r\nacl_access_denied_cmd:0\r\nacl_access_denied_key:0\r\nacl_access_denied_channel:0\r\nacl_access_denied_tls_cert:0\r\n\r\n# Replication\r\nrole:master\r\nconnected_slaves:0\r\nmaster_failover_state:no-failover\r\nmaster_replid:4e3966ce51abee73af251d337d79c40ff0bbeb0d\r\nmaster_replid2:0000000000000000000000000000000000000000\r\nmaster_repl_offset:0\r\nsecond_repl_offset:-1\r\nrepl_backlog_active:0\r\nrepl_backlog_size:1048576\r\nrepl_backlog_first_byte_offset:0\r\nrepl_backlog_histlen:0\r\n\r\n# CPU\r\nused_cpu_sys:21.477227\r\nused_cpu_user:87.846615\r\nused_cpu_sys_children:0.000000\r\nused_cpu_user_children:0.000000\r\nused_cpu_sys_main_thread:3.996175\r\nused_cpu_user_main_thread:15.049851\r\n\r\n# Hotkeys\r\n\r\n# Modules\r\nmodule:name=vectorset,ver=1,api=1,filters=0,usedby=[],using=[],options=[handle-io-errors|handle-repl-async-load]\r\n\r\n# Errorstats\r\nerrorstat_LOADING:count=118\r\n\r\n# Cluster\r\ncluster_enabled:0\r\n\r\n# Keyspace\r\ndb0:keys=3,expires=0,avg_ttl=0,subexpiry=0\r\n\r\n# Keysizes\r\n"
+ }
+}

@@ -1,0 +1,6 @@
+[17:13:32] engines ['hotkv'], sizes [100000], clients [1], ef_qps [80]
+[17:13:32] started hotkv pid 1547284: taskset -c 0-95,192-287 /opt/hotkv_vs/build/release/src/hotkv --port 6440 --bind 127.0.0.1 --threads 128 --no-snapshot --protected-mode no --loglevel warning
+[17:13:57]   ingest hotkv bench1: 100000 vectors, 8 conn, 24.7s = 4041/s, server used 5.58 cores, rss 0.71 GB
+[17:13:58]   recall hotkv build 1 ef 80: 0.9737
+[17:14:00]   qps size 100000 ef 80 clients  1 trial 1 hotkv:      1968 q/s p50 0.51 ms p99 0.73 ms server 1.0 cores client-busy-max 0.05
+[17:14:00] RUN DONE

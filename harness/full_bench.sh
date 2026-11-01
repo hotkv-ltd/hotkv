@@ -131,6 +131,30 @@ MAXCLIENTS="${MAXCLIENTS:-}"
 MAXCLIENTS_ARG=""
 [ -n "$MAXCLIENTS" ] && MAXCLIENTS_ARG=" --maxclients $MAXCLIENTS"
 
+# TCP_BACKLOG: the listen(2) backlog given to every server (opt-in). A load generator that opens
+# thousands of connections at once overflows a small backlog (Dragonfly's default is 256, Redis
+# and Valkey 511, HotKV 511): the kernel drops the SYNs, the clients retry with growing delays,
+# and part of the connections only start tens of seconds late or not at all. The kernel caps
+# the value at net.core.somaxconn (65535 after tune_server.sh). Unset, no server is changed.
+TCP_BACKLOG="${TCP_BACKLOG:-}"
+BACKLOG_ARG=""; BACKLOG_ARG_DF=""
+if [ -n "$TCP_BACKLOG" ]; then
+    BACKLOG_ARG=" --tcp-backlog $TCP_BACKLOG"
+    BACKLOG_ARG_DF=" --tcp_backlog=$TCP_BACKLOG"
+fi
+
+# OPT-IN: split each load generator's memtier into several processes. Unset (the
+# default, 1), each load generator runs one memtier process with one thread per
+# core and every launch line is exactly the original. One memtier process does not
+# scale to very many threads: on a 192-core load generator one process reached
+# 35M PING/s while the same 192 threads and 9,600 connections split over 4
+# processes reached 55M, and over 16 processes far more, with the server mostly
+# idle. When set, each load generator runs this many processes that share its
+# threads (threads, connections per thread and pipeline are unchanged in total).
+# Use it with SEED_ARGS="--distinct-client-seed --randomize" so that no two
+# processes replay the same key sequence.
+MEMTIER_PROCS="${MEMTIER_PROCS:-1}"
+
 # Overridable so the whole pipeline can be smoke-tested in a couple of minutes
 # (TEST_TIME=2 RUNS=1 SWEEP=0) before committing to a multi-hour publishable run.
 # Anything below 10 is for validation only; short samples are noise.
@@ -470,42 +494,42 @@ start_server() {
             # run's dataset into the next one's "empty" baseline.
             # --protected-mode no as Redis/Valkey get it: with no password, a
             # server bound to 0.0.0.0 refuses the load boxes otherwise.
-            cmdline="$HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no${MAXCLIENTS_ARG} --loglevel warning"
+            cmdline="$HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads --no-snapshot --protected-mode no${MAXCLIENTS_ARG}${BACKLOG_ARG} --loglevel warning"
             ;;
         redis)
             probe_do_reads redis "$REDIS_BIN"
-            cmdline="$REDIS_BIN --port $PORT --bind $BIND_ADDR --save  --appendonly no --protected-mode no${MAXCLIENTS_ARG} $(redis_family_flags redis "$nthreads") --loglevel warning"
+            cmdline="$REDIS_BIN --port $PORT --bind $BIND_ADDR --save  --appendonly no --protected-mode no${MAXCLIENTS_ARG}${BACKLOG_ARG} $(redis_family_flags redis "$nthreads") --loglevel warning"
             ;;
         valkey)
             probe_do_reads valkey "$VALKEY_BIN"
-            cmdline="$VALKEY_BIN --port $PORT --bind $BIND_ADDR --save  --appendonly no --protected-mode no${MAXCLIENTS_ARG} $(redis_family_flags valkey "$nthreads") --loglevel warning"
+            cmdline="$VALKEY_BIN --port $PORT --bind $BIND_ADDR --save  --appendonly no --protected-mode no${MAXCLIENTS_ARG}${BACKLOG_ARG} $(redis_family_flags valkey "$nthreads") --loglevel warning"
             ;;
         dragonfly)
             # --dbfilename= disables snapshotting, matching --save "" on the others.
             # If io_uring is unavailable on the kernel, add --force_epoll.
-            cmdline="$DRAGONFLY_BIN --port $PORT --bind $BIND_ADDR --proactor_threads=$nthreads --dbfilename= --noversion_check --logtostderr ${DRAGONFLY_EXTRA_FLAGS:-}"
+            cmdline="$DRAGONFLY_BIN --port $PORT --bind $BIND_ADDR --proactor_threads=$nthreads --dbfilename= --noversion_check --logtostderr${BACKLOG_ARG_DF} ${DRAGONFLY_EXTRA_FLAGS:-}"
             ;;
     esac
     SRV_CMDLINE[$srv]="$cmdline"
     case "$srv" in
         hotkv)
             nohup $HOTKV_BIN --port $PORT --bind $BIND_ADDR --threads $nthreads \
-                --no-snapshot --protected-mode no${MAXCLIENTS_ARG} --loglevel warning > /tmp/${srv}_bench.log 2>&1 &
+                --no-snapshot --protected-mode no${MAXCLIENTS_ARG}${BACKLOG_ARG} --loglevel warning > /tmp/${srv}_bench.log 2>&1 &
             ;;
         redis)
             nohup $REDIS_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no \
-                --protected-mode no${MAXCLIENTS_ARG} $(redis_family_flags redis "$nthreads") \
+                --protected-mode no${MAXCLIENTS_ARG}${BACKLOG_ARG} $(redis_family_flags redis "$nthreads") \
                 --loglevel warning > /tmp/${srv}_bench.log 2>&1 &
             ;;
         valkey)
             nohup $VALKEY_BIN --port $PORT --bind $BIND_ADDR --save "" --appendonly no \
-                --protected-mode no${MAXCLIENTS_ARG} $(redis_family_flags valkey "$nthreads") \
+                --protected-mode no${MAXCLIENTS_ARG}${BACKLOG_ARG} $(redis_family_flags valkey "$nthreads") \
                 --loglevel warning > /tmp/${srv}_bench.log 2>&1 &
             ;;
         dragonfly)
             nohup $DRAGONFLY_BIN --port $PORT --bind $BIND_ADDR \
                 --proactor_threads=$nthreads --dbfilename= --noversion_check \
-                --logtostderr ${DRAGONFLY_EXTRA_FLAGS:-} > /tmp/${srv}_bench.log 2>&1 &
+                --logtostderr${BACKLOG_ARG_DF} ${DRAGONFLY_EXTRA_FLAGS:-} > /tmp/${srv}_bench.log 2>&1 &
             ;;
     esac
     wait_ready
@@ -603,6 +627,23 @@ run_memtier_remote() {
     local c
     for c in $BENCH_CLIENTS; do
         local ct=${CLIENT_THREADS[$c]:-$THREADS}
+        if [ "$MEMTIER_PROCS" -gt 1 ]; then
+            # Several memtier processes on this load generator, sharing its threads.
+            local k tk cmds=""
+            for k in $(seq 1 "$MEMTIER_PROCS"); do
+                tk=$(( ct / MEMTIER_PROCS + (k <= ct % MEMTIER_PROCS ? 1 : 0) ))
+                [ "$tk" -ge 1 ] || continue
+                cmds+="memtier_benchmark -s $SERVER_ADDR -p $PORT -t $tk -c $CLIENTS --pipeline $PIPELINE -d $DATASIZE --test-time=$TEST_TIME $KEYSPACE_ARGS $SEED_ARGS --hide-histogram --json-out-file=${remote_json}.p$k $extra > /dev/null 2>&1 & "
+            done
+            ssh_client "$c" "ulimit -n 1048576 2>/dev/null || ulimit -n 65536 2>/dev/null || true; \
+                rm -f ${remote_json}.p* ${remote_json}.res; \
+                _c0=\$(awk '/^cpu /{print \$2+\$3+\$4+\$6+\$7+\$8}' /proc/stat); _t0=\$(date +%s%N); \
+                $cmds wait; \
+                _c1=\$(awk '/^cpu /{print \$2+\$3+\$4+\$6+\$7+\$8}' /proc/stat); _t1=\$(date +%s%N); \
+                echo \"\$(( (_c1-_c0) * 10 )) \$(( (_t1-_t0)/1000000 )) \$(nproc)\" > ${remote_json}.res" > /dev/null 2>&1 &
+            pids+=($!)
+            continue
+        fi
         # ulimit -n on the client is the quiet killer here: a default 1024 soft
         # limit against -t 60 -c 50 (3,000 sockets) makes memtier fail to open
         # most of its connections and report a fraction of the load it was asked
@@ -628,6 +669,18 @@ run_memtier_remote() {
     for p in "${pids[@]}"; do wait "$p" || true; done
 
     for c in $BENCH_CLIENTS; do
+        if [ "$MEMTIER_PROCS" -gt 1 ]; then
+            local k
+            scp $SSH_OPTS -i "$SSH_KEY" "${SSH_USER}@${c}:${remote_json}.res" \
+                "$partdir/${c}_p1.res" > /dev/null 2>&1 || true
+            for k in $(seq 1 "$MEMTIER_PROCS"); do
+                scp $SSH_OPTS -i "$SSH_KEY" "${SSH_USER}@${c}:${remote_json}.p$k" \
+                    "$partdir/${c}_p$k.json" > /dev/null 2>&1 || true
+                # The CPU sample is of the whole box, so every process shares it.
+                [ "$k" -gt 1 ] && cp "$partdir/${c}_p1.res" "$partdir/${c}_p$k.res" 2>/dev/null
+            done
+            continue
+        fi
         scp $SSH_OPTS -i "$SSH_KEY" "${SSH_USER}@${c}:${remote_json}" \
             "$partdir/${c}.json" > /dev/null 2>&1 || true
         scp $SSH_OPTS -i "$SSH_KEY" "${SSH_USER}@${c}:${remote_json}.res" \
@@ -1183,7 +1236,7 @@ export HOTKV_VER REDIS_VER VALKEY_VER DRAGONFLY_VER
 export HOTKV_SHA REDIS_SHA VALKEY_SHA DRAGONFLY_SHA MEMTIER_VER
 export SWEEP SWEEP_TSV
 export NET_IFACE NET_LINK_GBPS TEST_TIME
-export KEY_MINIMUM KEY_MAXIMUM SEED_ARGS MAXCLIENTS
+export KEY_MINIMUM KEY_MAXIMUM SEED_ARGS MAXCLIENTS MEMTIER_PROCS TCP_BACKLOG
 TUNED=""
 for srv in $SERVERS; do TUNED="$TUNED $srv=${SRV_THREADS[$srv]}"; done
 export TUNED_THREADS="$TUNED"
@@ -1466,6 +1519,8 @@ memtier_flags = {
     "key_maximum": int(env("KEY_MAXIMUM") or 0),
     "populate_pattern": "P (parallel sequential), --requests=allkeys",
     "distinct_client_seed": "--distinct-client-seed" in (env("SEED_ARGS") or ""),
+    **({"memtier_processes_per_client_box": int(env("MEMTIER_PROCS"))}
+       if int(env("MEMTIER_PROCS") or 1) > 1 else {}),
     "runs_per_command": num_runs,
     "reported_statistic": "median of runs",
 }

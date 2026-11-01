@@ -655,6 +655,8 @@ def config_section(d):
         ("Distinct seed per client",
          "yes" if mt.get("distinct_client_seed") else '<span class="loss">NO</span>'),
         ("memtier threads per client box", e(mt.get("threads_per_client_machine", "?"))),
+        *([("memtier processes per client box", e(mt["memtier_processes_per_client_box"]))]
+          if "memtier_processes_per_client_box" in mt else []),
         ("Connections per client box", f'{mt.get("total_connections_per_client_machine",0):,}'),
         ("Test duration per command", f'{e(mt.get("test_time_sec","?"))} s'),
         ("Runs per command", e(mt.get("runs_per_command", "?"))),

@@ -1,0 +1,158 @@
+{
+ "meta": {
+  "started_utc": "2026-10-31T15:45:15Z",
+  "args": {
+   "data_dir": "/home/ubuntu/vsb/data",
+   "out": "/home/ubuntu/vsb/out/redis_build",
+   "engines": [
+    "redis"
+   ],
+   "sizes": [
+    100000,
+    999000
+   ],
+   "builds": [
+    3,
+    1
+   ],
+   "ef_recall": [
+    10,
+    20,
+    40,
+    80,
+    150,
+    300,
+    500
+   ],
+   "ef_qps": [
+    20,
+    40,
+    80,
+    150,
+    300
+   ],
+   "clients": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    50
+   ],
+   "trials": 3,
+   "warm": 1.5,
+   "dur": 6.0,
+   "m": 16,
+   "ef_construction": 200,
+   "ingest_conns": 32,
+   "hotkv_ingest_conns": null,
+   "ingest_depth": 8,
+   "redis_cas": true,
+   "hotkv_threads": 96,
+   "redis_io_threads": 1,
+   "server_cpus": "92-93,188-189",
+   "redis_rdb": "/home/ubuntu/vsb/rdb/redis_{size}.rdb",
+   "build_only": true,
+   "port_offset": 100,
+   "note": ""
+  },
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy": "2.5.4",
+  "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+  "lscpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  192\nOn-line CPU(s) list:                     0-191\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) 6975P-C\nCPU family:                              6\nModel:                                   173\nThread(s) per core:                      2\nCore(s) per socket:                      96\nSocket(s):                               1\nStepping:                                1\nBogoMIPS:                                5400.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq monitor ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 wbnoinvd ida arat avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq rdpid bus_lock_detect cldemote movdiri movdir64b md_clear serialize amx_bf16 avx512_fp16 amx_tile amx_int8 flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               4.5 MiB (96 instances)\nL1i cache:                               6 MiB (96 instances)\nL2 cache:                                192 MiB (96 instances)\nL3 cache:                                480 MiB (1 instance)\nNUMA node(s):                            3\nNUMA node0 CPU(s):                       0-31,96-127\nNUMA node1 CPU(s):                       32-63,128-159\nNUMA node2 CPU(s):                       64-95,160-191\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+  "client_cpus": 16,
+  "binaries": {
+   "hotkv": {
+    "path": "/opt/hotkv_vs/build/release/src/hotkv",
+    "sha256": "499a3a848a9aaa6e95d3231613c1eb3fcca36142ff31731dce548681110189b1"
+   },
+   "redis": {
+    "path": "/opt/redis-8.10.3/src/redis-server",
+    "sha256": "8accf550b207092429366e915e3e4e0a51a351ddc218195233eb44b7b87f04ca"
+   }
+  },
+  "hotkv_commit": null,
+  "finished_utc": "2026-10-31T16:08:27Z"
+ },
+ "ingest": [
+  {
+   "engine": "redis",
+   "index": "bench1",
+   "vectors": 100000,
+   "connections": 32,
+   "pipeline_depth": 8,
+   "cas": true,
+   "seconds": 62.61,
+   "vectors_per_sec": 1597.1,
+   "sent": 100000,
+   "count_in_server": 100000,
+   "nonstandard_replies": 0,
+   "server_cpu_seconds": 173.8,
+   "server_cores_used": 2.78,
+   "server_rss_bytes": 719269888,
+   "size": 100000,
+   "build": 1,
+   "used_memory_bytes": 691956336
+  },
+  {
+   "engine": "redis",
+   "index": "bench2",
+   "vectors": 100000,
+   "connections": 32,
+   "pipeline_depth": 8,
+   "cas": true,
+   "seconds": 62.68,
+   "vectors_per_sec": 1595.3,
+   "sent": 100000,
+   "count_in_server": 100000,
+   "nonstandard_replies": 0,
+   "server_cpu_seconds": 174.4,
+   "server_cores_used": 2.78,
+   "server_rss_bytes": 1419911168,
+   "size": 100000,
+   "build": 2,
+   "used_memory_bytes": 1382116904
+  },
+  {
+   "engine": "redis",
+   "index": "bench3",
+   "vectors": 100000,
+   "connections": 32,
+   "pipeline_depth": 8,
+   "cas": true,
+   "seconds": 63.13,
+   "vectors_per_sec": 1584.1,
+   "sent": 100000,
+   "count_in_server": 100000,
+   "nonstandard_replies": 0,
+   "server_cpu_seconds": 177.5,
+   "server_cores_used": 2.81,
+   "server_rss_bytes": 2125488128,
+   "size": 100000,
+   "build": 3,
+   "used_memory_bytes": 2071884816
+  },
+  {
+   "engine": "redis",
+   "index": "bench1",
+   "vectors": 999000,
+   "connections": 32,
+   "pipeline_depth": 8,
+   "cas": true,
+   "seconds": 1142.76,
+   "vectors_per_sec": 874.2,
+   "sent": 999000,
+   "count_in_server": 999000,
+   "nonstandard_replies": 0,
+   "server_cpu_seconds": 3535.1,
+   "server_cores_used": 3.09,
+   "server_rss_bytes": 7012933632,
+   "size": 999000,
+   "build": 1,
+   "used_memory_bytes": 6895683320
+  }
+ ],
+ "recall": [],
+ "qps": []
+}

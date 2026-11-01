@@ -1,0 +1,8 @@
+[16:09:05] engines ['redis'], sizes [100000], clients [1, 16, 50], ef_qps [80]
+[16:09:18] started redis pid 1491954: taskset -c 0-63,96-159 /opt/redis-8.10.3/src/redis-server --port 6441 --bind 127.0.0.1 --save  --appendonly no --protected-mode no --loglevel warning --io-threads 4 --dir /home/ubuntu/vsb/rdb --dbfilename redis_100000.rdb
+[16:09:18]   redis bench1: 100000 vectors loaded from redis_100000.rdb (built earlier at 1597/s)
+[16:09:20]   recall redis build 1 ef 80: 0.9666
+[16:09:27]   qps size 100000 ef 80 clients  1 trial 1 redis:       776 q/s p50 1.27 ms p99 1.99 ms server 0.9 cores client-busy-max 0.04
+[16:09:34]   qps size 100000 ef 80 clients 16 trial 1 redis:      7031 q/s p50 2.40 ms p99 3.34 ms server 8.7 cores client-busy-max 0.04
+[16:09:42]   qps size 100000 ef 80 clients 50 trial 1 redis:      7236 q/s p50 6.97 ms p99 11.22 ms server 8.9 cores client-busy-max 0.02
+[16:09:42] RUN DONE

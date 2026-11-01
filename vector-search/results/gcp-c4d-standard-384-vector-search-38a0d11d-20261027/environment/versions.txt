@@ -1,0 +1,7 @@
+Redis server v=8.10.3 sha=00000000:1 malloc=jemalloc-5.3.0 bits=64 build=ba995197f11e7cbd
+HotKV v0.3.0
+a9eb6a3c2ca5325c3b4869f7ca6f290072874b8efeccbb902dea182923584a51  /opt/redis-8.10.3/src/redis-server
+499a3a848a9aaa6e95d3231613c1eb3fcca36142ff31731dce548681110189b1  /opt/hotkv_vs/build/release/src/hotkv
+numpy==2.5.4
+pyarrow==26.0.0
+HotKV source: commit 38a0d11dd5c78e118fa0fd2df3987d78cc8e8a82 (v0.3.0-32-g38a0d11d), release preset, portable flags

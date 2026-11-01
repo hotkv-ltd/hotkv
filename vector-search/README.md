@@ -5,7 +5,11 @@ similarity, float32 vectors. It measures recall, queries per second, latency and
 produced the results and the raw data behind every figure. Nothing here uses HotKV's AI engines or any feature that Redis does
 not also have.
 
-Results: [`results/azure-d160alds-v7-vector-search-c8dafd37-20261014/RESULTS.md`](results/azure-d160alds-v7-vector-search-c8dafd37-20261014/RESULTS.md)
+Results:
+
+- Azure `Standard_D160alds_v7`, 160 vCPUs: [`results/azure-d160alds-v7-vector-search-c8dafd37-20261014/RESULTS.md`](results/azure-d160alds-v7-vector-search-c8dafd37-20261014/RESULTS.md)
+- Google Cloud `c4d-standard-384`, 384 vCPUs, Redis 8.10.3: [`results/gcp-c4d-standard-384-vector-search-38a0d11d-20261027/RESULTS.md`](results/gcp-c4d-standard-384-vector-search-38a0d11d-20261027/RESULTS.md)
+- AWS `c8in.48xlarge`, 192 vCPUs, Redis 8.10.3: [`results/aws-c8in-48xlarge-vector-search-38a0d11d-20261031/RESULTS.md`](results/aws-c8in-48xlarge-vector-search-38a0d11d-20261031/RESULTS.md)
 
 ## What is measured
 

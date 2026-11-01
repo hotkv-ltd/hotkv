@@ -1,0 +1,116 @@
+{
+ "meta": {
+  "started_utc": "2026-10-27T17:14:01Z",
+  "args": {
+   "data_dir": "/home/bench/vsb/data",
+   "out": "/home/bench/vsb/out/tuning/hotkv_p16",
+   "engines": [
+    "hotkv"
+   ],
+   "sizes": [
+    100000
+   ],
+   "builds": [
+    1
+   ],
+   "ef_recall": [
+    80
+   ],
+   "ef_qps": [
+    80
+   ],
+   "clients": [
+    1
+   ],
+   "trials": 1,
+   "warm": 0.5,
+   "dur": 1.0,
+   "m": 16,
+   "ef_construction": 200,
+   "ingest_conns": 16,
+   "hotkv_ingest_conns": null,
+   "ingest_depth": 8,
+   "redis_cas": false,
+   "hotkv_threads": 128,
+   "redis_io_threads": 1,
+   "server_cpus": "0-95,192-287",
+   "redis_rdb": null,
+   "build_only": false,
+   "port_offset": 0,
+   "note": ""
+  },
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy": "2.5.4",
+  "platform": "Linux-7.0.0-1014-gcp-x86_64-with-glibc2.39",
+  "lscpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           52 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  384\nOn-line CPU(s) list:                     0-383\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 9B45\nCPU family:                              26\nModel:                                   2\nThread(s) per core:                      2\nCore(s) per socket:                      96\nSocket(s):                               2\nStepping:                                1\nBogoMIPS:                                5391.89\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf tsc_known_freq pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext mwaitx ssbd ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr wbnoinvd arat avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid movdiri movdir64b avx512_vp2intersect flush_l1d\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               9 MiB (192 instances)\nL1i cache:                               6 MiB (192 instances)\nL2 cache:                                192 MiB (192 instances)\nL3 cache:                                768 MiB (24 instances)\nNUMA node(s):                            2\nNUMA node0 CPU(s):                       0-95,192-287\nNUMA node1 CPU(s):                       96-191,288-383\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+  "client_cpus": 192,
+  "binaries": {
+   "hotkv": {
+    "path": "/opt/hotkv_vs/build/release/src/hotkv",
+    "sha256": "499a3a848a9aaa6e95d3231613c1eb3fcca36142ff31731dce548681110189b1"
+   },
+   "redis": {
+    "path": "/opt/redis-8.10.3/src/redis-server",
+    "sha256": "a9eb6a3c2ca5325c3b4869f7ca6f290072874b8efeccbb902dea182923584a51"
+   }
+  },
+  "hotkv_commit": null,
+  "finished_utc": "2026-10-27T17:14:17Z"
+ },
+ "ingest": [
+  {
+   "engine": "hotkv",
+   "index": "bench1",
+   "vectors": 100000,
+   "connections": 16,
+   "pipeline_depth": 8,
+   "cas": null,
+   "seconds": 13.64,
+   "vectors_per_sec": 7329.2,
+   "sent": 100000,
+   "count_in_server": 100000,
+   "nonstandard_replies": 0,
+   "server_cpu_seconds": 146.0,
+   "server_cores_used": 10.7,
+   "server_rss_bytes": 719429632,
+   "size": 100000,
+   "build": 1,
+   "used_memory_bytes": 67055224
+  }
+ ],
+ "recall": [
+  {
+   "recall_at_10": 0.971,
+   "stdev_per_query": 0.1010890696366328,
+   "queries": 1000,
+   "replies_with_fewer_than_10": 0,
+   "engine": "hotkv",
+   "size": 100000,
+   "build": 1,
+   "ef": 80
+  }
+ ],
+ "qps": [
+  {
+   "clients": 1,
+   "queries": 1921,
+   "qps": 1921.0,
+   "p50_ms": 0.5198490034672432,
+   "p99_ms": 0.7277173994225449,
+   "mean_ms": 0.5203580386051703,
+   "max_ms": 1.0118980062543415,
+   "server_cores_used": 0.959926464833384,
+   "client_busy_max": 0.049273094015633706,
+   "client_busy_mean": 0.049273094015633706,
+   "short_replies": 0,
+   "late_starts": 0,
+   "engine": "hotkv",
+   "size": 100000,
+   "ef": 80,
+   "trial": 1
+  }
+ ],
+ "server_info": {
+  "hotkv_100000": "# Server\r\nredis_version:8.4.0\r\nhotkv_version:0.3.0\r\nredis_git_sha1:00000000\r\nredis_git_dirty:0\r\nredis_build_id:da5c226983f23e77\r\nredis_mode:standalone\r\nos:Linux 7.0.0-1014-gcp x86_64\r\narch_bits:64\r\nmonotonic_clock:POSIX clock_gettime\r\nmultiplexing_api:epoll\r\natomicvar_api:c11-builtin\r\ngcc_version:13.3.0\r\nprocess_id:1547551\r\nprocess_supervised:no\r\nrun_id:669146b9efed54709b4cc3c1e0330f382bae88cf\r\ntcp_port:6440\r\nserver_time_usec:1793121257871070\r\nuptime_in_seconds:16\r\nuptime_in_days:0\r\nhz:10\r\nconfigured_hz:10\r\nlru_clock:14736361\r\nexecutable:/opt/hotkv_vs/build/release/src/hotkv\r\nconfig_file:\r\nio_threads_active:1\r\navailability_zone:\r\nthreads:128\r\nlistener0:name=tcp,bind=127.0.0.1,port=6440\r\n\r\n# Clients\r\nconnected_clients:1\r\ncluster_connections:0\r\nmaxclients:10000\r\nclient_recent_max_input_buffer:0\r\nclient_recent_max_output_buffer:0\r\nblocked_clients:0\r\ntracking_clients:0\r\npubsub_clients:0\r\nwatching_clients:0\r\nclients_in_timeout_table:0\r\ntotal_watched_keys:0\r\ntotal_blocking_keys:0\r\ntotal_blocking_keys_on_nokey:0\r\npaused_reason:none\r\npaused_actions:none\r\npaused_timeout_milliseconds:0\r\n\r\n# Memory\r\nused_memory:68083816\r\nused_memory_human:64.93M\r\nused_memory_rss:721768448\r\nused_memory_rss_human:688.33M\r\nused_memory_peak:69088424\r\nused_memory_peak_human:65.89M\r\nused_memory_peak_perc:98.55%\r\nused_memory_overhead:22418701\r\nused_memory_startup:22417688\r\nused_memory_dataset:45665115\r\nused_memory_dataset_perc:100.00%\r\nallocator_allocated:68083816\r\nallocator_active:68083816\r\nallocator_resident:721768448\r\ntotal_system_memory:1572423708672\r\ntotal_system_memory_human:1464.43G\r\nused_memory_lua:28865\r\nused_memory_vm_eval:28865\r\nused_memory_lua_human:28.19K\r\nused_memory_scripts_eval:0\r\nnumber_of_cached_scripts:0\r\nnumber_of_functions:0\r\nnumber_of_libraries:0\r\nused_memory_vm_functions:0\r\nused_memory_vm_total:28865\r\nused_memory_vm_total_human:28.19K\r\nused_memory_functions:0\r\nused_memory_scripts:0\r\nused_memory_hash_templates:0\r\nused_memory_scripts_human:0B\r\nmaxmemory:0\r\nmaxmemory_human:0B\r\nmaxmemory_policy:noeviction\r\nallocator_frag_ratio:1.00\r\nallocator_frag_bytes:0\r\nallocator_rss_ratio:10.60\r\nallocator_rss_bytes:653684632\r\nrss_overhead_ratio:1.00\r\nrss_overhead_bytes:0\r\nmem_fragmentation_ratio:10.60\r\nmem_fragmentation_bytes:653684632\r\nmem_not_counted_for_evict:45\r\nmem_replication_backlog:0\r\nmem_total_replication_buffers:0\r\nmem_clients_slaves:0\r\nmem_clients_normal:968\r\nmem_cluster_links:0\r\nmem_cluster_slot_import:0\r\nmem_cluster_slot_export:0\r\nmem_cluster_slot_migration_output_buffer:0\r\nmem_cluster_slot_migration_input_buffer:0\r\nmem_cluster_slot_migration_input_buffer_peak:0\r\nmem_aof_buffer:45\r\nmem_allocator:jemalloc\r\nactive_defrag_running:0\r\nlazyfree_pending_objects:0\r\nlazyfreed_objects:0\r\n\r\n# Persistence\r\nloading:0\r\nasync_loading:0\r\ncurrent_cow_peak:0\r\ncurrent_cow_size:0\r\ncurrent_cow_size_age:0\r\ncurrent_fork_perc:0.00\r\ncurrent_save_keys_processed:0\r\ncurrent_save_keys_total:0\r\nrdb_changes_since_last_save:100002\r\nrdb_bgsave_in_progress:0\r\nrdb_last_save_time:1793121241\r\nrdb_last_bgsave_status:ok\r\nrdb_last_bgsave_time_sec:-1\r\nrdb_current_bgsave_time_sec:-1\r\nrdb_saves:0\r\nrdb_saves_consecutive_failures:0\r\nrdb_last_cow_size:0\r\nrdb_last_load_keys_expired:0\r\nrdb_last_load_keys_loaded:0\r\naof_enabled:0\r\naof_rewrite_in_progress:0\r\naof_rewrite_scheduled:0\r\naof_last_rewrite_time_sec:-1\r\naof_current_rewrite_time_sec:-1\r\naof_last_bgrewrite_status:ok\r\naof_rewrites:0\r\naof_rewrites_consecutive_failures:0\r\naof_last_write_status:ok\r\naof_last_cow_size:0\r\nmodule_fork_in_progress:0\r\nmodule_fork_last_cow_size:0\r\n\r\n# Stats\r\ntotal_connections_received:22\r\ntotal_commands_processed:103861\r\ninstantaneous_ops_per_sec:1906\r\ntotal_net_input_bytes:3171202625\r\ntotal_net_output_bytes:1525341\r\ntotal_net_repl_input_bytes:0\r\ntotal_net_repl_output_bytes:0\r\ntotal_net_cluster_slot_import_bytes:0\r\ntotal_net_cluster_slot_export_bytes:0\r\ninstantaneous_input_kbps:56859.08\r\ninstantaneous_output_kbps:542.14\r\ninstantaneous_input_repl_kbps:0.00\r\ninstantaneous_output_repl_kbps:0.00\r\nrejected_connections:0\r\nsync_full:0\r\nsync_partial_ok:0\r\nsync_partial_err:0\r\nexpired_subkeys:0\r\nexpired_keys:0\r\nexpired_stale_perc:0.00\r\nexpired_time_cap_reached_count:3\r\nexpire_cycle_cpu_milliseconds:150\r\nevicted_keys:0\r\nevicted_clients:0\r\nevicted_scripts:0\r\ntotal_eviction_exceeded_time:0\r\ncurrent_eviction_exceeded_time:0\r\nkeyspace_hits:0\r\nkeyspace_misses:0\r\npubsub_channels:0\r\npubsub_patterns:0\r\npubsubshard_channels:0\r\nlatest_fork_usec:0\r\ntotal_forks:0\r\nmigrate_cached_sockets:0\r\nslave_expires_tracked_keys:0\r\nactive_defrag_hits:0\r\nactive_defrag_misses:0\r\nactive_defrag_key_hits:0\r\nactive_defrag_key_misses:0\r\ntotal_active_defrag_time:0\r\ncurrent_active_defrag_time:0\r\nhash_templates:0\r\nhash_template_keys:0\r\ntracking_total_keys:0\r\ntracking_total_items:0\r\ntracking_total_prefixes:0\r\nunexpected_error_replies:0\r\ntotal_error_replies:1\r\ndump_payload_sanitizations:0\r\ntotal_reads_processed:195626\r\ntotal_writes_processed:103861\r\nio_threaded_reads_processed:0\r\nio_threaded_writes_processed:0\r\nclient_query_buffer_limit_disconnections:0\r\nclient_output_buffer_limit_disconnections:0\r\nreply_buffer_shrinks:0\r\nreply_buffer_expands:0\r\nacl_access_denied_auth:0\r\nacl_access_denied_cmd:0\r\nacl_access_denied_key:0\r\nacl_access_denied_channel:0\r\nacl_access_denied_tls_cert:0\r\n\r\n# Replication\r\nrole:master\r\nconnected_slaves:0\r\nmaster_failover_state:no-failover\r\nmaster_replid:79c8ab76e742ac6697b83361a157e8cc8cab5988\r\nmaster_replid2:0000000000000000000000000000000000000000\r\nmaster_repl_offset:0\r\nsecond_repl_offset:-1\r\nrepl_backlog_active:0\r\nrepl_backlog_size:67108864\r\nrepl_backlog_first_byte_offset:0\r\nrepl_backlog_histlen:0\r\n\r\n# CPU\r\nused_cpu_sys:4.157304\r\nused_cpu_user:143.798386\r\nused_cpu_sys_children:0.000000\r\nused_cpu_user_children:0.000000\r\n\r\n# Modules\r\n\r\n# Errorstats\r\nerrorstat_ERR:count=1\r\n\r\n# Cluster\r\ncluster_enabled:0\r\n\r\n# Keyspace\r\n"
+ }
+}

@@ -33,7 +33,9 @@ PY="${PY:-/opt/vsb-venv/bin/python}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 SERVER_CPUS="${SERVER_CPUS:-0-127}"
 CLIENT_CPUS="${CLIENT_CPUS:-128-139}"
-RDB="${RDB:-$HOME/vsb/rdb/redis_{size}.rdb}"
+# (the default is set apart: a "}" inside ${RDB:-...} would end the expansion at "{size")
+RDB_DEFAULT="$HOME/vsb/rdb/redis_{size}.rdb"
+RDB="${RDB:-$RDB_DEFAULT}"
 export HOTKV_BIN="${HOTKV_BIN:-/opt/hotkv/build/release/src/hotkv}"
 mkdir -p "$OUT/tuning"
 

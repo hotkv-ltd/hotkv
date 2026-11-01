@@ -1,0 +1,10 @@
+[15:45:15] engines ['redis'], sizes [100000, 999000], clients [1, 2, 4, 8, 16, 32, 50], ef_qps [20, 40, 80, 150, 300]
+[15:45:15] started redis pid 90911: taskset -c 92-93,188-189 /opt/redis-8.10.3/src/redis-server --port 6541 --bind 127.0.0.1 --save  --appendonly no --protected-mode no --loglevel warning --dir /home/ubuntu/vsb/rdb --dbfilename redis_100000.rdb
+[15:46:18]   ingest redis bench1: 100000 vectors, 32 conn, 62.6s = 1597/s, server used 2.78 cores, rss 0.72 GB
+[15:47:21]   ingest redis bench2: 100000 vectors, 32 conn, 62.7s = 1595/s, server used 2.78 cores, rss 1.42 GB
+[15:48:24]   ingest redis bench3: 100000 vectors, 32 conn, 63.1s = 1584/s, server used 2.81 cores, rss 2.13 GB
+[15:48:37]   redis SAVE to /home/ubuntu/vsb/rdb/redis_100000.rdb: 13s, 1.83 GB
+[15:48:38] started redis pid 391251: taskset -c 92-93,188-189 /opt/redis-8.10.3/src/redis-server --port 6541 --bind 127.0.0.1 --save  --appendonly no --protected-mode no --loglevel warning --dir /home/ubuntu/vsb/rdb --dbfilename redis_999000.rdb
+[16:07:40]   ingest redis bench1: 999000 vectors, 32 conn, 1142.8s = 874/s, server used 3.09 cores, rss 7.01 GB
+[16:08:26]   redis SAVE to /home/ubuntu/vsb/rdb/redis_999000.rdb: 46s, 6.12 GB
+[16:08:27] RUN DONE
