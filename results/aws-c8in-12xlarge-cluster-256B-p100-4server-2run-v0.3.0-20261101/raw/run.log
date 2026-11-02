@@ -1,0 +1,156 @@
+[19:46:44] output /home/ubuntu/f3-hotkv, server hosts: 172.31.44.55 172.31.36.139 172.31.34.226, 48 vCPUs each
+[19:46:49] == hotkv, 1 node(s) per host, 3 primaries, 40 threads per node
+[19:47:03]   GET populated: DBSIZE 5000000 (expected 5000000)
+hotkv,GET,1,3,40,100,1,91688208,1.0000,100,78/79/77,extra_client_cpu=100
+[19:47:22]   GET populated: DBSIZE 5000000 (expected 5000000)
+hotkv,GET,1,3,40,100,2,92812779,1.0000,100,79/79/78,extra_client_cpu=100
+[19:47:40]   SET populated: DBSIZE 5000000 (expected 5000000)
+hotkv,SET,1,3,40,100,1,75985435,-,80,80/80/80,extra_client_cpu=66
+[19:47:58]   SET populated: DBSIZE 5000000 (expected 5000000)
+hotkv,SET,1,3,40,100,2,76202165,-,82,80/80/80,extra_client_cpu=66
+[19:48:16]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+hotkv,SETNX,1,3,40,100,1,86039060,-,87,80/81/81,extra_client_cpu=77
+[19:48:34]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+hotkv,SETNX,1,3,40,100,2,86230330,-,89,80/80/81,extra_client_cpu=78
+[19:48:52]   INCR populated: DBSIZE 5000000 (expected 5000000)
+hotkv,INCR,1,3,40,100,1,119546810,-,93,80/80/82,extra_client_cpu=84
+[19:49:10]   INCR populated: DBSIZE 5000000 (expected 5000000)
+hotkv,INCR,1,3,40,100,2,118860662,-,93,80/80/81,extra_client_cpu=83
+[19:49:28]   SADD populated: DBSIZE 5000000 (expected 5000000)
+hotkv,SADD,1,3,40,100,1,51625961,-,51,78/77/77,extra_client_cpu=43
+[19:49:49]   SADD populated: DBSIZE 5000000 (expected 5000000)
+hotkv,SADD,1,3,40,100,2,51746795,-,52,77/77/79,extra_client_cpu=44
+[19:50:10]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+hotkv,RPUSH,1,3,40,100,1,47489393,-,44,78/79/79,extra_client_cpu=38
+[19:51:17]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+hotkv,RPUSH,1,3,40,100,2,46747950,-,44,78/77/78,extra_client_cpu=37
+[19:52:23]   HSET populated: DBSIZE 5000000 (expected 5000000)
+hotkv,HSET,1,3,40,100,1,38594313,-,51,78/78/78,extra_client_cpu=44
+[19:52:49]   HSET populated: DBSIZE 5000000 (expected 5000000)
+hotkv,HSET,1,3,40,100,2,38253550,-,51,77/77/77,extra_client_cpu=43
+[19:53:15]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+hotkv,LPUSH,1,3,40,100,1,31087298,-,29,78/77/77,extra_client_cpu=25
+[19:54:03]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+hotkv,LPUSH,1,3,40,100,2,31206042,-,29,77/78/78,extra_client_cpu=25
+[19:54:52]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+hotkv,APPEND,1,3,40,100,1,35157328,-,30,48/48/47,extra_client_cpu=27
+[19:55:37]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+hotkv,APPEND,1,3,40,100,2,34784967,-,31,48/48/48,extra_client_cpu=27
+[19:56:00] DONE
+[19:56:07] output /home/ubuntu/f3-redis, server hosts: 172.31.44.55 172.31.36.139 172.31.34.226, 48 vCPUs each
+[19:56:13] == redis, 40 node(s) per host, 120 primaries, 1 threads per node
+[19:57:40]   GET populated: DBSIZE 5000000 (expected 5000000)
+redis,GET,40,120,1,100,1,57298756,1.0000,100,81/81/81,extra_client_cpu=100
+[19:58:00]   GET populated: DBSIZE 5000000 (expected 5000000)
+redis,GET,40,120,1,100,2,57323122,1.0000,100,81/82/81,extra_client_cpu=100
+[19:58:19]   SET populated: DBSIZE 5000000 (expected 5000000)
+redis,SET,40,120,1,100,1,55219694,-,100,82/82/81,extra_client_cpu=99
+[19:58:39]   SET populated: DBSIZE 5000000 (expected 5000000)
+redis,SET,40,120,1,100,2,54790966,-,100,82/81/82,extra_client_cpu=99
+[19:58:59]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+redis,SETNX,40,120,1,100,1,61038953,-,100,81/81/81,extra_client_cpu=100
+[19:59:18]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+redis,SETNX,40,120,1,100,2,60362963,-,99,81/82/81,extra_client_cpu=100
+[19:59:38]   INCR populated: DBSIZE 5000000 (expected 5000000)
+redis,INCR,40,120,1,100,1,119082784,-,100,69/69/69,extra_client_cpu=100
+[19:59:57]   INCR populated: DBSIZE 5000000 (expected 5000000)
+redis,INCR,40,120,1,100,2,117747974,-,100,68/68/68,extra_client_cpu=100
+[20:00:16]   SADD populated: DBSIZE 5000000 (expected 5000000)
+redis,SADD,40,120,1,100,1,40637582,-,97,83/83/83,extra_client_cpu=88
+[20:00:37]   SADD populated: DBSIZE 5000000 (expected 5000000)
+redis,SADD,40,120,1,100,2,40203464,-,96,83/83/84,extra_client_cpu=89
+[20:00:57]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+redis,RPUSH,40,120,1,100,1,29824192,-,84,83/84/84,extra_client_cpu=77
+[20:01:31]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+redis,RPUSH,40,120,1,100,2,28843175,-,83,83/82/84,extra_client_cpu=76
+[20:02:04]   HSET populated: DBSIZE 5000000 (expected 5000000)
+redis,HSET,40,120,1,100,1,28916724,-,88,83/83/83,extra_client_cpu=83
+[20:02:27]   HSET populated: DBSIZE 5000000 (expected 5000000)
+redis,HSET,40,120,1,100,2,28730708,-,89,83/82/83,extra_client_cpu=83
+[20:02:49]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+redis,LPUSH,40,120,1,100,1,23829750,-,74,83/83/83,extra_client_cpu=66
+[20:03:21]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+redis,LPUSH,40,120,1,100,2,23659496,-,75,82/83/83,extra_client_cpu=66
+[20:03:52]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+redis,APPEND,40,120,1,100,1,41631333,-,96,83/83/83,extra_client_cpu=90
+[20:04:28]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+redis,APPEND,40,120,1,100,2,41821109,-,97,84/83/83,extra_client_cpu=90
+[20:04:51] DONE
+[20:04:58] output /home/ubuntu/f3-valkey, server hosts: 172.31.44.55 172.31.36.139 172.31.34.226, 48 vCPUs each
+[20:05:04] == valkey, 40 node(s) per host, 120 primaries, 1 threads per node
+[20:06:31]   GET populated: DBSIZE 5000000 (expected 5000000)
+valkey,GET,40,120,1,100,1,53070141,1.0000,100,82/82/82,extra_client_cpu=99
+[20:06:50]   GET populated: DBSIZE 5000000 (expected 5000000)
+valkey,GET,40,120,1,100,2,52689368,1.0000,100,82/82/82,extra_client_cpu=99
+[20:07:08]   SET populated: DBSIZE 5000000 (expected 5000000)
+valkey,SET,40,120,1,100,1,48517744,-,99,83/82/83,extra_client_cpu=95
+[20:07:27]   SET populated: DBSIZE 5000000 (expected 5000000)
+valkey,SET,40,120,1,100,2,48519415,-,99,82/83/83,extra_client_cpu=95
+[20:07:46]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+valkey,SETNX,40,120,1,100,1,57000266,-,100,81/82/82,extra_client_cpu=100
+[20:08:04]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+valkey,SETNX,40,120,1,100,2,56926274,-,100,82/82/82,extra_client_cpu=99
+[20:08:23]   INCR populated: DBSIZE 5000000 (expected 5000000)
+valkey,INCR,40,120,1,100,1,104710066,-,100,78/78/78,extra_client_cpu=100
+[20:08:42]   INCR populated: DBSIZE 5000000 (expected 5000000)
+valkey,INCR,40,120,1,100,2,104454249,-,100,78/77/78,extra_client_cpu=100
+[20:09:01]   SADD populated: DBSIZE 5000000 (expected 5000000)
+valkey,SADD,40,120,1,100,1,33895929,-,91,83/84/84,extra_client_cpu=84
+[20:09:19]   SADD populated: DBSIZE 5000000 (expected 5000000)
+valkey,SADD,40,120,1,100,2,33721199,-,91,83/83/84,extra_client_cpu=84
+[20:09:38]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+valkey,RPUSH,40,120,1,100,1,28485891,-,84,84/84/83,extra_client_cpu=77
+[20:09:57]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+valkey,RPUSH,40,120,1,100,2,29572604,-,83,84/83/82,extra_client_cpu=74
+[20:10:15]   HSET populated: DBSIZE 5000000 (expected 5000000)
+valkey,HSET,40,120,1,100,1,27809282,-,86,83/82/83,extra_client_cpu=80
+[20:10:34]   HSET populated: DBSIZE 5000000 (expected 5000000)
+valkey,HSET,40,120,1,100,2,26592829,-,86,83/83/83,extra_client_cpu=80
+[20:10:53]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+valkey,LPUSH,40,120,1,100,1,23507388,-,74,84/83/84,extra_client_cpu=68
+[20:11:12]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+valkey,LPUSH,40,120,1,100,2,24583956,-,76,84/83/84,extra_client_cpu=65
+[20:11:31]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+valkey,APPEND,40,120,1,100,1,41026456,-,95,83/83/83,extra_client_cpu=87
+[20:11:49]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+valkey,APPEND,40,120,1,100,2,40706318,-,95,83/83/83,extra_client_cpu=87
+[20:12:13] DONE
+[20:12:20] output /home/ubuntu/f3-dragonfly, server hosts: 172.31.44.55 172.31.36.139 172.31.34.226, 48 vCPUs each
+[20:12:25] == dragonfly, 1 node(s) per host, 3 primaries, 40 threads per node
+[20:12:38]   GET populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,GET,1,3,40,100,1,22721709,1.0000,34,83/83/83,extra_client_cpu=29
+[20:12:56]   GET populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,GET,1,3,40,100,2,22350131,1.0000,33,83/83/83,extra_client_cpu=29
+[20:13:13]   SET populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,SET,1,3,40,100,1,25145326,-,24,83/83/83,extra_client_cpu=21
+[20:13:31]   SET populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,SET,1,3,40,100,2,25270131,-,24,83/83/83,extra_client_cpu=21
+[20:13:49]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,SETNX,1,3,40,100,1,27500199,-,25,83/83/83,extra_client_cpu=22
+[20:14:06]   SETNX populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,SETNX,1,3,40,100,2,27513908,-,25,83/83/83,extra_client_cpu=22
+[20:14:24]   INCR populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,INCR,1,3,40,100,1,30708145,-,23,83/82/83,extra_client_cpu=20
+[20:14:42]   INCR populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,INCR,1,3,40,100,2,30821043,-,22,83/83/83,extra_client_cpu=20
+[20:14:59]   SADD populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,SADD,1,3,40,100,1,22711025,-,21,83/83/83,extra_client_cpu=19
+[20:15:17]   SADD populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,SADD,1,3,40,100,2,22696717,-,21,83/83/83,extra_client_cpu=19
+[20:15:35]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,RPUSH,1,3,40,100,1,18719478,-,17,83/83/83,extra_client_cpu=16
+[20:15:56]   RPUSH populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,RPUSH,1,3,40,100,2,18690462,-,17,83/83/83,extra_client_cpu=16
+[20:16:16]   HSET populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,HSET,1,3,40,100,1,18488478,-,21,83/83/83,extra_client_cpu=19
+[20:16:35]   HSET populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,HSET,1,3,40,100,2,18398247,-,21,83/83/83,extra_client_cpu=19
+[20:16:53]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,LPUSH,1,3,40,100,1,16837464,-,15,83/83/83,extra_client_cpu=14
+[20:17:13]   LPUSH populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,LPUSH,1,3,40,100,2,16870602,-,15,83/83/83,extra_client_cpu=14
+[20:17:34]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,APPEND,1,3,40,100,1,10458791,-,10,76/77/71,extra_client_cpu=9
+[20:17:53]   APPEND populated: DBSIZE 5000000 (expected 5000000)
+dragonfly,APPEND,1,3,40,100,2,10271541,-,9,66/72/75,extra_client_cpu=8
+[20:18:16] DONE

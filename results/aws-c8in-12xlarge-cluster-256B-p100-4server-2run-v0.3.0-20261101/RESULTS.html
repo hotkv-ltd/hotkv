@@ -1,0 +1,223 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HotKV vs Redis vs Valkey vs Dragonfly: AWS 3 x c8in.12xlarge cluster (Intel Xeon 6975P-C, Granite Rapids), 256B pipeline=100</title><style>
+:root{
+  --ground:#f7f8fa; --panel:#fff; --sunken:#eef1f5; --line:#dde2e9;
+  --text:#131720; --muted:#5d6675; --faint:#8b94a3;
+  --accent:#d1541f; --accent-soft:#fdf0e8;
+  --gain:#1f7a3d; --caveat:#8a6d10; --invalid:#b3352c;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#0b0e14; --panel:#141922; --sunken:#0f141c; --line:#242c3a;
+    --text:#dde3ec; --muted:#8b94a3; --faint:#616b7d;
+    --accent:#ff7a3d; --accent-soft:#2a1a12;
+    --gain:#3fa758; --caveat:#c9a227; --invalid:#e0483e;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0b0e14; --panel:#141922; --sunken:#0f141c; --line:#242c3a;
+  --text:#dde3ec; --muted:#8b94a3; --faint:#616b7d;
+  --accent:#ff7a3d; --accent-soft:#2a1a12;
+  --gain:#3fa758; --caveat:#c9a227; --invalid:#e0483e;
+}
+:root[data-theme="light"]{
+  --ground:#f7f8fa; --panel:#fff; --sunken:#eef1f5; --line:#dde2e9;
+  --text:#131720; --muted:#5d6675; --faint:#8b94a3;
+  --accent:#d1541f; --accent-soft:#fdf0e8;
+  --gain:#1f7a3d; --caveat:#8a6d10; --invalid:#b3352c;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; padding:clamp(1.2rem,4vw,3rem) 1rem; background:var(--ground);
+  color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:.4rem;}
+.mast{display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.4rem;}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); font-weight:600;
+}
+h1{
+  font-family:var(--mono); font-size:clamp(1.35rem,3.2vw,1.85rem); font-weight:600;
+  margin:0; letter-spacing:-.02em; text-wrap:balance;
+}
+.rig{
+  font-family:var(--mono); font-size:12.5px; color:var(--muted); line-height:1.9;
+  display:flex; flex-wrap:wrap; gap:.35rem .9rem;
+}
+.rig span{white-space:nowrap;} .rig b{color:var(--text); font-weight:600;}
+h2{
+  font-family:var(--mono); font-size:.95rem; font-weight:600; letter-spacing:.02em;
+  margin:2.4rem 0 .2rem; padding-bottom:.5rem; border-bottom:1px solid var(--line);
+}
+h3{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--faint); margin:1.5rem 0 .1rem;
+}
+p.lede{color:var(--muted); margin:.5rem 0 .3rem; font-size:14px;}
+
+/* Quickview: one horizontal bar per command, HotKV against the rival, scaled to
+   the fastest number in the run so both the absolute speed and the gap read at a
+   glance. This is the "just show me who wins" view. */
+.qv{display:flex; flex-direction:column; gap:.55rem; margin:1rem 0;}
+.qv-row{display:grid; grid-template-columns:5.5rem 1fr 4.5rem; align-items:center; gap:.7rem;}
+.qv-cmd{font-family:var(--mono); font-weight:600; font-size:13px;}
+.qv-bars{display:flex; flex-direction:column; gap:3px;}
+.qv-bar{position:relative; height:20px; border-radius:3px; min-width:2px;
+  display:flex; align-items:center;}
+/* HotKV is the only saturated bar; the competitors get distinct muted tones so
+   they read as a group behind it. */
+.qv-bar.hk{background:var(--accent);}
+.qv-bar.s1{background:#6b7688;}
+.qv-bar.s2{background:#8a6f5a;}
+.qv-bar.s3{background:#5a7d86;}
+.qv-bar span{font-family:var(--mono); font-size:10px; font-weight:600;
+  padding:0 .35rem; white-space:nowrap; color:#fff;}
+.qv-bar.outside span{color:var(--text); position:absolute; left:calc(100% + .35rem);}
+.qv-ratio{font-family:var(--mono); font-weight:700; font-size:14px; text-align:right; line-height:1.2;}
+.qv-ratio small{display:block; font-size:9px; font-weight:400; color:var(--faint); letter-spacing:.02em;}
+.qv-ratio.win{color:var(--gain);} .qv-ratio.tie{color:var(--muted);}
+.qv-legend{display:flex; flex-wrap:wrap; gap:1rem; font-family:var(--mono); font-size:11px;
+  color:var(--muted); margin:.3rem 0 .2rem;}
+.qv-legend b{display:inline-block; width:11px; height:11px; border-radius:2px;
+  vertical-align:-1px; margin-right:.35rem;}
+.qv-legend .hk b{background:var(--accent);}
+.qv-legend .s1 b{background:#6b7688;} .qv-legend .s2 b{background:#8a6f5a;} .qv-legend .s3 b{background:#5a7d86;}
+.verdict{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:.7rem; margin:.9rem 0 .3rem;}
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:.85rem 1rem; display:flex; flex-direction:column; gap:.15rem;
+}
+.card b{
+  font-family:var(--mono); font-size:1.6rem; font-weight:600; letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums; line-height:1.15;
+}
+.card span{font-family:var(--mono); font-size:10.5px; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--faint);}
+.card.hero b{color:var(--accent);}
+.panel{
+  background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  margin:.7rem 0; overflow:hidden;
+}
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+table{border-collapse:collapse; width:100%; font-family:var(--mono); font-size:12.5px;}
+th,td{
+  padding:.42rem .7rem; text-align:right; white-space:nowrap;
+  border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums;
+}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left;}
+th{
+  color:var(--faint); font-weight:600; font-size:10px; letter-spacing:.1em;
+  text-transform:uppercase; position:sticky; top:0; background:var(--panel);
+}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:var(--sunken);}
+td.cmd{font-weight:600;}
+.hk{color:var(--accent); font-weight:600;}
+.gain{color:var(--gain); font-weight:600;}
+.loss{color:var(--invalid); font-weight:600;}
+.dim{color:var(--faint);}
+tr.capped td{color:var(--muted);}
+tr.capped td:first-child{box-shadow:inset 3px 0 0 var(--caveat);}
+tr.void td:first-child{box-shadow:inset 3px 0 0 var(--invalid);}
+.pill{
+  display:inline-block; padding:.05rem .4rem; border-radius:3px; font-size:10px;
+  letter-spacing:.06em; text-transform:uppercase; border:1px solid currentColor;
+  margin-right:.25rem;
+}
+.pill.c{color:var(--caveat);} .pill.v{color:var(--invalid);}
+/* Per-server resource summary: big, legible, one block per product. */
+.res-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.8rem; margin:.8rem 0;}
+.res-card{background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:1rem 1.1rem;}
+.res-card h4{
+  font-family:var(--mono); font-size:14px; margin:0 0 .7rem; font-weight:600;
+  display:flex; align-items:center; gap:.5rem;
+}
+.res-card h4 .dot{width:9px; height:9px; border-radius:50%; background:var(--faint);}
+.res-card.hk h4{color:var(--accent);} .res-card.hk h4 .dot{background:var(--accent);}
+.res-row{
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:.4rem 0; border-bottom:1px solid var(--line); font-family:var(--mono);
+}
+.res-row:last-child{border-bottom:none;}
+.res-row .k{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint);}
+.res-row .val{font-size:15px; font-weight:600; font-variant-numeric:tabular-nums;}
+.res-row .val small{font-size:11px; color:var(--muted); font-weight:400; margin-left:.3rem;}
+.note{
+  border-left:3px solid var(--line); background:var(--panel); border-radius:0 6px 6px 0;
+  padding:.6rem .95rem; margin:.7rem 0; color:var(--muted); font-size:13.5px;
+}
+.note b{color:var(--text);}
+.note.caveat{border-left-color:var(--caveat);}
+.note.invalid{border-left-color:var(--invalid);}
+.note.ok{border-left-color:var(--gain);}
+code{font-family:var(--mono); font-size:12px; background:var(--sunken);
+  padding:.05rem .3rem; border-radius:3px;}
+pre{
+  font-family:var(--mono); font-size:11.5px; background:var(--sunken); margin:0;
+  padding:.7rem .95rem; overflow-x:auto; color:var(--text); border-bottom:1px solid var(--line);
+}
+footer{
+  color:var(--faint); font-size:12px; font-family:var(--mono); margin-top:3rem;
+  border-top:1px solid var(--line); padding-top:1rem; line-height:1.8;
+}
+@media (max-width:640px){ .rig{font-size:11.5px;} th,td{padding:.38rem .5rem;} }
+</style></head><body><div class="wrap">
+<div class="mast"><div class="eyebrow">Benchmark report</div><h1>HotKV vs Redis vs Valkey vs Dragonfly: AWS 3 x c8in.12xlarge cluster (Intel Xeon 6975P-C, Granite Rapids), 256B pipeline=100</h1><div class="rig"><span><b>AWS 3 x c8in.12xlarge cluster (Intel Xeon 6975P-C, Granite Rapids)</b> virtual machine</span><span>Intel(R) Xeon(R) 6975P-C (3 servers, 48 vCPUs each) &middot; <b>144</b> cores &middot; x86_64</span><span>92 GiB per server RAM</span><span><b>256B</b> values &middot; pipeline <b>100</b></span><span><b>2</b> run(s)</span><span><b>2</b> dedicated load generator(s)</span><span>2026-11-01 21:58 UTC</span></div></div>
+<div class="verdict"><div class="card"><b>1.5&times;</b><span>median vs Redis, 2 commands</span></div><div class="card"><b>1.5&times;</b><span>median vs Valkey, 2 commands</span></div><div class="card"><b>&ge;3.0&times;</b><span>median vs Dragonfly, 9 commands</span></div><div class="card"><b>92.3M</b><span>GET per second</span></div><div class="card"><b>76.1M</b><span>SET per second</span></div><div class="card"><b>113</b><span>of 144 cores used on GET</span></div></div>
+
+<h2>Quick view</h2>
+<p class="lede">Every server on every command; bar length is operations per second. The number
+on the right is HotKV's throughput divided by the fastest other server's on that command. &ge;
+marks a HotKV figure that the network or the load generators capped (the true ratio is at least
+that); &le; marks the other server's being capped.</p>
+<div class="qv-legend"><span class="hk"><b></b>HotKV</span><span class="s1"><b></b>Redis</span><span class="s2"><b></b>Valkey</span><span class="s3"><b></b>Dragonfly</span><span>bar length = operations per second</span></div><div class="qv"><div class="qv-row"><div class="qv-cmd">INCR</div><div class="qv-bars"><div class="qv-bar hk" style="width:100.0%"><span>HotKV 119.2M</span></div><div class="qv-bar s1" style="width:99.3%"><span>Redis 118.4M</span></div><div class="qv-bar s2" style="width:87.7%"><span>Valkey 104.6M</span></div><div class="qv-bar s3" style="width:25.8%"><span>Dragonfly 30.8M</span></div></div><div class="qv-ratio tie">n/a<small>both capped by the rig</small></div></div><div class="qv-row"><div class="qv-cmd">GET</div><div class="qv-bars"><div class="qv-bar hk" style="width:77.4%"><span>HotKV 92.3M</span></div><div class="qv-bar s1" style="width:48.1%"><span>Redis 57.3M</span></div><div class="qv-bar s2" style="width:44.4%"><span>Valkey 52.9M</span></div><div class="qv-bar s3" style="width:18.9%"><span>Dragonfly 22.5M</span></div></div><div class="qv-ratio win">n/a<small>both capped by the rig</small></div></div><div class="qv-row"><div class="qv-cmd">SETNX</div><div class="qv-bars"><div class="qv-bar hk" style="width:72.3%"><span>HotKV 86.1M</span></div><div class="qv-bar s1" style="width:50.9%"><span>Redis 60.7M</span></div><div class="qv-bar s2" style="width:47.8%"><span>Valkey 57.0M</span></div><div class="qv-bar s3" style="width:23.1%"><span>Dragonfly 27.5M</span></div></div><div class="qv-ratio win">n/a<small>both capped by the rig</small></div></div><div class="qv-row"><div class="qv-cmd">SET</div><div class="qv-bars"><div class="qv-bar hk" style="width:63.8%"><span>HotKV 76.1M</span></div><div class="qv-bar s1" style="width:46.1%"><span>Redis 55.0M</span></div><div class="qv-bar s2" style="width:40.7%"><span>Valkey 48.5M</span></div><div class="qv-bar s3" style="width:21.1%"><span>Dragonfly 25.2M</span></div></div><div class="qv-ratio win">&le;1.4&times;<small>vs Redis</small></div></div><div class="qv-row"><div class="qv-cmd">SADD</div><div class="qv-bars"><div class="qv-bar hk" style="width:43.4%"><span>HotKV 51.7M</span></div><div class="qv-bar s1" style="width:33.9%"><span>Redis 40.4M</span></div><div class="qv-bar s2" style="width:28.4%"><span>Valkey 33.8M</span></div><div class="qv-bar s3" style="width:19.0%"><span>Dragonfly 22.7M</span></div></div><div class="qv-ratio win">&le;1.3&times;<small>vs Redis</small></div></div><div class="qv-row"><div class="qv-cmd">RPUSH</div><div class="qv-bars"><div class="qv-bar hk" style="width:39.5%"><span>HotKV 47.1M</span></div><div class="qv-bar s1" style="width:24.6%"><span>Redis 29.3M</span></div><div class="qv-bar s2" style="width:24.4%"><span>Valkey 29.0M</span></div><div class="qv-bar s3 outside" style="width:15.7%"><span>Dragonfly 18.7M</span></div></div><div class="qv-ratio win">1.6&times;<small>vs Redis</small></div></div><div class="qv-row"><div class="qv-cmd">HSET</div><div class="qv-bars"><div class="qv-bar hk" style="width:32.2%"><span>HotKV 38.4M</span></div><div class="qv-bar s1" style="width:24.2%"><span>Redis 28.8M</span></div><div class="qv-bar s2" style="width:22.8%"><span>Valkey 27.2M</span></div><div class="qv-bar s3 outside" style="width:15.5%"><span>Dragonfly 18.4M</span></div></div><div class="qv-ratio win">&le;1.3&times;<small>vs Redis</small></div></div><div class="qv-row"><div class="qv-cmd">APPEND</div><div class="qv-bars"><div class="qv-bar hk" style="width:29.3%"><span>HotKV 35.0M</span></div><div class="qv-bar s1" style="width:35.0%"><span>Redis 41.7M</span></div><div class="qv-bar s2" style="width:34.3%"><span>Valkey 40.9M</span></div><div class="qv-bar s3 outside" style="width:8.7%"><span>Dragonfly 10.4M</span></div></div><div class="qv-ratio tie">&le;0.8&times;<small>vs Redis</small></div></div><div class="qv-row"><div class="qv-cmd">LPUSH</div><div class="qv-bars"><div class="qv-bar hk" style="width:26.1%"><span>HotKV 31.1M</span></div><div class="qv-bar s1" style="width:19.9%"><span>Redis 23.7M</span></div><div class="qv-bar s2" style="width:20.2%"><span>Valkey 24.0M</span></div><div class="qv-bar s3 outside" style="width:14.1%"><span>Dragonfly 16.9M</span></div></div><div class="qv-ratio win">1.3&times;<small>vs Valkey</small></div></div></div>
+<div class="note caveat">Three servers formed one cluster, driven by two load generators started together. HotKV and Dragonfly ran one process per server, Redis and Valkey 40 single-thread processes per server. On several commands the load generators ran above 85% CPU, so those figures are lower bounds; NOTES.md explains how to read them.</div>
+
+<h2>Throughput</h2>
+<p class="lede">Every command the run measured, in operations per second. Rows tagged
+<span class="pill c">client-bound</span> were capped by the load generator rather than the
+server, so their change column carries no signal. Read those as floors. Rows tagged
+<span class="pill v">drained</span> or similar were not measuring the command at all.</p>
+<div class="panel scroll"><table><thead><tr><th>command</th><th>HotKV</th><th>Redis</th><th>Valkey</th><th>Dragonfly</th><th>vs Redis</th><th>vs Valkey</th><th>vs Dragonfly</th><th>validity</th></tr></thead><tbody><tr class="capped"><td class="cmd">GET</td><td class="hk">92,250,494</td><td class="dim">57,310,939</td><td class="dim">52,879,754</td><td class="dim">22,535,920</td><td class="gain">1.61&times;</td><td class="gain">1.74&times;</td><td class="gain">4.09&times;</td><td><span class="pill c">client-bound</span></td></tr><tr class=""><td class="cmd">SET</td><td class="hk">76,093,800</td><td class="dim">55,005,330</td><td class="dim">48,518,580</td><td class="dim">25,207,728</td><td class="gain">1.38&times;</td><td class="gain">1.57&times;</td><td class="gain">3.02&times;</td><td></td></tr><tr class="capped"><td class="cmd">SETNX</td><td class="hk">86,134,695</td><td class="dim">60,700,958</td><td class="dim">56,963,270</td><td class="dim">27,507,054</td><td class="gain">1.42&times;</td><td class="gain">1.51&times;</td><td class="gain">3.13&times;</td><td><span class="pill c">client-bound</span></td></tr><tr class="capped"><td class="cmd">INCR</td><td class="hk">119,203,736</td><td class="dim">118,415,379</td><td class="dim">104,582,158</td><td class="dim">30,764,594</td><td class="gain">1.01&times;</td><td class="gain">1.14&times;</td><td class="gain">3.87&times;</td><td><span class="pill c">client-bound</span></td></tr><tr class=""><td class="cmd">SADD</td><td class="hk">51,686,378</td><td class="dim">40,420,523</td><td class="dim">33,808,564</td><td class="dim">22,703,871</td><td class="gain">1.28&times;</td><td class="gain">1.53&times;</td><td class="gain">2.28&times;</td><td></td></tr><tr class=""><td class="cmd">RPUSH</td><td class="hk">47,118,672</td><td class="dim">29,333,684</td><td class="dim">29,029,248</td><td class="dim">18,704,970</td><td class="gain">1.61&times;</td><td class="gain">1.62&times;</td><td class="gain">2.52&times;</td><td></td></tr><tr class=""><td class="cmd">HSET</td><td class="hk">38,423,932</td><td class="dim">28,823,716</td><td class="dim">27,201,056</td><td class="dim">18,443,362</td><td class="gain">1.33&times;</td><td class="gain">1.41&times;</td><td class="gain">2.08&times;</td><td></td></tr><tr class=""><td class="cmd">LPUSH</td><td class="hk">31,146,670</td><td class="dim">23,744,623</td><td class="dim">24,045,672</td><td class="dim">16,854,033</td><td class="gain">1.31&times;</td><td class="gain">1.30&times;</td><td class="gain">1.85&times;</td><td></td></tr><tr class=""><td class="cmd">APPEND</td><td class="hk">34,971,148</td><td class="dim">41,726,221</td><td class="dim">40,866,387</td><td class="dim">10,365,166</td><td class="loss">0.84&times;</td><td class="loss">0.86&times;</td><td class="gain">3.37&times;</td><td></td></tr></tbody></table></div>
+
+<h2>Resource usage per server</h2>
+<p class="lede">How much of the machine each product drew at its heaviest point in the run.
+CPU is cores fully busy, memory is the server process resident set, disk is bytes that reached
+the block layer, and network is the share of the link filled.</p>
+<div class="res-grid"><div class="res-card hk"><h4><span class="dot"></span>HotKV</h4><div class="res-row"><span class="k">Peak CPU</span><span class="val">115.9 cores<small>of 144 cores</small></span></div><div class="res-row"><span class="k">Dataset memory</span><span class="val"><span class="dim">-</span> MB</span></div><div class="res-row"><span class="k">Disk I/O</span><span class="val">none measured</span></div><div class="res-row"><span class="k">Peak network</span><span class="val"><span class="dim">-</span> Gbps</span></div></div><div class="res-card"><h4><span class="dot"></span>Redis</h4><div class="res-row"><span class="k">Peak CPU</span><span class="val">120.0 cores<small>of 144 cores</small></span></div><div class="res-row"><span class="k">Dataset memory</span><span class="val"><span class="dim">-</span> MB</span></div><div class="res-row"><span class="k">Disk I/O</span><span class="val">none measured</span></div><div class="res-row"><span class="k">Peak network</span><span class="val"><span class="dim">-</span> Gbps</span></div></div><div class="res-card"><h4><span class="dot"></span>Valkey</h4><div class="res-row"><span class="k">Peak CPU</span><span class="val">120.5 cores<small>of 144 cores</small></span></div><div class="res-row"><span class="k">Dataset memory</span><span class="val"><span class="dim">-</span> MB</span></div><div class="res-row"><span class="k">Disk I/O</span><span class="val">none measured</span></div><div class="res-row"><span class="k">Peak network</span><span class="val"><span class="dim">-</span> Gbps</span></div></div><div class="res-card"><h4><span class="dot"></span>Dragonfly</h4><div class="res-row"><span class="k">Peak CPU</span><span class="val">119.5 cores<small>of 144 cores</small></span></div><div class="res-row"><span class="k">Dataset memory</span><span class="val"><span class="dim">-</span> MB</span></div><div class="res-row"><span class="k">Disk I/O</span><span class="val">none measured</span></div><div class="res-row"><span class="k">Peak network</span><span class="val"><span class="dim">-</span> Gbps</span></div></div></div>
+<div class="note">Disk shows <b>zero writes</b> for every server because persistence was turned
+off on all of them for the benchmark. These are in-memory stores and nothing was spilling to
+disk. The number is measured from the kernel per process, not assumed.</div>
+<div class="note caveat"><b>Redis and Valkey execute commands on a single thread.</b> Their other threads are I/O threads. They were run as single instances, not as clusters, with the same thread count as the others (all the machine's cores, clamped to each server's maximum). I/O threads can keep cores busy without doing commands, so the CPU and ops-per-CPU-second figures for Redis and Valkey are not a measure of their efficiency, and they can reach higher throughput with fewer I/O threads than they were given here.</div>
+
+<h2>Validity checks</h2>
+<p class="lede">These decide which numbers mean anything. A result produced against a full cable,
+a maxed-out load generator, or an empty keyspace is a measurement of the rig, not the server.</p>
+<div class="note caveat"><b>Client-bound: 17 results.</b> The load generator sat at or above 85% CPU on these, so the number is memtier reaching its own limit, not the server reaching its. Read these as a floor. A faster server cannot move them, which is why the change column carries no signal on these rows. Measuring the real ceiling needs more client machines. Affected: <code>GET</code>/HotKV 100%, <code>GET</code>/Redis 100%, <code>GET</code>/Valkey 100%, <code>SET</code>/Redis 100%, <code>SET</code>/Valkey 99%, <code>SETNX</code>/HotKV 88%, <code>SETNX</code>/Redis 100%, <code>SETNX</code>/Valkey 100%, <code>INCR</code>/HotKV 93%, <code>INCR</code>/Redis 100%, <code>INCR</code>/Valkey 100%, <code>SADD</code>/Redis 96%, <code>SADD</code>/Valkey 91%, <code>HSET</code>/Redis 88%, <code>HSET</code>/Valkey 86%, <code>APPEND</code>/Redis 96%, <code>APPEND</code>/Valkey 95%.</div>
+
+<h2>Resource usage per command</h2>
+<p class="lede">The same resource picture broken out for every command. <code>CPU cores</code> is
+CPU time over wall time, so 8.0 means eight cores fully busy. <code>ops/CPU-s</code> is work per
+second of CPU consumed, the efficiency figure that still holds on different hardware.
+<code>RSS MB</code> is resident memory at the moment the command was measured. The value-growing
+commands (APPEND, LPUSH, RPUSH) show a large RSS because they accumulate data over the 10-second
+test in proportion to their own throughput, not because of any inefficiency.</p>
+<div class="panel scroll"><table><thead><tr><th>command</th><th>server</th><th>ops/sec</th><th>CPU cores</th><th>ops/CPU-s</th><th>RSS MB</th><th>disk wr MB</th><th>Gbps</th><th>link %</th><th>p50 ms</th><th>p99 ms</th><th>hit %</th><th>client CPU %</th></tr></thead><tbody><tr class="capped"><td class="cmd">GET</td><td class="hk">HotKV</td><td>92,250,494</td><td>112.8</td><td>817,824</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100.0</td><td>100</td></tr><tr class=""><td class="cmd">GET</td><td class="dim">Redis</td><td>57,310,939</td><td>116.9</td><td>490,340</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100.0</td><td>100</td></tr><tr class=""><td class="cmd">GET</td><td class="dim">Valkey</td><td>52,879,754</td><td>118.1</td><td>447,830</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100.0</td><td>100</td></tr><tr class=""><td class="cmd">GET</td><td class="dim">Dragonfly</td><td>22,535,920</td><td>119.5</td><td>188,554</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100.0</td><td>34</td></tr><tr class=""><td class="cmd">SET</td><td class="hk">HotKV</td><td>76,093,800</td><td>115.2</td><td>660,536</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>81</td></tr><tr class=""><td class="cmd">SET</td><td class="dim">Redis</td><td>55,005,330</td><td>117.6</td><td>467,732</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100</td></tr><tr class=""><td class="cmd">SET</td><td class="dim">Valkey</td><td>48,518,580</td><td>119.0</td><td>407,582</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>99</td></tr><tr class=""><td class="cmd">SET</td><td class="dim">Dragonfly</td><td>25,207,728</td><td>119.5</td><td>210,908</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>24</td></tr><tr class="capped"><td class="cmd">SETNX</td><td class="hk">HotKV</td><td>86,134,695</td><td>115.9</td><td>743,053</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>88</td></tr><tr class=""><td class="cmd">SETNX</td><td class="dim">Redis</td><td>60,700,958</td><td>116.9</td><td>519,344</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100</td></tr><tr class=""><td class="cmd">SETNX</td><td class="dim">Valkey</td><td>56,963,270</td><td>117.8</td><td>483,395</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100</td></tr><tr class=""><td class="cmd">SETNX</td><td class="dim">Dragonfly</td><td>27,507,054</td><td>119.5</td><td>230,146</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>25</td></tr><tr class="capped"><td class="cmd">INCR</td><td class="hk">HotKV</td><td>119,203,736</td><td>115.9</td><td>1,028,328</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>93</td></tr><tr class=""><td class="cmd">INCR</td><td class="dim">Redis</td><td>118,415,379</td><td>98.6</td><td>1,200,480</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100</td></tr><tr class=""><td class="cmd">INCR</td><td class="dim">Valkey</td><td>104,582,158</td><td>112.1</td><td>933,103</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>100</td></tr><tr class=""><td class="cmd">INCR</td><td class="dim">Dragonfly</td><td>30,764,594</td><td>119.3</td><td>257,919</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>22</td></tr><tr class=""><td class="cmd">SADD</td><td class="hk">HotKV</td><td>51,686,378</td><td>111.6</td><td>463,140</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>52</td></tr><tr class=""><td class="cmd">SADD</td><td class="dim">Redis</td><td>40,420,523</td><td>119.8</td><td>337,513</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>96</td></tr><tr class=""><td class="cmd">SADD</td><td class="dim">Valkey</td><td>33,808,564</td><td>120.2</td><td>281,176</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>91</td></tr><tr class=""><td class="cmd">SADD</td><td class="dim">Dragonfly</td><td>22,703,871</td><td>119.5</td><td>189,959</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>21</td></tr><tr class=""><td class="cmd">RPUSH</td><td class="hk">HotKV</td><td>47,118,672</td><td>112.6</td><td>418,609</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>44</td></tr><tr class=""><td class="cmd">RPUSH</td><td class="dim">Redis</td><td>29,333,684</td><td>120.0</td><td>244,447</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>84</td></tr><tr class=""><td class="cmd">RPUSH</td><td class="dim">Valkey</td><td>29,029,248</td><td>120.0</td><td>241,910</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>84</td></tr><tr class=""><td class="cmd">RPUSH</td><td class="dim">Dragonfly</td><td>18,704,970</td><td>119.5</td><td>156,501</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>17</td></tr><tr class=""><td class="cmd">HSET</td><td class="hk">HotKV</td><td>38,423,932</td><td>111.6</td><td>344,300</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>51</td></tr><tr class=""><td class="cmd">HSET</td><td class="dim">Redis</td><td>28,823,716</td><td>119.3</td><td>241,648</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>88</td></tr><tr class=""><td class="cmd">HSET</td><td class="dim">Valkey</td><td>27,201,056</td><td>119.3</td><td>228,044</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>86</td></tr><tr class=""><td class="cmd">HSET</td><td class="dim">Dragonfly</td><td>18,443,362</td><td>119.5</td><td>154,312</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>21</td></tr><tr class=""><td class="cmd">LPUSH</td><td class="hk">HotKV</td><td>31,146,670</td><td>111.6</td><td>279,092</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>29</td></tr><tr class=""><td class="cmd">LPUSH</td><td class="dim">Redis</td><td>23,744,623</td><td>119.3</td><td>199,066</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>74</td></tr><tr class=""><td class="cmd">LPUSH</td><td class="dim">Valkey</td><td>24,045,672</td><td>120.5</td><td>199,582</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>75</td></tr><tr class=""><td class="cmd">LPUSH</td><td class="dim">Dragonfly</td><td>16,854,033</td><td>119.5</td><td>141,014</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>15</td></tr><tr class=""><td class="cmd">APPEND</td><td class="hk">HotKV</td><td>34,971,148</td><td>68.9</td><td>507,711</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>30</td></tr><tr class=""><td class="cmd">APPEND</td><td class="dim">Redis</td><td>41,726,221</td><td>119.8</td><td>348,415</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>96</td></tr><tr class=""><td class="cmd">APPEND</td><td class="dim">Valkey</td><td>40,866,387</td><td>119.5</td><td>341,921</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>95</td></tr><tr class=""><td class="cmd">APPEND</td><td class="dim">Dragonfly</td><td>10,365,166</td><td>104.9</td><td>98,829</td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td><span class="dim">-</span></td><td>10</td></tr></tbody></table></div>
+
+<h2>Where HotKV is slower</h2>
+<div class="note">Commands on which another server measured higher throughput than HotKV.</div><div class="panel scroll"><table><thead><tr><th>command</th><th>server</th><th>theirs</th><th>ours</th><th>gap</th></tr></thead><tbody><tr><td class="cmd">APPEND</td><td>Redis</td><td>41,726,221</td><td>34,971,148</td><td class="loss">19.3% faster</td></tr><tr><td class="cmd">APPEND</td><td>Valkey</td><td>40,866,387</td><td>34,971,148</td><td class="loss">16.9% faster</td></tr></tbody></table></div>
+
+<h2>Configuration</h2>
+<p class="lede">Everything needed to reproduce this run, and to check that no server was
+handicapped. Launch lines and effective configs are read back from each live server, not copied
+from the script.</p>
+<h3>Load</h3><div class="panel scroll"><table><tbody><tr><td>Value size</td><td><b>256</b> bytes</td></tr><tr><td>Pipeline depth</td><td><b>100</b></td></tr><tr><td>Keyspace</td><td>5,000,000 keys</td></tr><tr><td>Populate</td><td>P (parallel sequential), --requests=allkeys</td></tr><tr><td>Key pattern</td><td>R (uniform random) over the populated range</td></tr><tr><td>Distinct seed per client</td><td>yes</td></tr><tr><td>memtier threads per client box</td><td>192</td></tr><tr><td>memtier processes per client box</td><td>16</td></tr><tr><td>Connections per client box</td><td>9,216</td></tr><tr><td>Test duration per command</td><td>15 s</td></tr><tr><td>Runs per command</td><td>2</td></tr><tr><td>Reported statistic</td><td>median of runs</td></tr></tbody></table></div><h3>Versions</h3><div class="panel scroll"><table><thead><tr><th>server</th><th>version</th></tr></thead><tbody><tr><td>HotKV</td><td>0.3.0</td></tr><tr><td>Redis</td><td>8.10.3</td></tr><tr><td>Valkey</td><td>9.1.3</td></tr><tr><td>Dragonfly</td><td>v2.0.2</td></tr></tbody></table></div><h3>Host</h3><div class="panel scroll"><table><tbody><tr><td>transparent hugepages</td><td><code>always madvise [never]</code></td></tr><tr><td>overcommit memory</td><td><code>1</code></td></tr><tr><td>somaxconn</td><td><code>65535</code></td></tr><tr><td>nofile limit</td><td><code>1048576</code></td></tr><tr><td>net link gbps</td><td><code>75.0</code></td></tr></tbody></table></div><h3>Server threads</h3><div class="note">the same for every server: all the machine&#x27;s cores, clamped to each server&#x27;s maximum. <b>HotKV</b> = 40, <b>Redis</b> = 1, <b>Valkey</b> = 1, <b>Dragonfly</b> = 40.</div><h3>HotKV</h3><div class='panel'><pre>taskset -c 0-39 hotkv node.conf   (one process per server host, port 7400)</pre><table><tbody><tr><td><code>protected-mode</code></td><td><code>no</code></td></tr><tr><td><code>appendonly</code></td><td><code>no</code></td></tr><tr><td><code>save</code></td><td><code>(off)</code></td></tr><tr><td><code>tcp-backlog</code></td><td><code>65535</code></td></tr></tbody></table></div><div class="note">No memory cap (<code>maxmemory=0</code>). Nothing was evicted during this run.</div><h3>Redis</h3><div class='panel'><pre>taskset -c 0-39 redis-server node.conf   (40 processes per server host, ports 7400 to 7439)</pre><table><tbody><tr><td><code>protected-mode</code></td><td><code>no</code></td></tr><tr><td><code>appendonly</code></td><td><code>no</code></td></tr><tr><td><code>save</code></td><td><code>(off)</code></td></tr><tr><td><code>tcp-backlog</code></td><td><code>65535</code></td></tr></tbody></table></div><div class="note">No memory cap (<code>maxmemory=0</code>). Nothing was evicted during this run.</div><h3>Valkey</h3><div class='panel'><pre>taskset -c 0-39 valkey-server node.conf   (40 processes per server host, ports 7400 to 7439)</pre><table><tbody><tr><td><code>protected-mode</code></td><td><code>no</code></td></tr><tr><td><code>appendonly</code></td><td><code>no</code></td></tr><tr><td><code>save</code></td><td><code>(off)</code></td></tr><tr><td><code>tcp-backlog</code></td><td><code>65535</code></td></tr></tbody></table></div><div class="note">No memory cap (<code>maxmemory=0</code>). Nothing was evicted during this run.</div><h3>Dragonfly</h3><div class='panel'><pre>taskset -c 0-39 dragonfly --port=7400 --proactor_threads=40 --dbfilename= --cluster_mode=yes --maxclients=65000 --tcp_backlog=65535   (one process per server host)</pre></div><div class="note">Three-node cluster: HotKV and Dragonfly run one process per server host with 40 threads. Redis and Valkey run 40 single-thread processes per server host (120 primaries). All 16,384 slots are spread evenly. Persistence is off everywhere and every server process is pinned to CPUs 0 to 39.</div><div class="note">HotKV ran with pipeline-prefetch set to yes (off by default). Redis and Valkey ran with their own batch prefetching at its default.</div><div class="note">The load comes from two machines started together: a c8in.48xlarge running 16 memtier_benchmark processes of 12 threads, and a c8in.12xlarge running 4 processes of 12 threads. memtier runs in cluster mode, so each client connects to every node. The figure of a run is the sum of all processes. The connections row counts 16 connections per thread and node on the large machine.</div><div class="note">Before every run the keyspace is emptied and written completely with that command&#x27;s own data type, and DBSIZE over all primaries is checked against it.</div><div class="note">The Load generator CPU column is the CPU of the large load generator. At or above 85 percent a figure is a lower bound, because the load generator and not the server may have set the limit. Redis and Valkey need 120 processes, which costs the load generators more per operation.</div><div class="note">MGET, MSET and PING are not run: in a cluster MGET and MSET with random keys fail with CROSSSLOT, and PING has no key to route by.</div><div class="note">Throughput only. The sweep does not record latency, memory or network use per command.</div>
+
+<footer>
+Data: <code>comparison.json</code>, which carries every individual run and every sample, not only what is shown here.<br>
+Redis, Valkey and Dragonfly are trademarks of their respective owners. They are named only to identify the software that was measured; this implies no sponsorship, endorsement or affiliation.
+</footer>
+</div></body></html>

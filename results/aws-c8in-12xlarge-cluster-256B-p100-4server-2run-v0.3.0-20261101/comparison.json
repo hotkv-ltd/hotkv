@@ -1,0 +1,859 @@
+{
+  "timestamp": "2026-11-01T21:58:00+00:00",
+  "tool": "memtier",
+  "clients": 16,
+  "requests": 0,
+  "pipeline": 100,
+  "datasize": 256,
+  "threads": 192,
+  "runs": 2,
+  "results": {
+    "HotKV": {
+      "GET": 92250493.5,
+      "SET": 76093800.0,
+      "SETNX": 86134695.0,
+      "INCR": 119203736.0,
+      "SADD": 51686378.0,
+      "RPUSH": 47118671.5,
+      "HSET": 38423931.5,
+      "LPUSH": 31146670.0,
+      "APPEND": 34971147.5
+    },
+    "Redis": {
+      "GET": 57310939.0,
+      "SET": 55005330.0,
+      "SETNX": 60700958.0,
+      "INCR": 118415379.0,
+      "SADD": 40420523.0,
+      "RPUSH": 29333683.5,
+      "HSET": 28823716.0,
+      "LPUSH": 23744623.0,
+      "APPEND": 41726221.0
+    },
+    "Valkey": {
+      "GET": 52879754.5,
+      "SET": 48518579.5,
+      "SETNX": 56963270.0,
+      "INCR": 104582157.5,
+      "SADD": 33808564.0,
+      "RPUSH": 29029247.5,
+      "HSET": 27201055.5,
+      "LPUSH": 24045672.0,
+      "APPEND": 40866387.0
+    },
+    "Dragonfly": {
+      "GET": 22535920.0,
+      "SET": 25207728.5,
+      "SETNX": 27507053.5,
+      "INCR": 30764594.0,
+      "SADD": 22703871.0,
+      "RPUSH": 18704970.0,
+      "HSET": 18443362.5,
+      "LPUSH": 16854033.0,
+      "APPEND": 10365166.0
+    }
+  },
+  "results_detail": {
+    "HotKV": {
+      "GET": {
+        "ops": 92250493.5,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 11280.0,
+        "cores_busy": 112.8,
+        "ops_per_cpu_sec": 817823.5239361703,
+        "hit_rate_pct": 100.0
+      },
+      "SET": {
+        "ops": 76093800.0,
+        "client_cpu_saturation_pct": 81.0,
+        "server_cpu_pct": 11519.999999999998,
+        "cores_busy": 115.19999999999999,
+        "ops_per_cpu_sec": 660536.4583333334
+      },
+      "SETNX": {
+        "ops": 86134695.0,
+        "client_cpu_saturation_pct": 88.0,
+        "server_cpu_pct": 11592.0,
+        "cores_busy": 115.92,
+        "ops_per_cpu_sec": 743052.9244306418
+      },
+      "INCR": {
+        "ops": 119203736.0,
+        "client_cpu_saturation_pct": 93.0,
+        "server_cpu_pct": 11592.0,
+        "cores_busy": 115.92,
+        "ops_per_cpu_sec": 1028327.6052449965
+      },
+      "SADD": {
+        "ops": 51686378.0,
+        "client_cpu_saturation_pct": 51.5,
+        "server_cpu_pct": 11160.0,
+        "cores_busy": 111.6,
+        "ops_per_cpu_sec": 463139.5878136201
+      },
+      "RPUSH": {
+        "ops": 47118671.5,
+        "client_cpu_saturation_pct": 44.0,
+        "server_cpu_pct": 11256.0,
+        "cores_busy": 112.56,
+        "ops_per_cpu_sec": 418609.37722103763
+      },
+      "HSET": {
+        "ops": 38423931.5,
+        "client_cpu_saturation_pct": 51.0,
+        "server_cpu_pct": 11160.0,
+        "cores_busy": 111.6,
+        "ops_per_cpu_sec": 344300.4614695341
+      },
+      "LPUSH": {
+        "ops": 31146670.0,
+        "client_cpu_saturation_pct": 29.0,
+        "server_cpu_pct": 11160.0,
+        "cores_busy": 111.6,
+        "ops_per_cpu_sec": 279092.02508960577
+      },
+      "APPEND": {
+        "ops": 34971147.5,
+        "client_cpu_saturation_pct": 30.5,
+        "server_cpu_pct": 6888.0,
+        "cores_busy": 68.88,
+        "ops_per_cpu_sec": 507711.2006387921
+      }
+    },
+    "Redis": {
+      "GET": {
+        "ops": 57310939.0,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 11688.000000000002,
+        "cores_busy": 116.88000000000001,
+        "ops_per_cpu_sec": 490339.9982888432,
+        "hit_rate_pct": 100.0
+      },
+      "SET": {
+        "ops": 55005330.0,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 11760.0,
+        "cores_busy": 117.60000000000001,
+        "ops_per_cpu_sec": 467732.3979591836
+      },
+      "SETNX": {
+        "ops": 60700958.0,
+        "client_cpu_saturation_pct": 99.5,
+        "server_cpu_pct": 11688.000000000002,
+        "cores_busy": 116.88000000000001,
+        "ops_per_cpu_sec": 519344.2676249144
+      },
+      "INCR": {
+        "ops": 118415379.0,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 9863.999999999998,
+        "cores_busy": 98.63999999999999,
+        "ops_per_cpu_sec": 1200480.3223844285
+      },
+      "SADD": {
+        "ops": 40420523.0,
+        "client_cpu_saturation_pct": 96.5,
+        "server_cpu_pct": 11976.0,
+        "cores_busy": 119.76,
+        "ops_per_cpu_sec": 337512.7171008684
+      },
+      "RPUSH": {
+        "ops": 29333683.5,
+        "client_cpu_saturation_pct": 83.5,
+        "server_cpu_pct": 12000.0,
+        "cores_busy": 120.0,
+        "ops_per_cpu_sec": 244447.3625
+      },
+      "HSET": {
+        "ops": 28823716.0,
+        "client_cpu_saturation_pct": 88.5,
+        "server_cpu_pct": 11928.0,
+        "cores_busy": 119.28,
+        "ops_per_cpu_sec": 241647.5184439973
+      },
+      "LPUSH": {
+        "ops": 23744623.0,
+        "client_cpu_saturation_pct": 74.5,
+        "server_cpu_pct": 11928.0,
+        "cores_busy": 119.28,
+        "ops_per_cpu_sec": 199066.2558685446
+      },
+      "APPEND": {
+        "ops": 41726221.0,
+        "client_cpu_saturation_pct": 96.5,
+        "server_cpu_pct": 11976.0,
+        "cores_busy": 119.76,
+        "ops_per_cpu_sec": 348415.339011356
+      }
+    },
+    "Valkey": {
+      "GET": {
+        "ops": 52879754.5,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 11808.0,
+        "cores_busy": 118.08,
+        "ops_per_cpu_sec": 447829.8992208672,
+        "hit_rate_pct": 100.0
+      },
+      "SET": {
+        "ops": 48518579.5,
+        "client_cpu_saturation_pct": 99.0,
+        "server_cpu_pct": 11904.0,
+        "cores_busy": 119.03999999999999,
+        "ops_per_cpu_sec": 407582.1530577957
+      },
+      "SETNX": {
+        "ops": 56963270.0,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 11784.0,
+        "cores_busy": 117.84,
+        "ops_per_cpu_sec": 483395.02715546504
+      },
+      "INCR": {
+        "ops": 104582157.5,
+        "client_cpu_saturation_pct": 100.0,
+        "server_cpu_pct": 11208.0,
+        "cores_busy": 112.08,
+        "ops_per_cpu_sec": 933102.761420414
+      },
+      "SADD": {
+        "ops": 33808564.0,
+        "client_cpu_saturation_pct": 91.0,
+        "server_cpu_pct": 12024.0,
+        "cores_busy": 120.24,
+        "ops_per_cpu_sec": 281175.68196939456
+      },
+      "RPUSH": {
+        "ops": 29029247.5,
+        "client_cpu_saturation_pct": 83.5,
+        "server_cpu_pct": 12000.0,
+        "cores_busy": 120.0,
+        "ops_per_cpu_sec": 241910.39583333334
+      },
+      "HSET": {
+        "ops": 27201055.5,
+        "client_cpu_saturation_pct": 86.0,
+        "server_cpu_pct": 11928.0,
+        "cores_busy": 119.28,
+        "ops_per_cpu_sec": 228043.72484909458
+      },
+      "LPUSH": {
+        "ops": 24045672.0,
+        "client_cpu_saturation_pct": 75.0,
+        "server_cpu_pct": 12047.999999999998,
+        "cores_busy": 120.47999999999999,
+        "ops_per_cpu_sec": 199582.27091633467
+      },
+      "APPEND": {
+        "ops": 40866387.0,
+        "client_cpu_saturation_pct": 95.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 341920.9086345381
+      }
+    },
+    "Dragonfly": {
+      "GET": {
+        "ops": 22535920.0,
+        "client_cpu_saturation_pct": 33.5,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 188553.54752342703,
+        "hit_rate_pct": 100.0
+      },
+      "SET": {
+        "ops": 25207728.5,
+        "client_cpu_saturation_pct": 24.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 210908.0363119143
+      },
+      "SETNX": {
+        "ops": 27507053.5,
+        "client_cpu_saturation_pct": 25.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 230146.0299531459
+      },
+      "INCR": {
+        "ops": 30764594.0,
+        "client_cpu_saturation_pct": 22.5,
+        "server_cpu_pct": 11928.0,
+        "cores_busy": 119.28,
+        "ops_per_cpu_sec": 257919.13145539907
+      },
+      "SADD": {
+        "ops": 22703871.0,
+        "client_cpu_saturation_pct": 21.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 189958.76004016062
+      },
+      "RPUSH": {
+        "ops": 18704970.0,
+        "client_cpu_saturation_pct": 17.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 156500.75301204817
+      },
+      "HSET": {
+        "ops": 18443362.5,
+        "client_cpu_saturation_pct": 21.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 154311.93524096385
+      },
+      "LPUSH": {
+        "ops": 16854033.0,
+        "client_cpu_saturation_pct": 15.0,
+        "server_cpu_pct": 11952.000000000002,
+        "cores_busy": 119.52000000000001,
+        "ops_per_cpu_sec": 141014.33232931726
+      },
+      "APPEND": {
+        "ops": 10365166.0,
+        "client_cpu_saturation_pct": 9.5,
+        "server_cpu_pct": 10488.0,
+        "cores_busy": 104.88,
+        "ops_per_cpu_sec": 98828.81388253243
+      }
+    }
+  },
+  "all_runs": [
+    {
+      "HotKV": {
+        "GET": 91688208.0,
+        "SET": 75985435.0,
+        "SETNX": 86039060.0,
+        "INCR": 119546810.0,
+        "SADD": 51625961.0,
+        "RPUSH": 47489393.0,
+        "HSET": 38594313.0,
+        "LPUSH": 31087298.0,
+        "APPEND": 35157328.0
+      },
+      "Redis": {
+        "GET": 57298756.0,
+        "SET": 55219694.0,
+        "SETNX": 61038953.0,
+        "INCR": 119082784.0,
+        "SADD": 40637582.0,
+        "RPUSH": 29824192.0,
+        "HSET": 28916724.0,
+        "LPUSH": 23829750.0,
+        "APPEND": 41631333.0
+      },
+      "Valkey": {
+        "GET": 53070141.0,
+        "SET": 48517744.0,
+        "SETNX": 57000266.0,
+        "INCR": 104710066.0,
+        "SADD": 33895929.0,
+        "RPUSH": 28485891.0,
+        "HSET": 27809282.0,
+        "LPUSH": 23507388.0,
+        "APPEND": 41026456.0
+      },
+      "Dragonfly": {
+        "GET": 22721709.0,
+        "SET": 25145326.0,
+        "SETNX": 27500199.0,
+        "INCR": 30708145.0,
+        "SADD": 22711025.0,
+        "RPUSH": 18719478.0,
+        "HSET": 18488478.0,
+        "LPUSH": 16837464.0,
+        "APPEND": 10458791.0
+      }
+    },
+    {
+      "HotKV": {
+        "GET": 92812779.0,
+        "SET": 76202165.0,
+        "SETNX": 86230330.0,
+        "INCR": 118860662.0,
+        "SADD": 51746795.0,
+        "RPUSH": 46747950.0,
+        "HSET": 38253550.0,
+        "LPUSH": 31206042.0,
+        "APPEND": 34784967.0
+      },
+      "Redis": {
+        "GET": 57323122.0,
+        "SET": 54790966.0,
+        "SETNX": 60362963.0,
+        "INCR": 117747974.0,
+        "SADD": 40203464.0,
+        "RPUSH": 28843175.0,
+        "HSET": 28730708.0,
+        "LPUSH": 23659496.0,
+        "APPEND": 41821109.0
+      },
+      "Valkey": {
+        "GET": 52689368.0,
+        "SET": 48519415.0,
+        "SETNX": 56926274.0,
+        "INCR": 104454249.0,
+        "SADD": 33721199.0,
+        "RPUSH": 29572604.0,
+        "HSET": 26592829.0,
+        "LPUSH": 24583956.0,
+        "APPEND": 40706318.0
+      },
+      "Dragonfly": {
+        "GET": 22350131.0,
+        "SET": 25270131.0,
+        "SETNX": 27513908.0,
+        "INCR": 30821043.0,
+        "SADD": 22696717.0,
+        "RPUSH": 18690462.0,
+        "HSET": 18398247.0,
+        "LPUSH": 16870602.0,
+        "APPEND": 10271541.0
+      }
+    }
+  ],
+  "all_runs_detail": [
+    {
+      "HotKV": {
+        "GET": {
+          "ops": 91688208.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SET": {
+          "ops": 75985435.0,
+          "client_cpu_saturation_pct": 80.0
+        },
+        "SETNX": {
+          "ops": 86039060.0,
+          "client_cpu_saturation_pct": 87.0
+        },
+        "INCR": {
+          "ops": 119546810.0,
+          "client_cpu_saturation_pct": 93.0
+        },
+        "SADD": {
+          "ops": 51625961.0,
+          "client_cpu_saturation_pct": 51.0
+        },
+        "RPUSH": {
+          "ops": 47489393.0,
+          "client_cpu_saturation_pct": 44.0
+        },
+        "HSET": {
+          "ops": 38594313.0,
+          "client_cpu_saturation_pct": 51.0
+        },
+        "LPUSH": {
+          "ops": 31087298.0,
+          "client_cpu_saturation_pct": 29.0
+        },
+        "APPEND": {
+          "ops": 35157328.0,
+          "client_cpu_saturation_pct": 30.0
+        }
+      },
+      "Redis": {
+        "GET": {
+          "ops": 57298756.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SET": {
+          "ops": 55219694.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SETNX": {
+          "ops": 61038953.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "INCR": {
+          "ops": 119082784.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SADD": {
+          "ops": 40637582.0,
+          "client_cpu_saturation_pct": 97.0
+        },
+        "RPUSH": {
+          "ops": 29824192.0,
+          "client_cpu_saturation_pct": 84.0
+        },
+        "HSET": {
+          "ops": 28916724.0,
+          "client_cpu_saturation_pct": 88.0
+        },
+        "LPUSH": {
+          "ops": 23829750.0,
+          "client_cpu_saturation_pct": 74.0
+        },
+        "APPEND": {
+          "ops": 41631333.0,
+          "client_cpu_saturation_pct": 96.0
+        }
+      },
+      "Valkey": {
+        "GET": {
+          "ops": 53070141.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SET": {
+          "ops": 48517744.0,
+          "client_cpu_saturation_pct": 99.0
+        },
+        "SETNX": {
+          "ops": 57000266.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "INCR": {
+          "ops": 104710066.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SADD": {
+          "ops": 33895929.0,
+          "client_cpu_saturation_pct": 91.0
+        },
+        "RPUSH": {
+          "ops": 28485891.0,
+          "client_cpu_saturation_pct": 84.0
+        },
+        "HSET": {
+          "ops": 27809282.0,
+          "client_cpu_saturation_pct": 86.0
+        },
+        "LPUSH": {
+          "ops": 23507388.0,
+          "client_cpu_saturation_pct": 74.0
+        },
+        "APPEND": {
+          "ops": 41026456.0,
+          "client_cpu_saturation_pct": 95.0
+        }
+      },
+      "Dragonfly": {
+        "GET": {
+          "ops": 22721709.0,
+          "client_cpu_saturation_pct": 34.0
+        },
+        "SET": {
+          "ops": 25145326.0,
+          "client_cpu_saturation_pct": 24.0
+        },
+        "SETNX": {
+          "ops": 27500199.0,
+          "client_cpu_saturation_pct": 25.0
+        },
+        "INCR": {
+          "ops": 30708145.0,
+          "client_cpu_saturation_pct": 23.0
+        },
+        "SADD": {
+          "ops": 22711025.0,
+          "client_cpu_saturation_pct": 21.0
+        },
+        "RPUSH": {
+          "ops": 18719478.0,
+          "client_cpu_saturation_pct": 17.0
+        },
+        "HSET": {
+          "ops": 18488478.0,
+          "client_cpu_saturation_pct": 21.0
+        },
+        "LPUSH": {
+          "ops": 16837464.0,
+          "client_cpu_saturation_pct": 15.0
+        },
+        "APPEND": {
+          "ops": 10458791.0,
+          "client_cpu_saturation_pct": 10.0
+        }
+      }
+    },
+    {
+      "HotKV": {
+        "GET": {
+          "ops": 92812779.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SET": {
+          "ops": 76202165.0,
+          "client_cpu_saturation_pct": 82.0
+        },
+        "SETNX": {
+          "ops": 86230330.0,
+          "client_cpu_saturation_pct": 89.0
+        },
+        "INCR": {
+          "ops": 118860662.0,
+          "client_cpu_saturation_pct": 93.0
+        },
+        "SADD": {
+          "ops": 51746795.0,
+          "client_cpu_saturation_pct": 52.0
+        },
+        "RPUSH": {
+          "ops": 46747950.0,
+          "client_cpu_saturation_pct": 44.0
+        },
+        "HSET": {
+          "ops": 38253550.0,
+          "client_cpu_saturation_pct": 51.0
+        },
+        "LPUSH": {
+          "ops": 31206042.0,
+          "client_cpu_saturation_pct": 29.0
+        },
+        "APPEND": {
+          "ops": 34784967.0,
+          "client_cpu_saturation_pct": 31.0
+        }
+      },
+      "Redis": {
+        "GET": {
+          "ops": 57323122.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SET": {
+          "ops": 54790966.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SETNX": {
+          "ops": 60362963.0,
+          "client_cpu_saturation_pct": 99.0
+        },
+        "INCR": {
+          "ops": 117747974.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SADD": {
+          "ops": 40203464.0,
+          "client_cpu_saturation_pct": 96.0
+        },
+        "RPUSH": {
+          "ops": 28843175.0,
+          "client_cpu_saturation_pct": 83.0
+        },
+        "HSET": {
+          "ops": 28730708.0,
+          "client_cpu_saturation_pct": 89.0
+        },
+        "LPUSH": {
+          "ops": 23659496.0,
+          "client_cpu_saturation_pct": 75.0
+        },
+        "APPEND": {
+          "ops": 41821109.0,
+          "client_cpu_saturation_pct": 97.0
+        }
+      },
+      "Valkey": {
+        "GET": {
+          "ops": 52689368.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SET": {
+          "ops": 48519415.0,
+          "client_cpu_saturation_pct": 99.0
+        },
+        "SETNX": {
+          "ops": 56926274.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "INCR": {
+          "ops": 104454249.0,
+          "client_cpu_saturation_pct": 100.0
+        },
+        "SADD": {
+          "ops": 33721199.0,
+          "client_cpu_saturation_pct": 91.0
+        },
+        "RPUSH": {
+          "ops": 29572604.0,
+          "client_cpu_saturation_pct": 83.0
+        },
+        "HSET": {
+          "ops": 26592829.0,
+          "client_cpu_saturation_pct": 86.0
+        },
+        "LPUSH": {
+          "ops": 24583956.0,
+          "client_cpu_saturation_pct": 76.0
+        },
+        "APPEND": {
+          "ops": 40706318.0,
+          "client_cpu_saturation_pct": 95.0
+        }
+      },
+      "Dragonfly": {
+        "GET": {
+          "ops": 22350131.0,
+          "client_cpu_saturation_pct": 33.0
+        },
+        "SET": {
+          "ops": 25270131.0,
+          "client_cpu_saturation_pct": 24.0
+        },
+        "SETNX": {
+          "ops": 27513908.0,
+          "client_cpu_saturation_pct": 25.0
+        },
+        "INCR": {
+          "ops": 30821043.0,
+          "client_cpu_saturation_pct": 22.0
+        },
+        "SADD": {
+          "ops": 22696717.0,
+          "client_cpu_saturation_pct": 21.0
+        },
+        "RPUSH": {
+          "ops": 18690462.0,
+          "client_cpu_saturation_pct": 17.0
+        },
+        "HSET": {
+          "ops": 18398247.0,
+          "client_cpu_saturation_pct": 21.0
+        },
+        "LPUSH": {
+          "ops": 16870602.0,
+          "client_cpu_saturation_pct": 15.0
+        },
+        "APPEND": {
+          "ops": 10271541.0,
+          "client_cpu_saturation_pct": 9.0
+        }
+      }
+    }
+  ],
+  "server_versions": {
+    "HotKV": "0.3.0",
+    "Redis": "8.10.3",
+    "Valkey": "9.1.3",
+    "Dragonfly": "v2.0.2"
+  },
+  "server_revisions": {
+    "HotKV": "126d1a6a (0.3.0 plus the pipeline-prefetch setting)"
+  },
+  "system_info": {
+    "os": "Linux",
+    "os_version": "",
+    "os_release": "7.0.0-1014-aws",
+    "architecture": "x86_64",
+    "cpu_model": "Intel(R) Xeon(R) 6975P-C (3 servers, 48 vCPUs each)",
+    "cpu_cores": 144,
+    "total_ram": "92 GiB per server",
+    "benchmark_tool": "memtier_benchmark",
+    "memtier_version": "memtier_benchmark v=255.255.255 sha=272eeb64:0 bits=64 libevent=2.1.12-stable openssl=OpenSSL 3.0.13 30 Jan 2024 prometheus=yes",
+    "bench_threads": 192,
+    "platform_name": "AWS 3 x c8in.12xlarge cluster (Intel Xeon 6975P-C, Granite Rapids)",
+    "platform_kind": "vm",
+    "host_vcpus": 48
+  },
+  "load_generation": {
+    "mode": "remote",
+    "client_machines": [
+      "172.31.32.45 (c8in.48xlarge)",
+      "172.31.47.233 (c8in.12xlarge)"
+    ],
+    "client_count": 2,
+    "server_addr": "172.31.44.55 172.31.36.139 172.31.34.226",
+    "shared_host": false
+  },
+  "tuning": {
+    "swept": false,
+    "tuned_threads": {
+      "HotKV": 40,
+      "Redis": 1,
+      "Valkey": 1,
+      "Dragonfly": 40
+    },
+    "sweep": [],
+    "sweep_metric": ""
+  },
+  "benchmark_config": {
+    "servers": {
+      "HotKV": {
+        "launch_cmdline": "taskset -c 0-39 hotkv node.conf   (one process per server host, port 7400)",
+        "threads_configured": 40,
+        "effective_config": {
+          "cluster-enabled": "yes",
+          "cluster-node-timeout": "15000",
+          "protected-mode": "no",
+          "appendonly": "no",
+          "save": "(off)",
+          "tcp-backlog": "65535",
+          "maxclients": "65000",
+          "threads": "40",
+          "pipeline-prefetch": "yes"
+        },
+        "maxmemory_is_unlimited": true
+      },
+      "Redis": {
+        "launch_cmdline": "taskset -c 0-39 redis-server node.conf   (40 processes per server host, ports 7400 to 7439)",
+        "threads_configured": 1,
+        "effective_config": {
+          "cluster-enabled": "yes",
+          "cluster-node-timeout": "15000",
+          "protected-mode": "no",
+          "appendonly": "no",
+          "save": "(off)",
+          "tcp-backlog": "65535",
+          "maxclients": "65000"
+        },
+        "maxmemory_is_unlimited": true
+      },
+      "Valkey": {
+        "launch_cmdline": "taskset -c 0-39 valkey-server node.conf   (40 processes per server host, ports 7400 to 7439)",
+        "threads_configured": 1,
+        "effective_config": {
+          "cluster-enabled": "yes",
+          "cluster-node-timeout": "15000",
+          "protected-mode": "no",
+          "appendonly": "no",
+          "save": "(off)",
+          "tcp-backlog": "65535",
+          "maxclients": "65000"
+        },
+        "maxmemory_is_unlimited": true
+      },
+      "Dragonfly": {
+        "launch_cmdline": "taskset -c 0-39 dragonfly --port=7400 --proactor_threads=40 --dbfilename= --cluster_mode=yes --maxclients=65000 --tcp_backlog=65535   (one process per server host)",
+        "threads_configured": 40,
+        "effective_config": {},
+        "maxmemory_is_unlimited": false
+      }
+    },
+    "memtier": {
+      "threads_per_client_machine": 192,
+      "connections_per_thread": 16,
+      "total_connections_per_client_machine": 9216,
+      "pipeline": 100,
+      "data_size_bytes": 256,
+      "test_time_sec": 15,
+      "key_pattern": "R (uniform random) over the populated range",
+      "key_minimum": 1,
+      "key_maximum": 5000000,
+      "populate_pattern": "P (parallel sequential), --requests=allkeys",
+      "distinct_client_seed": true,
+      "memtier_processes_per_client_box": 16,
+      "runs_per_command": 2,
+      "reported_statistic": "median of runs"
+    },
+    "host": {
+      "transparent_hugepages": "always madvise [never]",
+      "overcommit_memory": "1",
+      "somaxconn": "65535",
+      "nofile_limit": "1048576",
+      "net_link_gbps": 75.0
+    },
+    "notes": [
+      "Three-node cluster: HotKV and Dragonfly run one process per server host with 40 threads. Redis and Valkey run 40 single-thread processes per server host (120 primaries). All 16,384 slots are spread evenly. Persistence is off everywhere and every server process is pinned to CPUs 0 to 39.",
+      "HotKV ran with pipeline-prefetch set to yes (off by default). Redis and Valkey ran with their own batch prefetching at its default.",
+      "The load comes from two machines started together: a c8in.48xlarge running 16 memtier_benchmark processes of 12 threads, and a c8in.12xlarge running 4 processes of 12 threads. memtier runs in cluster mode, so each client connects to every node. The figure of a run is the sum of all processes. The connections row counts 16 connections per thread and node on the large machine.",
+      "Before every run the keyspace is emptied and written completely with that command's own data type, and DBSIZE over all primaries is checked against it.",
+      "The Load generator CPU column is the CPU of the large load generator. At or above 85 percent a figure is a lower bound, because the load generator and not the server may have set the limit. Redis and Valkey need 120 processes, which costs the load generators more per operation.",
+      "MGET, MSET and PING are not run: in a cluster MGET and MSET with random keys fail with CROSSSLOT, and PING has no key to route by.",
+      "Throughput only. The sweep does not record latency, memory or network use per command."
+    ]
+  },
+  "exclusive_results": [],
+  "compressed_results": []
+}

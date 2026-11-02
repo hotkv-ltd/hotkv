@@ -38,6 +38,7 @@ unfair, we re-measure it and correct it, and we say what changed.
 | Azure `Standard_D160alds_v7` (160 vCPUs) | HotKV, Redis 8.10.2, Valkey 9.1.2, Dragonfly 2.0.2 | [`results/azure-d160alds-v7-256B-p30-4server-3run-v0.3.0-20261009/`](results/azure-d160alds-v7-256B-p30-4server-3run-v0.3.0-20261009/RESULTS.md) |
 | Google Cloud `c4d-standard-384` (384 vCPUs) | HotKV, Redis 8.10.3, Valkey 9.1.3, Dragonfly 2.0.2 | [`results/gcp-c4d-standard-384-256B-p30-4server-3run-v0.3.0-20261027/`](results/gcp-c4d-standard-384-256B-p30-4server-3run-v0.3.0-20261027/RESULTS.md) |
 | AWS `c8in.48xlarge` (192 vCPUs) | HotKV, Redis 8.10.3, Valkey 9.1.3, Dragonfly 2.0.2 | [`results/aws-c8in-48xlarge-256B-p30-4server-3run-v0.3.0-20261031/`](results/aws-c8in-48xlarge-256B-p30-4server-3run-v0.3.0-20261031/RESULTS.md) |
+| AWS `c8in.12xlarge` three-node cluster (3 x 48 vCPUs), pipeline 100 | HotKV, Redis 8.10.3, Valkey 9.1.3, Dragonfly 2.0.2 | [`results/aws-c8in-12xlarge-cluster-256B-p100-4server-2run-v0.3.0-20261101/`](results/aws-c8in-12xlarge-cluster-256B-p100-4server-2run-v0.3.0-20261101/RESULTS.md) |
 | Vector search, Azure `Standard_D160alds_v7` | HotKV, Redis 8.10.2 | [`vector-search/`](vector-search/README.md) |
 
 ## Run the benchmark yourself
