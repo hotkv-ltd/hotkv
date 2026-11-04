@@ -1,0 +1,6 @@
+start 2026-11-02T08:08:39Z
+keys=1000000 vsize=256 threads=4 conns/thread=12 test_time=20 repeats=2
+rates=10000 25000 50000 100000 200000 300000
+workloads=get mixed
+memtier_benchmark v=255.255.255 sha=272eeb64:0 bits=64 libevent=2.1.12-stable openssl=OpenSSL 3.0.13 30 Jan 2024 prometheus=yes
+end 2026-11-02T08:58:38Z

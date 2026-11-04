@@ -1,0 +1,5 @@
+start 2026-11-02T06:39:22Z
+payload=128 publishers=64 test_time=20 repeats=2
+scenarios=p2p_10k:100:100:10000 p2p_50k:100:100:50000 p2p_100k:100:100:100000 fanout10_10k:10:100:10000 fanout100_1k:1:100:1000
+pubsub-sub-bench (git_sha1:)
+end 2026-11-02T07:07:43Z

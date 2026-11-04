@@ -1,0 +1,3 @@
+redis_version:7.4.0
+dragonfly_version:df-dev
+executable:/opt/dragonfly/build-opt/dragonfly

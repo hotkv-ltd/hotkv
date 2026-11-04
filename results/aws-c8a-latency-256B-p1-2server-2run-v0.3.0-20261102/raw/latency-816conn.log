@@ -1,0 +1,184 @@
+[07:08:51] === hotkv
+[07:09:15] hotkv_get_r19584_run1 offered=19584 achieved=19621.85 cpu(load,server)=0.7 1.1 ok=1
+[07:09:36] hotkv_get_r19584_run2 offered=19584 achieved=19631.51 cpu(load,server)=0.9 1.3 ok=1
+[07:09:58] hotkv_get_r49776_run1 offered=49776 achieved=49014.41 cpu(load,server)=1.0 1.5 ok=1
+[07:10:19] hotkv_get_r49776_run2 offered=49776 achieved=49007.88 cpu(load,server)=1.0 1.4 ok=1
+[07:10:41] hotkv_get_r99552_run1 offered=99552 achieved=97970.55 cpu(load,server)=1.6 2.4 ok=1
+[07:11:03] hotkv_get_r99552_run2 offered=99552 achieved=97858.06 cpu(load,server)=1.8 2.2 ok=1
+[07:11:23] hotkv_get_r199920_run1 offered=199920 achieved=199947.95 cpu(load,server)=3.8 5.4 ok=1
+[07:11:45] hotkv_get_r199920_run2 offered=199920 achieved=199937.91 cpu(load,server)=3.6 5.4 ok=1
+[07:12:05] hotkv_get_r399840_run1 offered=399840 achieved=399864.4 cpu(load,server)=7.9 10.3 ok=1
+[07:12:26] hotkv_get_r399840_run2 offered=399840 achieved=399860.21 cpu(load,server)=7.4 10.0 ok=1
+[07:12:46] hotkv_get_r799680_run1 offered=799680 achieved=799669.13 cpu(load,server)=16.3 19.5 ok=1
+[07:13:07] hotkv_get_r799680_run2 offered=799680 achieved=799650.16 cpu(load,server)=16.8 19.4 ok=1
+[07:13:28] hotkv_get_r1199520_run1 offered=1199520 achieved=1199427.14 cpu(load,server)=24.1 27.9 ok=1
+[07:13:48] hotkv_get_r1199520_run2 offered=1199520 achieved=1199513.09 cpu(load,server)=23.6 27.7 ok=1
+[07:14:09] hotkv_get_r1599360_run1 offered=1599360 achieved=1599308.11 cpu(load,server)=31.7 36.5 ok=1
+[07:14:29] hotkv_get_r1599360_run2 offered=1599360 achieved=1599199.46 cpu(load,server)=31.9 36.5 ok=1
+[07:14:50] hotkv_get_r2399856_run1 offered=2399856 achieved=2294186.62 cpu(load,server)=45.2 51.5 ok=0
+[07:15:10] hotkv_get_r2399856_run2 offered=2399856 achieved=2274115.38 cpu(load,server)=45.6 51.1 ok=0
+[07:15:10] hotkv/get: not sustained at 2399856, stopping this workload
+[07:15:32] hotkv_mixed_r19584_run1 offered=19584 achieved=19627.68 cpu(load,server)=0.9 1.4 ok=1
+[07:15:53] hotkv_mixed_r19584_run2 offered=19584 achieved=19622.59 cpu(load,server)=0.9 1.3 ok=1
+[07:16:15] hotkv_mixed_r49776_run1 offered=49776 achieved=49017.78 cpu(load,server)=1.0 1.7 ok=1
+[07:16:37] hotkv_mixed_r49776_run2 offered=49776 achieved=49027.8 cpu(load,server)=0.9 1.8 ok=1
+[07:16:58] hotkv_mixed_r99552_run1 offered=99552 achieved=97947.74 cpu(load,server)=1.9 2.1 ok=1
+[07:17:20] hotkv_mixed_r99552_run2 offered=99552 achieved=97960.78 cpu(load,server)=1.6 2.6 ok=1
+[07:17:41] hotkv_mixed_r199920_run1 offered=199920 achieved=199981.61 cpu(load,server)=3.6 5.1 ok=1
+[07:18:03] hotkv_mixed_r199920_run2 offered=199920 achieved=199968.99 cpu(load,server)=3.4 5.0 ok=1
+[07:18:24] hotkv_mixed_r399840_run1 offered=399840 achieved=399872.62 cpu(load,server)=7.7 10.3 ok=1
+[07:18:44] hotkv_mixed_r399840_run2 offered=399840 achieved=399889.78 cpu(load,server)=7.6 10.2 ok=1
+[07:19:05] hotkv_mixed_r799680_run1 offered=799680 achieved=799663.45 cpu(load,server)=16.7 19.6 ok=1
+[07:19:25] hotkv_mixed_r799680_run2 offered=799680 achieved=799685.43 cpu(load,server)=16.5 19.6 ok=1
+[07:19:46] hotkv_mixed_r1199520_run1 offered=1199520 achieved=1199439.9 cpu(load,server)=23.3 27.7 ok=1
+[07:20:06] hotkv_mixed_r1199520_run2 offered=1199520 achieved=1199515.72 cpu(load,server)=24.1 28.1 ok=1
+[07:20:27] hotkv_mixed_r1599360_run1 offered=1599360 achieved=1599325.51 cpu(load,server)=31.8 36.7 ok=1
+[07:20:48] hotkv_mixed_r1599360_run2 offered=1599360 achieved=1599339.37 cpu(load,server)=31.6 36.8 ok=1
+[07:21:08] hotkv_mixed_r2399856_run1 offered=2399856 achieved=2300662.34 cpu(load,server)=45.1 52.0 ok=0
+[07:21:29] hotkv_mixed_r2399856_run2 offered=2399856 achieved=2279554.44 cpu(load,server)=45.6 51.5 ok=0
+[07:21:29] hotkv/mixed: not sustained at 2399856, stopping this workload
+[07:21:29] === dragonfly
+[07:21:52] dragonfly_get_r19584_run1 offered=19584 achieved=19599.02 cpu(load,server)=0.7 1.8 ok=1
+[07:22:14] dragonfly_get_r19584_run2 offered=19584 achieved=19628.42 cpu(load,server)=0.6 1.8 ok=1
+[07:22:36] dragonfly_get_r49776_run1 offered=49776 achieved=49007.55 cpu(load,server)=1.2 2.5 ok=1
+[07:22:57] dragonfly_get_r49776_run2 offered=49776 achieved=49013.95 cpu(load,server)=1.1 2.6 ok=1
+[07:23:19] dragonfly_get_r99552_run1 offered=99552 achieved=97962.58 cpu(load,server)=2.2 5.8 ok=1
+[07:23:40] dragonfly_get_r99552_run2 offered=99552 achieved=97968.0 cpu(load,server)=1.9 5.6 ok=1
+[07:24:02] dragonfly_get_r199920_run1 offered=199920 achieved=199975.41 cpu(load,server)=3.8 8.4 ok=1
+[07:24:22] dragonfly_get_r199920_run2 offered=199920 achieved=199938.35 cpu(load,server)=4.0 8.8 ok=1
+[07:24:43] dragonfly_get_r399840_run1 offered=399840 achieved=399868.79 cpu(load,server)=8.3 16.0 ok=1
+[07:25:04] dragonfly_get_r399840_run2 offered=399840 achieved=399863.67 cpu(load,server)=8.4 16.3 ok=1
+[07:25:24] dragonfly_get_r799680_run1 offered=799680 achieved=799676.38 cpu(load,server)=17.1 30.2 ok=1
+[07:25:45] dragonfly_get_r799680_run2 offered=799680 achieved=799680.34 cpu(load,server)=17.3 29.8 ok=1
+[07:26:05] dragonfly_get_r1199520_run1 offered=1199520 achieved=1199433.55 cpu(load,server)=24.1 41.9 ok=1
+[07:26:26] dragonfly_get_r1199520_run2 offered=1199520 achieved=1199472.13 cpu(load,server)=24.7 43.6 ok=1
+[07:26:47] dragonfly_get_r1599360_run1 offered=1599360 achieved=1599166.2 cpu(load,server)=31.7 53.7 ok=1
+[07:27:07] dragonfly_get_r1599360_run2 offered=1599360 achieved=1599058.59 cpu(load,server)=32.5 54.4 ok=1
+[07:27:28] dragonfly_get_r2399856_run1 offered=2399856 achieved=2279558.74 cpu(load,server)=46.6 77.9 ok=0
+[07:27:48] dragonfly_get_r2399856_run2 offered=2399856 achieved=2282138.86 cpu(load,server)=46.3 77.2 ok=0
+[07:27:48] dragonfly/get: not sustained at 2399856, stopping this workload
+[07:28:10] dragonfly_mixed_r19584_run1 offered=19584 achieved=19629.06 cpu(load,server)=0.7 1.8 ok=1
+[07:28:31] dragonfly_mixed_r19584_run2 offered=19584 achieved=19632.1 cpu(load,server)=0.6 1.6 ok=1
+[07:28:53] dragonfly_mixed_r49776_run1 offered=49776 achieved=48950.63 cpu(load,server)=1.1 3.0 ok=1
+[07:29:15] dragonfly_mixed_r49776_run2 offered=49776 achieved=48994.57 cpu(load,server)=1.1 2.9 ok=1
+[07:29:36] dragonfly_mixed_r99552_run1 offered=99552 achieved=97956.12 cpu(load,server)=2.1 5.9 ok=1
+[07:29:58] dragonfly_mixed_r99552_run2 offered=99552 achieved=97970.92 cpu(load,server)=1.8 4.9 ok=1
+[07:30:18] dragonfly_mixed_r199920_run1 offered=199920 achieved=199950.57 cpu(load,server)=4.1 9.4 ok=1
+[07:30:40] dragonfly_mixed_r199920_run2 offered=199920 achieved=199966.79 cpu(load,server)=3.8 8.3 ok=1
+[07:31:01] dragonfly_mixed_r399840_run1 offered=399840 achieved=399867.37 cpu(load,server)=8.1 15.8 ok=1
+[07:31:21] dragonfly_mixed_r399840_run2 offered=399840 achieved=399863.72 cpu(load,server)=8.6 16.4 ok=1
+[07:31:42] dragonfly_mixed_r799680_run1 offered=799680 achieved=799670.74 cpu(load,server)=17.1 30.1 ok=1
+[07:32:02] dragonfly_mixed_r799680_run2 offered=799680 achieved=799637.36 cpu(load,server)=16.8 29.7 ok=1
+[07:32:23] dragonfly_mixed_r1199520_run1 offered=1199520 achieved=1199464.81 cpu(load,server)=24.4 42.9 ok=1
+[07:32:43] dragonfly_mixed_r1199520_run2 offered=1199520 achieved=1199483.5 cpu(load,server)=24.5 42.0 ok=1
+[07:33:04] dragonfly_mixed_r1599360_run1 offered=1599360 achieved=1599175.27 cpu(load,server)=32.3 54.1 ok=1
+[07:33:25] dragonfly_mixed_r1599360_run2 offered=1599360 achieved=1599092.38 cpu(load,server)=31.8 53.9 ok=1
+[07:33:45] dragonfly_mixed_r2399856_run1 offered=2399856 achieved=2308201.31 cpu(load,server)=45.7 77.5 ok=0
+[07:34:06] dragonfly_mixed_r2399856_run2 offered=2399856 achieved=2308167.44 cpu(load,server)=45.7 77.0 ok=0
+[07:34:06] dragonfly/mixed: not sustained at 2399856, stopping this workload
+[07:34:06] === redis-1
+[07:34:29] redis-1_get_r19584_run1 offered=19584 achieved=19620.06 cpu(load,server)=0.6 0.3 ok=1
+[07:34:50] redis-1_get_r19584_run2 offered=19584 achieved=19619.34 cpu(load,server)=0.7 0.3 ok=1
+[07:35:12] redis-1_get_r49776_run1 offered=49776 achieved=48995.47 cpu(load,server)=1.1 0.5 ok=1
+[07:35:34] redis-1_get_r49776_run2 offered=49776 achieved=48995.17 cpu(load,server)=1.1 0.5 ok=1
+[07:35:55] redis-1_get_r99552_run1 offered=99552 achieved=97948.46 cpu(load,server)=1.9 1.0 ok=1
+[07:36:17] redis-1_get_r99552_run2 offered=99552 achieved=97949.27 cpu(load,server)=1.9 1.0 ok=1
+[07:36:38] redis-1_get_r199920_run1 offered=199920 achieved=199930.69 cpu(load,server)=3.8 2.0 ok=1
+[07:37:00] redis-1_get_r199920_run2 offered=199920 achieved=199937.83 cpu(load,server)=3.7 2.0 ok=1
+[07:37:22] redis-1_get_r399840_run1 offered=399840 achieved=264415.46 cpu(load,server)=5.4 2.5 ok=0
+[07:37:43] redis-1_get_r399840_run2 offered=399840 achieved=252375.06 cpu(load,server)=5.2 2.5 ok=0
+[07:37:43] redis-1/get: not sustained at 399840, stopping this workload
+[07:38:05] redis-1_mixed_r19584_run1 offered=19584 achieved=19621.27 cpu(load,server)=0.6 0.3 ok=1
+[07:38:26] redis-1_mixed_r19584_run2 offered=19584 achieved=19624.06 cpu(load,server)=0.6 0.3 ok=1
+[07:38:48] redis-1_mixed_r49776_run1 offered=49776 achieved=48989.88 cpu(load,server)=1.0 0.5 ok=1
+[07:39:10] redis-1_mixed_r49776_run2 offered=49776 achieved=48991.94 cpu(load,server)=1.0 0.5 ok=1
+[07:39:31] redis-1_mixed_r99552_run1 offered=99552 achieved=97938.68 cpu(load,server)=2.0 1.0 ok=1
+[07:39:53] redis-1_mixed_r99552_run2 offered=99552 achieved=97941.59 cpu(load,server)=1.9 1.0 ok=1
+[07:40:14] redis-1_mixed_r199920_run1 offered=199920 achieved=199924.5 cpu(load,server)=3.7 2.0 ok=1
+[07:40:36] redis-1_mixed_r199920_run2 offered=199920 achieved=199926.36 cpu(load,server)=3.7 2.0 ok=1
+[07:40:58] redis-1_mixed_r399840_run1 offered=399840 achieved=260807.55 cpu(load,server)=5.4 2.5 ok=0
+[07:41:19] redis-1_mixed_r399840_run2 offered=399840 achieved=251220.93 cpu(load,server)=5.2 2.5 ok=0
+[07:41:19] redis-1/mixed: not sustained at 399840, stopping this workload
+[07:41:19] === redis-io8
+[07:41:42] redis-io8_get_r19584_run1 offered=19584 achieved=19623.1 cpu(load,server)=0.9 0.8 ok=1
+[07:42:04] redis-io8_get_r19584_run2 offered=19584 achieved=19632.71 cpu(load,server)=0.9 0.8 ok=1
+[07:42:26] redis-io8_get_r49776_run1 offered=49776 achieved=48993.78 cpu(load,server)=1.1 1.3 ok=1
+[07:42:47] redis-io8_get_r49776_run2 offered=49776 achieved=49000.64 cpu(load,server)=1.3 1.1 ok=1
+[07:43:09] redis-io8_get_r99552_run1 offered=99552 achieved=97960.17 cpu(load,server)=2.0 2.5 ok=1
+[07:43:30] redis-io8_get_r99552_run2 offered=99552 achieved=97959.01 cpu(load,server)=1.9 2.2 ok=1
+[07:43:51] redis-io8_get_r199920_run1 offered=199920 achieved=199951.14 cpu(load,server)=4.5 4.4 ok=1
+[07:44:12] redis-io8_get_r199920_run2 offered=199920 achieved=199946.51 cpu(load,server)=4.6 4.1 ok=1
+[07:44:33] redis-io8_get_r399840_run1 offered=399840 achieved=399851.86 cpu(load,server)=9.6 8.8 ok=1
+[07:44:54] redis-io8_get_r399840_run2 offered=399840 achieved=399862.23 cpu(load,server)=9.5 8.7 ok=1
+[07:45:15] redis-io8_get_r799680_run1 offered=799680 achieved=799602.86 cpu(load,server)=17.9 15.3 ok=1
+[07:45:36] redis-io8_get_r799680_run2 offered=799680 achieved=799684.66 cpu(load,server)=18.8 16.1 ok=1
+[07:45:56] redis-io8_get_r1199520_run1 offered=1199520 achieved=1079996.73 cpu(load,server)=25.4 21.2 ok=0
+[07:46:18] redis-io8_get_r1199520_run2 offered=1199520 achieved=1075720.2 cpu(load,server)=24.2 20.3 ok=0
+[07:46:18] redis-io8/get: not sustained at 1199520, stopping this workload
+[07:46:39] redis-io8_mixed_r19584_run1 offered=19584 achieved=19623.4 cpu(load,server)=0.9 0.8 ok=1
+[07:47:01] redis-io8_mixed_r19584_run2 offered=19584 achieved=19622.99 cpu(load,server)=0.9 0.8 ok=1
+[07:47:23] redis-io8_mixed_r49776_run1 offered=49776 achieved=49017.34 cpu(load,server)=1.0 1.4 ok=1
+[07:47:44] redis-io8_mixed_r49776_run2 offered=49776 achieved=48995.66 cpu(load,server)=1.1 1.3 ok=1
+[07:48:06] redis-io8_mixed_r99552_run1 offered=99552 achieved=97973.55 cpu(load,server)=1.9 2.5 ok=1
+[07:48:27] redis-io8_mixed_r99552_run2 offered=99552 achieved=97959.98 cpu(load,server)=2.1 2.3 ok=1
+[07:48:49] redis-io8_mixed_r199920_run1 offered=199920 achieved=199959.97 cpu(load,server)=4.4 4.5 ok=1
+[07:49:10] redis-io8_mixed_r199920_run2 offered=199920 achieved=199962.84 cpu(load,server)=4.5 4.7 ok=1
+[07:49:30] redis-io8_mixed_r399840_run1 offered=399840 achieved=399859.86 cpu(load,server)=9.4 8.9 ok=1
+[07:49:51] redis-io8_mixed_r399840_run2 offered=399840 achieved=399858.72 cpu(load,server)=9.6 8.9 ok=1
+[07:50:11] redis-io8_mixed_r799680_run1 offered=799680 achieved=799658.63 cpu(load,server)=19.0 16.2 ok=1
+[07:50:33] redis-io8_mixed_r799680_run2 offered=799680 achieved=799632.12 cpu(load,server)=17.9 15.3 ok=1
+[07:50:53] redis-io8_mixed_r1199520_run1 offered=1199520 achieved=1079337.83 cpu(load,server)=25.3 21.5 ok=0
+[07:51:14] redis-io8_mixed_r1199520_run2 offered=1199520 achieved=1102158.26 cpu(load,server)=26.1 21.7 ok=0
+[07:51:14] redis-io8/mixed: not sustained at 1199520, stopping this workload
+[07:51:14] === valkey-1
+[07:51:38] valkey-1_get_r19584_run1 offered=19584 achieved=19626.74 cpu(load,server)=0.6 0.3 ok=1
+[07:51:59] valkey-1_get_r19584_run2 offered=19584 achieved=19623.15 cpu(load,server)=0.7 0.3 ok=1
+[07:52:21] valkey-1_get_r49776_run1 offered=49776 achieved=48991.54 cpu(load,server)=1.0 0.5 ok=1
+[07:52:43] valkey-1_get_r49776_run2 offered=49776 achieved=48998.92 cpu(load,server)=1.1 0.5 ok=1
+[07:53:04] valkey-1_get_r99552_run1 offered=99552 achieved=97939.98 cpu(load,server)=1.9 1.0 ok=1
+[07:53:26] valkey-1_get_r99552_run2 offered=99552 achieved=97949.94 cpu(load,server)=1.9 1.0 ok=1
+[07:53:47] valkey-1_get_r199920_run1 offered=199920 achieved=199920.44 cpu(load,server)=3.8 2.0 ok=1
+[07:54:09] valkey-1_get_r199920_run2 offered=199920 achieved=199941.6 cpu(load,server)=3.8 2.0 ok=1
+[07:54:31] valkey-1_get_r399840_run1 offered=399840 achieved=259827.88 cpu(load,server)=5.3 2.5 ok=0
+[07:54:51] valkey-1_get_r399840_run2 offered=399840 achieved=258350.13 cpu(load,server)=5.6 2.6 ok=0
+[07:54:51] valkey-1/get: not sustained at 399840, stopping this workload
+[07:55:13] valkey-1_mixed_r19584_run1 offered=19584 achieved=19625.59 cpu(load,server)=0.6 0.3 ok=1
+[07:55:34] valkey-1_mixed_r19584_run2 offered=19584 achieved=19626.23 cpu(load,server)=0.6 0.3 ok=1
+[07:55:56] valkey-1_mixed_r49776_run1 offered=49776 achieved=48988.93 cpu(load,server)=1.0 0.5 ok=1
+[07:56:17] valkey-1_mixed_r49776_run2 offered=49776 achieved=48990.02 cpu(load,server)=1.1 0.5 ok=1
+[07:56:39] valkey-1_mixed_r99552_run1 offered=99552 achieved=97944.65 cpu(load,server)=2.0 1.0 ok=1
+[07:57:01] valkey-1_mixed_r99552_run2 offered=99552 achieved=97953.76 cpu(load,server)=1.8 1.0 ok=1
+[07:57:22] valkey-1_mixed_r199920_run1 offered=199920 achieved=199944.31 cpu(load,server)=3.7 2.0 ok=1
+[07:57:44] valkey-1_mixed_r199920_run2 offered=199920 achieved=199931.77 cpu(load,server)=3.6 2.0 ok=1
+[07:58:05] valkey-1_mixed_r399840_run1 offered=399840 achieved=259072.2 cpu(load,server)=5.3 2.5 ok=0
+[07:58:27] valkey-1_mixed_r399840_run2 offered=399840 achieved=247100.84 cpu(load,server)=5.1 2.5 ok=0
+[07:58:27] valkey-1/mixed: not sustained at 399840, stopping this workload
+[07:58:27] === valkey-io8
+[07:58:51] valkey-io8_get_r19584_run1 offered=19584 achieved=19621.24 cpu(load,server)=0.6 10.4 ok=1
+[07:59:12] valkey-io8_get_r19584_run2 offered=19584 achieved=19627.86 cpu(load,server)=0.6 10.4 ok=1
+[07:59:34] valkey-io8_get_r49776_run1 offered=49776 achieved=48999.34 cpu(load,server)=1.1 6.4 ok=1
+[07:59:56] valkey-io8_get_r49776_run2 offered=49776 achieved=48999.17 cpu(load,server)=1.1 6.7 ok=1
+[08:00:17] valkey-io8_get_r99552_run1 offered=99552 achieved=97957.13 cpu(load,server)=2.0 10.5 ok=1
+[08:00:39] valkey-io8_get_r99552_run2 offered=99552 achieved=97947.09 cpu(load,server)=1.9 9.0 ok=1
+[08:00:59] valkey-io8_get_r199920_run1 offered=199920 achieved=199946.93 cpu(load,server)=4.1 17.9 ok=1
+[08:01:20] valkey-io8_get_r199920_run2 offered=199920 achieved=199938.23 cpu(load,server)=4.4 18.3 ok=1
+[08:01:40] valkey-io8_get_r399840_run1 offered=399840 achieved=399829.76 cpu(load,server)=8.8 19.9 ok=1
+[08:02:01] valkey-io8_get_r399840_run2 offered=399840 achieved=399849.08 cpu(load,server)=8.6 20.0 ok=1
+[08:02:21] valkey-io8_get_r799680_run1 offered=799680 achieved=670528.44 cpu(load,server)=15.5 20.7 ok=0
+[08:02:42] valkey-io8_get_r799680_run2 offered=799680 achieved=670013.69 cpu(load,server)=15.4 20.7 ok=0
+[08:02:42] valkey-io8/get: not sustained at 799680, stopping this workload
+[08:03:04] valkey-io8_mixed_r19584_run1 offered=19584 achieved=19628.84 cpu(load,server)=0.6 11.5 ok=1
+[08:03:25] valkey-io8_mixed_r19584_run2 offered=19584 achieved=19626.13 cpu(load,server)=0.6 7.5 ok=1
+[08:03:47] valkey-io8_mixed_r49776_run1 offered=49776 achieved=48998.69 cpu(load,server)=1.0 7.1 ok=1
+[08:04:08] valkey-io8_mixed_r49776_run2 offered=49776 achieved=49000.18 cpu(load,server)=1.1 6.7 ok=1
+[08:04:30] valkey-io8_mixed_r99552_run1 offered=99552 achieved=97947.59 cpu(load,server)=2.0 11.2 ok=1
+[08:04:51] valkey-io8_mixed_r99552_run2 offered=99552 achieved=97956.46 cpu(load,server)=2.0 10.3 ok=1
+[08:05:12] valkey-io8_mixed_r199920_run1 offered=199920 achieved=199946.62 cpu(load,server)=4.3 18.1 ok=1
+[08:05:34] valkey-io8_mixed_r199920_run2 offered=199920 achieved=199960.29 cpu(load,server)=4.1 18.3 ok=1
+[08:05:54] valkey-io8_mixed_r399840_run1 offered=399840 achieved=399866.97 cpu(load,server)=8.6 20.2 ok=1
+[08:06:15] valkey-io8_mixed_r399840_run2 offered=399840 achieved=399854.86 cpu(load,server)=8.5 20.1 ok=1
+[08:06:36] valkey-io8_mixed_r799680_run1 offered=799680 achieved=678087.61 cpu(load,server)=14.8 20.6 ok=0
+[08:06:57] valkey-io8_mixed_r799680_run2 offered=799680 achieved=667081.09 cpu(load,server)=15.3 20.7 ok=0
+[08:06:57] valkey-io8/mixed: not sustained at 799680, stopping this workload
+[08:06:57] lat_sweep done
+LAT_DONE

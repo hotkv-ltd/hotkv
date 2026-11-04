@@ -1,0 +1,2 @@
+redis_version:8.10.3
+gcc_version:13.3.0

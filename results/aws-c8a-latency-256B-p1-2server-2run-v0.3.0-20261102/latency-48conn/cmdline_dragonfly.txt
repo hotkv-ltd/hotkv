@@ -1,0 +1,1 @@
+/opt/dragonfly/build-opt/dragonfly --port 6399 --bind 0.0.0.0 --proactor_threads=40 --dbfilename= --noversion_check --logtostderr

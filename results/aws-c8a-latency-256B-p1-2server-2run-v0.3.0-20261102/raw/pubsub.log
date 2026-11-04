@@ -1,0 +1,44 @@
+[06:39:22] === hotkv
+[06:39:52] hotkv p2p_10k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21503.310390 msg/sec;P50 RTT 0.093 ms;P99 RTT 0.673 ms; cpu=0.8 0.6
+[06:40:19] hotkv p2p_10k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21490.504760 msg/sec;P50 RTT 0.102 ms;P99 RTT 0.747 ms; cpu=0.8 0.6
+[06:40:48] hotkv p2p_50k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107213.720142 msg/sec;P50 RTT 0.095 ms;P99 RTT 1.000 ms; cpu=3.8 3.1
+[06:41:16] hotkv p2p_50k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107253.156221 msg/sec;P50 RTT 0.095 ms;P99 RTT 1.032 ms; cpu=3.8 3.2
+[06:41:45] hotkv p2p_100k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214519.232034 msg/sec;P50 RTT 0.110 ms;P99 RTT 1.183 ms; cpu=8.9 6.6
+[06:42:13] hotkv p2p_100k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214686.596916 msg/sec;P50 RTT 0.108 ms;P99 RTT 1.211 ms; cpu=9.1 6.6
+[06:44:05] === dragonfly
+[06:44:34] dragonfly p2p_10k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21448.606636 msg/sec;P50 RTT 0.103 ms;P99 RTT 0.559 ms; cpu=0.8 6.7
+[06:45:01] dragonfly p2p_10k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21452.190026 msg/sec;P50 RTT 0.107 ms;P99 RTT 0.748 ms; cpu=0.8 7.1
+[06:45:30] dragonfly p2p_50k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107337.401510 msg/sec;P50 RTT 0.114 ms;P99 RTT 0.908 ms; cpu=3.7 20.7
+[06:45:59] dragonfly p2p_50k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107275.539975 msg/sec;P50 RTT 0.117 ms;P99 RTT 0.925 ms; cpu=3.8 20.9
+[06:46:27] dragonfly p2p_100k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214631.596817 msg/sec;P50 RTT 0.135 ms;P99 RTT 1.133 ms; cpu=9.3 29.4
+[06:46:56] dragonfly p2p_100k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214650.218760 msg/sec;P50 RTT 0.134 ms;P99 RTT 1.123 ms; cpu=9.2 29.2
+[06:48:48] === redis-1
+[06:49:17] redis-1 p2p_10k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21477.844063 msg/sec;P50 RTT 0.110 ms;P99 RTT 0.749 ms; cpu=0.8 0.3
+[06:49:45] redis-1 p2p_10k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21459.449358 msg/sec;P50 RTT 0.101 ms;P99 RTT 0.725 ms; cpu=0.8 0.3
+[06:50:13] redis-1 p2p_50k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107299.174287 msg/sec;P50 RTT 0.098 ms;P99 RTT 0.795 ms; cpu=3.7 1.8
+[06:50:41] redis-1 p2p_50k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107259.585133 msg/sec;P50 RTT 0.103 ms;P99 RTT 0.808 ms; cpu=3.6 1.7
+[06:51:10] redis-1 p2p_100k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214560.237490 msg/sec;P50 RTT 0.490 ms;P99 RTT 1.018 ms; cpu=8.3 2.4
+[06:51:38] redis-1 p2p_100k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214901.834030 msg/sec;P50 RTT 0.539 ms;P99 RTT 1.048 ms; cpu=8.1 2.3
+[06:53:32] === redis-io8
+[06:54:01] redis-io8 p2p_10k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21536.982660 msg/sec;P50 RTT 0.106 ms;P99 RTT 0.592 ms; cpu=0.8 0.5
+[06:54:28] redis-io8 p2p_10k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21521.337301 msg/sec;P50 RTT 0.106 ms;P99 RTT 0.642 ms; cpu=0.8 0.5
+[06:54:57] redis-io8 p2p_50k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107357.965425 msg/sec;P50 RTT 0.108 ms;P99 RTT 0.632 ms; cpu=3.7 2.8
+[06:55:26] redis-io8 p2p_50k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107352.321100 msg/sec;P50 RTT 0.107 ms;P99 RTT 0.636 ms; cpu=3.8 3.0
+[06:55:54] redis-io8 p2p_100k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214755.218934 msg/sec;P50 RTT 0.195 ms;P99 RTT 0.744 ms; cpu=8.6 5.0
+[06:56:22] redis-io8 p2p_100k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214739.135638 msg/sec;P50 RTT 0.195 ms;P99 RTT 0.726 ms; cpu=8.6 5.0
+[06:58:16] === valkey-1
+[06:58:45] valkey-1 p2p_10k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21464.382354 msg/sec;P50 RTT 0.115 ms;P99 RTT 0.731 ms; cpu=0.8 0.3
+[06:59:14] valkey-1 p2p_10k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21514.034204 msg/sec;P50 RTT 0.107 ms;P99 RTT 0.783 ms; cpu=0.8 0.3
+[06:59:43] valkey-1 p2p_50k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107291.659942 msg/sec;P50 RTT 0.097 ms;P99 RTT 0.823 ms; cpu=3.6 1.7
+[07:00:11] valkey-1 p2p_50k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107268.734791 msg/sec;P50 RTT 0.098 ms;P99 RTT 0.822 ms; cpu=3.6 1.7
+[07:00:40] valkey-1 p2p_100k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214821.850796 msg/sec;P50 RTT 0.561 ms;P99 RTT 1.064 ms; cpu=8.5 2.3
+[07:01:08] valkey-1 p2p_100k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214862.502815 msg/sec;P50 RTT 0.574 ms;P99 RTT 1.069 ms; cpu=8.5 2.3
+[07:02:59] === valkey-io8
+[07:03:29] valkey-io8 p2p_10k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21473.709870 msg/sec;P50 RTT 0.113 ms;P99 RTT 0.775 ms; cpu=0.8 0.3
+[07:03:57] valkey-io8 p2p_10k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 21517.984412 msg/sec;P50 RTT 0.125 ms;P99 RTT 0.783 ms; cpu=0.7 0.3
+[07:04:25] valkey-io8 p2p_50k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107288.344740 msg/sec;P50 RTT 0.095 ms;P99 RTT 0.886 ms; cpu=3.8 4.9
+[07:04:54] valkey-io8 p2p_50k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 107298.472837 msg/sec;P50 RTT 0.100 ms;P99 RTT 0.827 ms; cpu=3.8 4.9
+[07:05:22] valkey-io8 p2p_100k run1:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214415.225040 msg/sec;P50 RTT 0.115 ms;P99 RTT 1.237 ms; cpu=8.9 11.2
+[07:05:51] valkey-io8 p2p_100k run2:  Test Time Total Messages Message Rate Connect Rate Active subscriptions Avg RTT (ms);Message Rate: 214513.862335 msg/sec;P50 RTT 0.115 ms;P99 RTT 1.202 ms; cpu=9.1 11.9
+[07:07:43] ps_sweep done
+ALL_DONE

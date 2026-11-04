@@ -1,0 +1,1 @@
+/opt/redis-8.10.3/src/redis-server --port 6399 --bind 0.0.0.0 --save '' --appendonly no --protected-mode no --loglevel warning
