@@ -1,0 +1,1 @@
+/opt/garnet/GarnetServer --bind 0.0.0.0 --port 6399 --index 1g --protected-mode no

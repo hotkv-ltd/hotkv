@@ -1,0 +1,1 @@
+hotkv --port 6399 --bind 0.0.0.0 --threads 48 --no-snapshot --protected-mode no --loglevel warning --server-cpulist 0-47

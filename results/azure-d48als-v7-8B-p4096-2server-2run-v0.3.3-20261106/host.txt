@@ -1,0 +1,5 @@
+Azure Standard_D48als_v7, Ubuntu 24.04 (server and load generator, same size, same subnet)
+CPU(s):                                  48
+Model name:                              AMD EPYC 9V45 96-Core Processor
+Thread(s) per core:                      2
+Core(s) per socket:                      24
